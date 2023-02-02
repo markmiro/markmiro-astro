@@ -1,0 +1,22 @@
+---
+const {frontmatter} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{frontmatter.title}</title>
+  </head>
+  <body>
+    <article class="prose lg:prose-lg">
+      <h1>{frontmatter.title}</h1>
+      <h2>Post author: {frontmatter.author}</h2>
+      <p>{frontmatter.description}</p>
+      <slot /> <!-- Markdown content is injected here -->
+    </article>
+  </body>
+</html>
