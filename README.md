@@ -1,5 +1,11 @@
 # Astro Starter Kit: Basics
 
+## My additions:
+
+To use with VSCode with prettier, follow [this guide](https://github.com/withastro/prettier-plugin-astro/blob/main/README.md#using-in-vs-code).
+
+---
+
 ```
 npm create astro@latest -- --template basics
 ```
