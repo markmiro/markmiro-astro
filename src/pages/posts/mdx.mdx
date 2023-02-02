@@ -1,8 +1,16 @@
 ---
-layout: ../../layouts/PostLayout.astro
+layout: ../../layouts/Layout.astro
 title: MDX Page
 ---
+
+import Card from '../../components/Card.astro'
+
+<div class="p-4">
 
 # MDX Page
 
 Hello
+
+<Card href="/" title="home" body="Go home" />
+
+</div>
