@@ -4,6 +4,7 @@ specifiers:
   '@astrojs/mdx': 0.16.0
   '@astrojs/react': 2.0.2
   '@astrojs/tailwind': 3.0.1
+  '@tailwindcss/container-queries': 0.1.0
   '@tailwindcss/typography': 0.5.9
   '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.6
@@ -18,6 +19,7 @@ dependencies:
   '@astrojs/mdx': 0.16.0_astro@2.0.6
   '@astrojs/react': 2.0.2_fxtgt6bjwd6p4cwoordejim2zi
   '@astrojs/tailwind': 3.0.1_jiulpwjund37q6yckwlgwo54mu
+  '@tailwindcss/container-queries': 0.1.0_tailwindcss@3.2.4
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   astro: 2.0.6
@@ -750,6 +752,14 @@ packages:
       '@types/estree': 1.0.0
       estree-walker: 2.0.2
       picomatch: 2.3.1
+    dev: false
+
+  /@tailwindcss/container-queries/0.1.0_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-t1GeJ9P8ual160BvKy6Y1sG7bjChArMaK6iRXm3ZYjZGN2FTzmqb5ztsTDb9AsTSJD4NMHtsnaI2ielrXEk+hw==}
+    peerDependencies:
+      tailwindcss: '>=3.2.0'
+    dependencies:
+      tailwindcss: 3.2.4
     dev: false
 
   /@tailwindcss/typography/0.5.9_tailwindcss@3.2.4:
