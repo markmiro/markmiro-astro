@@ -1,0 +1,22 @@
+---
+const allPosts = await Astro.glob("../pages/posts/*.(md|mdx)");
+---
+
+<!-- https://docs.astro.build/en/tutorial/5-astro-api/1/ -->
+<ul class="flex flex-wrap gap-4">
+  {
+    allPosts.map((post) => (
+      <li>
+        <a href={post.url}>{post.frontmatter.title}</a>
+      </li>
+    ))
+  }
+  <li>
+    <a href="/example">Example</a>
+  </li>
+  <li>
+    <a href="/sdlfkjsdf">404</a>
+  </li>
+</ul>
+
+<hr />

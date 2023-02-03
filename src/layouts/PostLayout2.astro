@@ -1,4 +1,5 @@
 ---
+import AllPages from "@components/AllPages.astro";
 const {frontmatter} = Astro.props;
 ---
 
@@ -12,6 +13,7 @@ const {frontmatter} = Astro.props;
     <title>{frontmatter.title}</title>
   </head>
   <body>
+    <AllPages />
     <article class="prose lg:prose-lg">
       <h1>{frontmatter.title}</h1>
       <h2>Post author: {frontmatter.author}</h2>
