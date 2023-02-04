@@ -1,8 +1,20 @@
 ---
+import PostWrapper from "@components/PostWrapper.astro";
 import Layout from "@layouts/Layout.astro";
+const allProjects = await Astro.glob("./projects/*.mdx");
 const title = "Index";
 ---
 
 <Layout title={title}>
-  <h1>Home!</h1>
+  <PostWrapper title="Projects">
+    <ul class="list-disc ml-10">
+      {
+        allProjects.map((page) => (
+          <li>
+            <a href={page.url}>{page.frontmatter.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </PostWrapper>
 </Layout>

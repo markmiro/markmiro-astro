@@ -1,0 +1,56 @@
+---
+layout: ../../layouts/PostLayout.astro
+title: Migrating Cranes
+primaryLink: https://migratingcranes.com
+source: https://gitlab.com/migratingcranes/website
+---
+
+<img class="border border-gray-500 rounded-lg" src="/figma-export/project-migratingcranes-1x.png" />
+
+## Summary
+
+My friend Bill wanted a website to publish immigration reports containing data in a format difficult to get elsewhere. He generated the reports using R, but wanted them to be accessible online.
+
+## Goals
+
+Get the website up and crawlable by search engines ASAP.
+
+## Solution
+
+I created a static site using Handlebars. The first version of the site took 2 days.
+
+I initially used Bootstrap for the styling. However, it was quite heavy for the site's needs, so I switched to a custom CSS file.
+
+Some features of the site:
+- I reparsed the HTML reports I got to add a navigation menu to each one, and remove unused JS and CSS.
+- I wrote custom CSS for the site because there wasn't much to style. Each report was text and some tables.
+  - The custom CSS helped me ensure the reports look great on mobile.
+- Route emails from the site to Bill's email. This was to create a layer of protection against spam.
+- Grouped the reports alphabetically by country. Otherwise, it would have been a long and ugly list.
+- Added Google Analytics to track traffic.
+
+![](/projects/migratingcranes/lighthouse-score-home.png)
+
+The reports are close behind:
+
+![](/projects/migratingcranes/lighthouse-score-report.png)
+
+To get a 100 score for SEO would require each report page to get a meta tag describing the content.
+
+## Learnings
+
+I'm not sure I'd use Handlebars again. I expected it to be more intuitive to use. However, you have to learn its special syntax for doing simple things like iterating over elements. This was fine for listing out the countries initially, but I ended up using plain JS when I added the grouping. I'm sure there's a way to do it in Handlebars, but now I see why it's not as popular at it once was. In fact, I'm not sure I'd use any of the other templating languages either.
+
+I also [found a bug](https://github.com/markmiro/ios-table-whitespace-text-size-bug) in how iOS renders tables.
+
+---
+
+Languages:
+- HTML
+- CSS
+- JavaScript
+- Handlebars
+
+Libraries:
+- Prettier
+- Lodash
