@@ -3,7 +3,10 @@ const allPosts = await Astro.glob("../pages/posts/*.(md|mdx)");
 ---
 
 <!-- https://docs.astro.build/en/tutorial/5-astro-api/1/ -->
-<ul class="flex flex-wrap gap-4">
+<ul class="flex flex-wrap">
+  <li>
+    <a href="/">Home</a>
+  </li>
   {
     allPosts.map((post) => (
       <li>
@@ -19,4 +22,13 @@ const allPosts = await Astro.glob("../pages/posts/*.(md|mdx)");
   </li>
 </ul>
 
-<hr />
+<style>
+  a {
+    display: block;
+    padding: .5em 1em;
+    border-right: 1px solid;
+  }
+  a:hover {
+    background: #eee;
+  }
+</style>
