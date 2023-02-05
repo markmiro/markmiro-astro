@@ -4,7 +4,14 @@ import ProjectHeader from "@components/ProjectHeader.astro";
 import _ from "lodash";
 const { frontmatter, title } = Astro.props;
 const title2 = title || frontmatter.title || "Untitled";
-const slug = _.last((new URL(Astro.url)).pathname.split('/'));
+
+function getSlug() {
+  const tokens = (new URL(Astro.url)).pathname.split('/');
+  const nonEmpty = _.filter(tokens, (section) => section !== '');
+  return _.last(nonEmpty);
+}
+
+const slug = getSlug();
 ---
 
 <PostLayout title={title2}>
