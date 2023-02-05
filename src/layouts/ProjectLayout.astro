@@ -1,13 +1,14 @@
 ---
 import PostLayout from "./PostLayout.astro";
 import ProjectHeader from "@components/ProjectHeader.astro";
+import { Icon } from 'astro-icon'
 import _ from "lodash";
 const { frontmatter, title } = Astro.props;
 const title2 = title || frontmatter.title || "Untitled";
 
 function getSlug() {
-  const tokens = (new URL(Astro.url)).pathname.split('/');
-  const nonEmpty = _.filter(tokens, (section) => section !== '');
+  const tokens = new URL(Astro.url).pathname.split("/");
+  const nonEmpty = _.filter(tokens, (section) => section !== "");
   return _.last(nonEmpty);
 }
 
@@ -15,6 +16,18 @@ const slug = getSlug();
 ---
 
 <PostLayout title={title2}>
-  <ProjectHeader slug={slug} />
+  <div class="not-prose">
+    <div class="relative">
+      <ProjectHeader slug={slug} />
+      <a
+        href={frontmatter.source}
+        target="_blank"
+        class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 shadow-md bg-black text-white hover:bg-neutral-800 rounded-lg px-3 py-1 flex items-center gap-2"
+      >
+        <Icon name="github" class="w-7" />
+        Project Source
+      </a>
+    </div>
+  </div>
   <slot />
 </PostLayout>
