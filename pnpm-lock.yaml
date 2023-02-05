@@ -4,6 +4,7 @@ specifiers:
   '@astrojs/mdx': 0.16.0
   '@astrojs/react': 2.0.2
   '@astrojs/tailwind': 3.0.1
+  '@tailwindcss/aspect-ratio': 0.4.2
   '@tailwindcss/container-queries': 0.1.0
   '@tailwindcss/typography': 0.5.9
   '@types/react': ^18.0.21
@@ -32,6 +33,7 @@ dependencies:
   tailwindcss: 3.2.4
 
 devDependencies:
+  '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.4
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.4
   prettier: 2.8.3
   prettier-plugin-astro: 0.8.0
@@ -805,6 +807,14 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
     dev: false
+
+  /@tailwindcss/aspect-ratio/0.4.2_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
+      tailwindcss: 3.2.4
+    dev: true
 
   /@tailwindcss/container-queries/0.1.0_tailwindcss@3.2.4:
     resolution: {integrity: sha512-t1GeJ9P8ual160BvKy6Y1sG7bjChArMaK6iRXm3ZYjZGN2FTzmqb5ztsTDb9AsTSJD4NMHtsnaI2ielrXEk+hw==}
