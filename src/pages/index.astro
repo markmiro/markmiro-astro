@@ -9,7 +9,7 @@ const title = "Index";
   <PostWrapper title="Projects">
     <ul class="list-disc ml-10">
       {
-        allProjects.map((page) => (
+        allProjects.filter(p => p.frontmatter?.draft !== true).map((page) => (
           <li>
             <a href={page.url}>{page.frontmatter.title}</a>
           </li>
