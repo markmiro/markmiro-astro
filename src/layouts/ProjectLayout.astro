@@ -1,0 +1,13 @@
+---
+import PostLayout from "./PostLayout.astro";
+import ProjectHeader from "@components/ProjectHeader.astro";
+import _ from "lodash";
+const { frontmatter, title } = Astro.props;
+const title2 = title || frontmatter.title || "Untitled";
+const slug = _.last((new URL(Astro.url)).pathname.split('/'));
+---
+
+<PostLayout title={title2}>
+  <ProjectHeader slug={slug} />
+  <slot />
+</PostLayout>

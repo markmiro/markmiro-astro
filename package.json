@@ -20,6 +20,7 @@
     "@types/react-dom": "^18.0.6",
     "astro": "^2.0.6",
     "astro-embed": "0.2.1",
+    "lodash": "4.17.21",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-social-media-embed": "2.3.4",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "0.4.2",
     "@tailwindcss/typography": "0.5.9",
+    "@types/lodash": "4.14.191",
     "prettier": "2.8.3",
     "prettier-plugin-astro": "0.8.0"
   }
