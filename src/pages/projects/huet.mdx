@@ -1,0 +1,114 @@
+---
+layout: ../../layouts/ProjectLayout.astro
+title: Huet
+primaryLink: https://markmiro.github.io/huet
+primaryLinkText: Demo
+source: https://github.com/markmiro/huet
+---
+
+import { Tweet, YouTube } from "astro-embed";
+import { Code } from 'astro/components';
+
+## Summary
+
+Demo:
+https://markmiro.github.io/huet
+
+## Motivation
+
+It's often assumed that re-branding a website is easy. In practice, there's a big risk of accidentally creating an unpredictable number of contrast issues. This will tend to happen in parts of the UI that are often not tested, or are difficult to test, like error states—which is especially tragic.
+
+## Goals
+
+Instead of letting the developer define the colors they want in the UI. Instead, they define the contrast they want. If you're adding a button on top of a black page, instead of saying you want a white button, you instead say "I want a button with 100% contrast against the background".
+
+<div class="no-prose">
+  <div class="bg-black p-6 text-center">
+    <button class="bg-white text-black px-3 py-1 rounded-md">Button</button>
+  </div>
+</div>
+
+```jsx
+<Container bg="black">
+  <Button bgContrast="100%" textContrast="100%">
+    Button
+  </Button>
+</Container>
+```
+
+In the above code, the color dependencies look like this:
+
+```
+container background <- button background <- button text
+```
+
+Text is calculated off of the button's background which is calculated off of the container's background.
+
+If we change the background `bg="white"`, we want all the children to update recursively.
+
+<div class="no-prose">
+  <div class="bg-white p-6 text-center border">
+    <button class="bg-black text-white px-3 py-1 rounded-md">Button</button>
+  </div>
+</div>
+
+```jsx
+<Container bg="white">
+  <Button bgContrast="100%" textContrast="100%">
+    Button
+  </Button>
+</Container>
+```
+
+## Solution
+
+The first step was to see if I could get the contrast calculations working, even for intermediate values, and to have them propogate through the UI using React's context.
+
+<iframe src="https://codesandbox.io/embed/qkqm90x8w6?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="Initial contrast experiment"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+I created an example based on the GitHub website UI to have a more realistic test case.
+
+<iframe src="https://codesandbox.io/embed/yw6vxn7q1v?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="Contrast"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+I eventually created a library called Huet. This library comes with a helper UI to help you test how well your Huet-colored interface will work with different themes. It's a little buggy, but it's a start.
+
+<iframe src="https://codesandbox.io/embed/k04vm52xov?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="Huet Example"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+## Learnings
+
+The biggest learning was I didn't have a set of people that wanted to use it. I figured I'd build it because I wanted something like this, but the complexity involved in building it was higher than the benefits I gained.
+
+---
+
+Languages:
+
+- HTML
+- CSS
+- JavaScript
+
+Libraries:
+
+- React
+- Rollup
+- Lodash
+- Prettier
+- chroma-js
+
+Frameworks:
+
+- create-react-app
