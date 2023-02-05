@@ -5,9 +5,13 @@ primaryLink: https://www.youtube.com/watch?v=kksc8vX2l0A
 source: https://github.com/markmiro/hashdrop
 ---
 
-import { TwitterEmbed } from 'react-social-media-embed';
+import { TwitterEmbed } from "react-social-media-embed";
+import { Tweet, Vimeo, YouTube } from "astro-embed";
 
-<img class="border border-gray-500 rounded-lg" src="/figma-export/project-hashdrop-1x.png" />
+<img
+  class="border border-gray-500 rounded-lg"
+  src="/figma-export/project-hashdrop-1x.png"
+/>
 
 ## Summary
 
@@ -19,7 +23,9 @@ https://www.kalzumeus.com/essays/dropping-hashes
 
 In his case, he wanted to prove that he wrote something at or before a specific date, but he didn't want to publish the actual document until sometime later. Security researchers will sometimes do this. They'll hash a document describing some vulnerability, and then publish the document after the vulnerability is patched.
 
-<TwitterEmbed url="https://twitter.com/patio11/status/1242670345737256962" width="100%" />
+<div class="not-prose">
+  <Tweet id="https://twitter.com/patio11/status/1242670345737256962" />
+</div>
 
 ## Goals
 
@@ -34,7 +40,7 @@ Finally, I wanted to let the user create private drops. Since files were already
 I was able to get the app to encrypt and/or hash documents, and publish the hashes onto the blockchain, retrieve the files, and then decrypt them. I also generated unique URLs for each drop that could be shared on sites like Twitter:
 
 <small class="break-words">
-https://hashdrop.me/#/drop/bafkreihia2rjdt6d4ypyhomngrhok7r6rez4ztwoj62f4feb6h2wbzyowe
+  https://hashdrop.me/#/drop/bafkreihia2rjdt6d4ypyhomngrhok7r6rez4ztwoj62f4feb6h2wbzyowe
 </small>
 
 ## Learnings
@@ -42,6 +48,7 @@ https://hashdrop.me/#/drop/bafkreihia2rjdt6d4ypyhomngrhok7r6rez4ztwoj62f4feb6h2w
 I was a little too ambitious about what I wanted to accomplish. There were many yaks worth shaving. Should I have leaned on making the site easy to newcomers to use? This was a monumental task in itself. This meant putting in copius amounts of error handling logic around ensuring that the user has MetaMask installed, is on the right network, has a balance, etc. And because gas fees randomly spike, would it be worth pulling this data? What can I expect the user to know about IPFS?
 
 Some highlights:
+
 - Storing all the user data on IPFS either meant forcing the user to make frequent saves, which increased the gas cost for the user, or trying to get clever about storing user data locally in a secure way.
 - It was going to have to be a hybrid app eventually—a standard database-backed site as well as a decentralized system for storing the critical stuff.
 - The IPFS Chrome browser companion had some means of storing the app locally, but the feature wasn't ready enough for me to use.
@@ -51,22 +58,26 @@ Some highlights:
 ---
 
 Languages:
+
 - HTML
 - CSS
 - TypeScript
 - Solidity
 
 Libraries:
+
 - Prettier
 - Lodash
 - Ethers
 - Chakra UI
 
 Frameworks:
+
 - create-react-app
 - Hardhat
 
 Hosting:
+
 - Vercel
 - Pinata
 - Various Ethereum L2s

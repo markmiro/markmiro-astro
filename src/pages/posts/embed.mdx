@@ -4,8 +4,14 @@ title: Embed
 ---
 import { Tweet, Vimeo, YouTube } from 'astro-embed';
 
-{/* <Tweet id="https://twitter.com/astrodotbuild/status/1512144306898976768" /> */}
+<div class="flex flex-col gap-8">
+
+<div class="not-prose">
+<Tweet id="https://twitter.com/astrodotbuild/status/1512144306898976768" />
+</div>
 
 <Vimeo id="https://vimeo.com/32001208" />
 
 <YouTube id="https://youtu.be/xtTy5nKay_Y" />
+
+</div>
