@@ -4,6 +4,8 @@
 
 To use with VSCode with prettier, follow [this guide](https://github.com/withastro/prettier-plugin-astro/blob/main/README.md#using-in-vs-code).
 
+I once had a Vercel build fail because it was missing the `shiki` dependency though it worked locally. I was able to repro by running `pnpm exec vercel run build` locally. I fixed it by adding `shiki` to the `devDependencies` in `package.json`.
+
 ---
 
 ```
