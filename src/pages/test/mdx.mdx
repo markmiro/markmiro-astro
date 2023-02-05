@@ -1,0 +1,25 @@
+---
+layout: ../../layouts/TestLayout.astro
+title: MDX
+---
+
+import Card from "@components/Card.astro";
+
+It probably isn't styled much, but Markdown does support:
+
+- **bold** and _italics._
+- lists
+- [links](https://astro.build)
+- and more!
+
+## Introduction
+
+I can link internally to [my conclusion](#conclusion) on the same page when writing Markdown.
+
+## Conclusion
+
+I can use the URL `https://my-domain.com/page-1/#introduction` to navigate directly to my Introduction on the page.
+
+<div class="not-prose">
+  <Card href="/" title="home" body="Go home" />
+</div>

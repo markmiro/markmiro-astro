@@ -1,14 +1,17 @@
 ---
+import TestLayout from "@layouts/TestLayout.astro";
 import _ from "lodash";
 const { pathname } = new URL(Astro.url);
 const slug = _.last(pathname.split("/"));
 ---
 
-<pre>
-url:
-{Astro.url}
-pathname:
-{pathname}
-slug:
-{slug}
-</pre>
+<TestLayout title="url">
+  <pre>
+  url:
+  {Astro.url}
+  pathname:
+  {pathname}
+  slug:
+  {slug}
+  </pre>
+</TestLayout>
