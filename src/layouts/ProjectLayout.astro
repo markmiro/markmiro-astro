@@ -1,32 +1,43 @@
 ---
 import PostLayout from "./PostLayout.astro";
-import ProjectHeader from "@components/ProjectHeader.astro";
-import { Icon } from 'astro-icon'
+import ProjectImage from "@components/ProjectImage.astro";
+import { Icon } from "astro-icon";
 import _ from "lodash";
+import { extractLastUrlPathItem } from "src/lib/extractLastUrlPathItem";
 const { frontmatter, title } = Astro.props;
 const title2 = title || frontmatter.title || "Untitled";
 
-function getSlug() {
-  const tokens = new URL(Astro.url).pathname.split("/");
-  const nonEmpty = _.filter(tokens, (section) => section !== "");
-  return _.last(nonEmpty);
-}
-
-const slug = getSlug();
+const slug = extractLastUrlPathItem(Astro.url);
 ---
 
 <PostLayout title={title2}>
   <div class="not-prose">
-    <div class="relative">
-      <ProjectHeader slug={slug} />
-      <a
-        href={frontmatter.source}
-        target="_blank"
-        class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 shadow-md bg-black text-white hover:bg-neutral-800 rounded-lg px-3 py-1 flex items-center gap-2"
-      >
-        <Icon name="github" class="w-7" />
-        Project Source
-      </a>
+    <ProjectImage slug={slug} imgOverride={frontmatter.img} />
+    <div class="flex items-center gap-3 text-sm mt-2 text-gray-500">
+      {
+        frontmatter.primaryLink && (
+          <a
+            href={frontmatter.primaryLink}
+            target="_blank"
+            class="shadow-md bg-black text-white hover:bg-neutral-800 rounded-lg px-3 py-1 flex items-center gap-2"
+          >
+            {frontmatter.primaryLinkText} ↗
+          </a>
+        )
+      }
+      {
+        frontmatter.source && (
+          <a
+            href={frontmatter.source}
+            target="_blank"
+            class="hover:text-gray-700 underline flex items-center gap-1"
+          >
+            <Icon name="github" class="w-3" /> Project Source
+          </a>
+        )
+      }
+      <div class="grow"></div>
+      {frontmatter.date && <div>{frontmatter.date}</div>}
     </div>
   </div>
   <slot />

@@ -1,0 +1,25 @@
+---
+export interface Props {
+  slug?: string;
+  imgOverride?: string;
+}
+
+const { slug, imgOverride } = Astro.props;
+---
+
+<div class="not-prose aspect-w-2 aspect-h-1">
+  {
+    imgOverride && (
+      <img class="border border-gray-500 rounded-lg" src={imgOverride} />
+    )
+  }
+  {
+    !imgOverride && slug && (
+      <img
+        class="border border-gray-500 rounded-lg"
+        src={`/figma-export/project-${slug}-1x.png`}
+        srcset={`/figma-export/project-${slug}-2x.png 2x`}
+      />
+    )
+  }
+</div>

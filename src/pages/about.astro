@@ -1,53 +1,13 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import About from "@components/About.astro";
 const title = "About";
 ---
 
 <Layout title={title}>
   <article class="prose lg:prose-xl p-4 md:p-10 ml-auto mr-auto">
     <div class="py-16 ml-auto mr-auto border bg-gray-50 rounded-3xl">
-      <div class="not-prose text-center">
-        <img
-          src="/figma-export/markmiro-portrait-1x.jpg"
-          srcset="/figma-export/markmiro-portrait-2x.jpg 2x"
-          alt="Mark Mironyuk"
-          class="w-[100px] h-[150px] ml-auto mr-auto"
-        />
-
-        <div class="mb-2 md:mb-4"></div>
-
-        <h3 class="font-bold text-3xl md:text-4xl">
-          Mark Miro<span class="text-gray-300">nyuk</span>
-        </h3>
-        <div class="mb-1 md:mb-2"></div>
-        <p class="leading-snug text-gray-400 text-sm md:text-lg">
-          legally last name includes this last part,<br />but I almost always
-          leave it off for online accounts.
-        </p>
-
-        <div class="mb-2 md:mb-4"></div>
-
-        <!-- <p>
-          I'm a UI Engineer with a love for React, design systems, and user
-          research.
-        </p> -->
-
-        <div class="mb-2 md:mb-4"></div>
-
-        <p>
-          <a href="mailto:contact@markmiro.com" class="underline"
-            >contact@markmiro.com</a
-          >
-        </p>
-        <p>
-          <a
-            href="https://drive.google.com/file/d/1WSRlbYqNToYsoQ4eoeWSD1Xud7un-OW8/view?usp=sharing"
-            class="underline"
-          >
-            PDF Resume ↗
-          </a>
-        </p>
-      </div>
+      <About />
     </div>
   </article>
 </Layout>

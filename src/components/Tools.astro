@@ -1,0 +1,29 @@
+---
+const tools = [
+  {
+    title: "Add days",
+    url: "https://add-days.vercel.app",
+    // source: "https://codesandbox.io/s/r0n9oljz7p",
+  },
+  // {
+  //   title: "Typing Test",
+  //   url: "https://crabbykeys.vercel.app",
+  // },
+  // {
+  //   title: "HashDrop",
+  //   url: "https://hashdrop.me",
+  // },
+];
+---
+
+<ul>
+  {
+    tools.map((tool) => (
+      <li>
+        <a href={tool.url} class="">
+          {tool.title} ↗
+        </a>
+      </li>
+    ))
+  }
+</ul>

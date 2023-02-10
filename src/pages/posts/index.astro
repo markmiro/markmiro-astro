@@ -1,0 +1,37 @@
+---
+import PostLayout from "@layouts/PostLayout.astro";
+
+const allPosts = await Astro.glob("./*.mdx");
+---
+<PostLayout title="Posts">
+  <ul>
+    {
+      allPosts
+        .filter((p) => p.frontmatter?.draft !== true)
+        .map((page) => (
+          <li>
+            <div>
+              {page.frontmatter?.emoji && (
+                <span class="mr-2">{page.frontmatter.emoji}</span>
+              )}
+              <a href={page.url}>{page.frontmatter.title}</a>
+            </div>
+            {page.frontmatter?.description && (
+              <div class="text-gray-500">{page.frontmatter.description}</div>
+            )}
+            {page.frontmatter?.date && (
+              <time
+                class="text-gray-500 text-sm"
+                datetime={page.frontmatter.date}
+              >
+                {page.frontmatter.date}
+              </time>
+            )}
+          </li>
+        ))
+    }
+    <li>
+      See more posts on <a href="https://medium.com/@markmiro"> 📝 Medium</a>.
+    </li>
+  </ul>
+</PostLayout>

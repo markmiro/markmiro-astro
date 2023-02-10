@@ -1,20 +1,98 @@
 ---
 import PostWrapper from "@components/PostWrapper.astro";
+import ProjectImage from "@components/ProjectImage.astro";
+import Tools from "@components/Tools.astro";
 import Layout from "@layouts/Layout.astro";
-const allProjects = await Astro.glob("./projects/*.mdx");
+import { extractLastUrlPathItem } from "src/lib/extractLastUrlPathItem";
+import { allExperiments, reference } from "src/lib/_content";
 const title = "Index";
+const allProjects = await Astro.glob("./projects/*.mdx");
 ---
 
 <Layout title={title}>
-  <PostWrapper title="Projects">
-    <ul class="list-disc ml-10">
+  <PostWrapper>
+    <!-- <About />
+    <hr /> -->
+    <h1>Projects</h1>
+    <ul>
       {
-        allProjects.filter(p => p.frontmatter?.draft !== true).map((page) => (
+        allProjects
+          .filter((p) => p.frontmatter?.draft !== true)
+          .map((page) => (
+            <li>
+              <div>
+                {page.frontmatter?.emoji && (
+                  <span class="mr-2">{page.frontmatter.emoji}</span>
+                )}
+                <a href={page.url}>{page.frontmatter.title}</a>
+              </div>
+              {page.frontmatter?.description && (
+                <div class="text-gray-500">{page.frontmatter.description}</div>
+              )}
+              {page.frontmatter?.date && (
+                <time
+                  class="text-gray-500 text-sm"
+                  datetime={page.frontmatter.date}
+                >
+                  {page.frontmatter.date}
+                </time>
+              )}
+              <div class="w-1/2">
+                <ProjectImage
+                  slug={extractLastUrlPathItem(page.url)}
+                  imgOverride={page.frontmatter?.img}
+                />
+              </div>
+            </li>
+          ))
+      }
+    </ul>
+    <hr />
+    <h1>Experiments</h1>
+    <ul>
+      {
+        allExperiments
+          .filter((ex) => ex?.draft !== true)
+          .map((ex) => (
+            <li>
+              <div>
+                {ex?.emoji && <span class="mr-2">{ex.emoji}</span>}
+                {ex.title}
+              </div>
+              {ex?.description && (
+                <div class="text-gray-500">{ex.description}</div>
+              )}
+
+              {ex?.date && (
+                <time class="block text-gray-500 text-sm" datetime={ex.date}>
+                  {ex.date}
+                </time>
+              )}
+              <a
+                href={ex.primaryLink}
+                class="no-underline text-sm px-2 py-1 rounded-md bg-black hover:bg-neutral-700 text-white"
+              >
+                {ex.primaryLinkText} ↗
+              </a>
+            </li>
+          ))
+      }
+    </ul>
+    <hr />
+    <h1>Reference</h1>
+    <ul>
+      {
+        reference.map((r) => (
           <li>
-            <a href={page.url}>{page.frontmatter.title}</a>
+            <a href={r.url} class="">
+              {r.title} ↗
+            </a>
           </li>
         ))
       }
     </ul>
+    <hr />
+    <h1>Tools</h1>
+    <Tools />
   </PostWrapper>
 </Layout>

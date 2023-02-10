@@ -1,8 +1,18 @@
-<ul class="flex flex-wrap justify-center border-b border-gray-200">
-  <li>
-    <a href="/" class="block px-4 py-2 md:px-6 md:py-4 hover:bg-gray-100">Home</a>
-  </li>
-  <li>
-    <a href="/about" class="block px-4 py-2 md:px-6 md:py-4 hover:bg-gray-100">About</a>
-  </li>
-</ul>
+---
+import NavLink from "./NavLink.astro";
+---
+
+<nav class="flex border-b border-gray-200">
+  <a href="/" class="block font-bold px-4 py-2 md:px-6 md:py-4">Mark Miro</a>
+  <ul class="flex flex-wrap justify-center">
+    <li>
+      <NavLink href="/">Home</NavLink>
+    </li>
+    <li>
+      <NavLink href="/posts">Posts</NavLink>
+    </li>
+    <li>
+      <NavLink href="/about">About</NavLink>
+    </li>
+  </ul>
+</nav>

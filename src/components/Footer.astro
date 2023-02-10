@@ -1,7 +1,12 @@
 ---
+import SocialLinks from "./SocialLinks.astro";
+import Updated from "./Updated.astro";
 const date = new Date().toISOString();
 ---
 
 <footer class="border-t border-gray-200 p-4 text-center text-gray-400 text-xs">
-  Updated: {date}
+  <ul class="flex justify-center flex-wrap gap-4 mb-4">
+    <SocialLinks />
+  </ul>
+  Updated: <Updated />
 </footer>

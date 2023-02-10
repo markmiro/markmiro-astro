@@ -1,0 +1,7 @@
+---
+const date = new Date();
+---
+
+<time datetime={date && date.toJSON()}>
+  {date && `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`}
+</time>
