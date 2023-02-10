@@ -8,11 +8,11 @@
 const S3 = require("aws-sdk/clients/s3.js");
 const BUCKET_NAME = "markmiro-website-content";
 
-// console.log("process.env.S3_ID", process.env.S3_ID);
+// console.log("process.env.AWS_ACCESS_KEY_ID", process.env.AWS_ACCESS_KEY_ID);
 
 const s3 = new S3({
-  accessKeyId: process.env.S3_ID,
-  secretAccessKey: process.env.S3_SECRET,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
 });
 
 const uploadToS3 = (localFile, s3File) => {
