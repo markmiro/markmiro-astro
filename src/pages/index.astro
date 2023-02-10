@@ -38,10 +38,7 @@ const allProjects = await Astro.glob("./projects/*.mdx");
                 </time>
               )}
               <div class="w-1/2">
-                <ProjectImage
-                  slug={extractLastUrlPathItem(page.url)}
-                  imgOverride={page.frontmatter?.img}
-                />
+                <ProjectImage slug={extractLastUrlPathItem(page.url)} />
               </div>
             </li>
           ))

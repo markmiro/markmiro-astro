@@ -1,23 +1,16 @@
 ---
 export interface Props {
-  slug?: string;
-  imgOverride?: string;
+  slug: string;
 }
 
-const { slug, imgOverride } = Astro.props;
+const { slug } = Astro.props;
 ---
 
-{
-  (imgOverride || slug) && (
-    <div class="not-prose aspect-w-2 aspect-h-1 border border-gray-500 rounded-lg bg-gray-50 overflow-hidden">
-      {imgOverride ? (
-        <img src={imgOverride} />
-      ) : (
-        <img
-          src={`/figma-export/project-${slug}-1x.png`}
-          srcset={`/figma-export/project-${slug}-2x.png 2x`}
-        />
-      )}
-    </div>
-  )
-}
+<div
+  class="not-prose aspect-w-2 aspect-h-1 border border-gray-500 rounded-lg bg-gray-50 overflow-hidden"
+>
+  <img
+    src={`/figma-export/project-${slug}-1x.png`}
+    srcset={`/figma-export/project-${slug}-2x.png 2x`}
+  />
+</div>
