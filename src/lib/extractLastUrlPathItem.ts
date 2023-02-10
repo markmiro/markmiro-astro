@@ -10,7 +10,6 @@ export function extractLastUrlPathItem(url?: URL | string) {
   // We don't care about the base URL, just the path.
   const baseUrl = "https://example.com";
   const tokens = new URL(url, baseUrl).pathname.split("/");
-  return tokens[tokens.length - 1];
   const nonEmpty = _.filter(tokens, (section) => section !== "");
   return _.last(nonEmpty);
 }
