@@ -31,9 +31,6 @@
     "@tailwindcss/aspect-ratio": "0.4.2",
     "@tailwindcss/typography": "0.5.9",
     "@types/lodash": "4.14.191",
-    "@types/node": "18.13.0",
-    "aws-sdk": "2.1312.0",
-    "dotenv": "16.0.3",
     "prettier": "2.8.3",
     "prettier-plugin-astro": "0.8.0"
   }
