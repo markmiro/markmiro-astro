@@ -34,4 +34,7 @@ const uploadToS3 = (localFile, s3File) => {
   });
 };
 
-uploadToS3("local_file.txt", "s3_file.txt");
+uploadToS3(
+  "public/s3/projects/degraded/vid.webm",
+  "public/s3/projects/degraded/vid.webm"
+);
