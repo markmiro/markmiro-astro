@@ -1,4 +1,5 @@
 ---
+import About from "@components/About.astro";
 import PostWrapper from "@components/PostWrapper.astro";
 import ProjectImage from "@components/ProjectImage.astro";
 import ProjectItemDate from "@components/ProjectItemDate.astro";
@@ -14,35 +15,34 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
 
 <Layout title={title}>
   <PostWrapper>
-    <!-- <About />
-    <hr /> -->
     <h1>Projects</h1>
-    <ul>
+
+    <div class="not-prose grid lg:grid-cols-2 gap-8">
       {
         allProjects
           .filter((p) => p.frontmatter?.draft !== true)
           .sort(compareFrontmatterDateDesc)
           .map((page) => (
-            <li>
-              <div>
-                {page.frontmatter?.emoji && (
-                  <span class="mr-2">{page.frontmatter.emoji}</span>
+            <a href={page.url} class="block hover:-translate-y-1 transition-transform">
+              <div class="font-bold mb-2">
+                <div>
+
+                  {page.frontmatter.title}
+                </div>
+                {page.frontmatter?.date && (
+                  <ProjectItemDate date={page.frontmatter?.date} />
                 )}
-                <a href={page.url}>{page.frontmatter.title}</a>
               </div>
+              <ProjectImage slug={extractLastUrlPathItem(page.url)} />
               {page.frontmatter?.description && (
-                <div class="text-gray-500">{page.frontmatter.description}</div>
+                <div class="text-sm text-center my-1 leading-snug text-gray-500">
+                  {page.frontmatter.description}
+                </div>
               )}
-              {page.frontmatter?.date && (
-                <ProjectItemDate date={page.frontmatter?.date} />
-              )}
-              <div class="w-1/2">
-                <ProjectImage slug={extractLastUrlPathItem(page.url)} />
-              </div>
-            </li>
+            </a>
           ))
       }
-    </ul>
+    </div>
     <hr />
     <h1>Experiments</h1>
     <ul>

@@ -11,7 +11,8 @@ const { date } = Astro.props;
 const [_, toDate] = parseFrontmatterDateRange(date);
 ---
 
-<div class="text-gray-500 text-sm flex justify-between">
+<div class="text-gray-500 text-sm font-normal flex items-center">
   {date}
-  <span>{formatDistanceToNow(toDate, { addSuffix: true })}</span>
+  <span class="flex-1 border-b mx-2" />
+  {formatDistanceToNow(toDate, { addSuffix: true })}
 </div>
