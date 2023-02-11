@@ -1,16 +1,18 @@
 ---
 export interface Props {
-  slug: string;
+  slug?: string;
 }
 
 const { slug } = Astro.props;
 ---
 
-<div
-  class="not-prose aspect-w-2 aspect-h-1 border border-gray-500 rounded-lg bg-gray-50 overflow-hidden"
->
-  <img
-    src={`/figma-export/project-${slug}-1x.png`}
-    srcset={`/figma-export/project-${slug}-2x.png 2x`}
-  />
-</div>
+{
+  slug && (
+    <div class="not-prose aspect-w-2 aspect-h-1 border border-gray-500 rounded-lg bg-gray-50 overflow-hidden">
+      <img
+        src={`/figma-export/project-${slug}-1x.png`}
+        srcset={`/figma-export/project-${slug}-2x.png 2x`}
+      />
+    </div>
+  )
+}
