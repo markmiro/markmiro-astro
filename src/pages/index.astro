@@ -1,5 +1,4 @@
 ---
-import About from "@components/About.astro";
 import PostWrapper from "@components/PostWrapper.astro";
 import ProjectImage from "@components/ProjectImage.astro";
 import ProjectItemDate from "@components/ProjectItemDate.astro";
@@ -15,27 +14,30 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
 
 <Layout title={title}>
   <PostWrapper>
-    <h1>Projects</h1>
-
-    <div class="not-prose grid lg:grid-cols-2 gap-8">
+    <h1 class="text-center">Side Projects</h1>
+  </PostWrapper>
+  <div class="p-8 md:p-10 bg-gray-50">
+    <div
+      class="ml-auto mr-auto max-w-lg md:max-w-3xl lg:max-w-6xl grid md:grid-cols-2 gap-8"
+    >
       {
         allProjects
           .filter((p) => p.frontmatter?.draft !== true)
           .sort(compareFrontmatterDateDesc)
           .map((page) => (
-            <a href={page.url} class="block hover:-translate-y-1 transition-transform">
+            <a
+              href={page.url}
+              class="block hover:-translate-y-1 transition-transform"
+            >
               <div class="font-bold mb-2">
-                <div>
-
-                  {page.frontmatter.title}
-                </div>
+                <div>{page.frontmatter.title}</div>
                 {page.frontmatter?.date && (
                   <ProjectItemDate date={page.frontmatter?.date} />
                 )}
               </div>
               <ProjectImage slug={extractLastUrlPathItem(page.url)} />
               {page.frontmatter?.description && (
-                <div class="text-sm text-center my-1 leading-snug text-gray-500">
+                <div class="text-sm my-1 leading-snug text-gray-500">
                   {page.frontmatter.description}
                 </div>
               )}
@@ -43,52 +45,65 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
           ))
       }
     </div>
-    <hr />
-    <h1>Experiments</h1>
-    <ul>
-      {
-        allExperiments
-          .filter((ex) => ex?.draft !== true)
-          .map((ex) => (
-            <li>
-              <div>
-                {ex?.emoji && <span class="mr-2">{ex.emoji}</span>}
-                {ex.title}
-              </div>
-              {ex?.description && (
-                <div class="text-gray-500">{ex.description}</div>
-              )}
-
-              {ex?.date && (
-                <time class="block text-gray-500 text-sm" datetime={ex.date}>
-                  {ex.date}
-                </time>
-              )}
-              <a
-                href={ex.primaryLink}
-                class="no-underline text-sm px-2 py-1 rounded-md bg-black hover:bg-neutral-700 text-white"
-              >
-                {ex.primaryLinkText} ↗
-              </a>
-            </li>
-          ))
-      }
-    </ul>
-    <hr />
-    <h1>Reference</h1>
-    <ul>
-      {
-        reference.map((r) => (
-          <li>
-            <a href={r.url} class="">
-              {r.title} ↗
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <hr />
-    <h1>Tools</h1>
-    <Tools />
-  </PostWrapper>
+  </div>
+  <hr />
+  <div class="p-8 lg:p-10">
+    <div
+      class="ml-auto mr-auto max-w-lg md:max-w-3xl lg:max-w-6xl grid md:grid-cols-2 gap-12"
+    >
+      <div>
+        <div class="prose lg:prose-xl mb-10">
+          <h1>Experiments</h1>
+        </div>
+        <ul>
+          {
+            allExperiments
+              .filter((ex) => ex?.draft !== true)
+              .map((ex) => (
+                <li class="flex items-start w-full py-4">
+                  <div class="text-2xl w-12 h-12 mr-3 bg-gray-200 rounded-full grid place-items-center">
+                    {ex?.emoji && <span>{ex.emoji}</span>}
+                  </div>
+                  <div class="flex-1">
+                    <div class="leading-snug font-bold">{ex.title}</div>
+                    {ex?.description && (
+                      <div class="text-sm text-gray-500 leading-snug">
+                        {ex.description}
+                      </div>
+                    )}
+                    <div class="flex mt-1 items-center">
+                      <span class="flex-1 border-b mr-2" />
+                      <a
+                        href={ex.primaryLink}
+                        class="no-underline text-sm px-2 py-1 rounded-md border hover:bg-gray-100"
+                      >
+                        {ex.primaryLinkText} ↗
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              ))
+          }
+        </ul>
+      </div>
+      <hr class="md:hidden" />
+      <div class="prose lg:prose-xl">
+        <h1>📚 Reference</h1>
+        <ul>
+          {
+            reference.map((r) => (
+              <li>
+                <a href={r.url} class="">
+                  {r.title} ↗
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <hr />
+        <h1>Tools</h1>
+        <Tools />
+      </div>
+    </div>
+  </div>
 </Layout>
