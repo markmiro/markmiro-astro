@@ -1,0 +1,17 @@
+---
+import { parseFrontmatterDateRange } from "@lib/parseFrontmatterDateRange";
+import { formatDistanceToNow } from "date-fns";
+
+export interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+
+const [_, toDate] = parseFrontmatterDateRange(date);
+---
+
+<div class="text-gray-500 text-sm flex justify-between">
+  {date}
+  <span>{formatDistanceToNow(toDate, { addSuffix: true })}</span>
+</div>

@@ -13,6 +13,7 @@ specifiers:
   astro: ^2.0.6
   astro-embed: 0.2.1
   astro-icon: 0.8.0
+  date-fns: 2.29.3
   lodash: 4.17.21
   prettier: 2.8.3
   prettier-plugin-astro: 0.8.0
@@ -32,6 +33,7 @@ dependencies:
   astro: 2.0.6
   astro-embed: 0.2.1_astro@2.0.6
   astro-icon: 0.8.0
+  date-fns: 2.29.3
   lodash: 4.17.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1457,6 +1459,11 @@ packages:
   /data-uri-to-buffer/4.0.1:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
     engines: {node: '>= 12'}
+    dev: false
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
     dev: false
 
   /debug/2.6.9:
