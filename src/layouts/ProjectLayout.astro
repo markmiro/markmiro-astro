@@ -13,7 +13,7 @@ const slug = extractLastUrlPathItem(Astro.url);
 <PostLayout title={title2}>
   <div class="not-prose">
     <ProjectImage slug={slug} />
-    <div class="flex items-center gap-3 text-sm mt-2 text-gray-500">
+    <div class="flex flex-wrap items-center gap-3 text-sm mt-2 text-gray-500">
       {
         frontmatter.primaryLink && (
           <a
