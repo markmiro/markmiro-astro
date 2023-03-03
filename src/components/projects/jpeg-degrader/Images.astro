@@ -1,15 +1,16 @@
 ---
-import { localToS3 } from "@lib/s3";
-const allGifs = await Astro.glob("../../../../public/s3/projects/jpeg-degrader/results/*.gif");
-const allImgs = await Astro.glob("../../../../public/s3/projects/jpeg-degrader/results/*.jpeg");
+import { listFileNames, s3File } from "@lib/s3";
+const files = await listFileNames("projects/jpeg-degrader/results");
+const gifs = files.filter((file) => file?.endsWith(".gif"));
+const jpegs = files.filter((file) => file?.match(/\.jpe?g$/i));
 ---
 
 <div class="flex flex-col items-center">
-  {allImgs.map((img) => {
-    return <img src={localToS3(img.default)} />
+  {jpegs.map((img) => {
+    return <img src={s3File(img)} />
   })}
   
-  {allGifs.map((gif) => {
-    return <img src={localToS3(gif.default)} />
+  {gifs.map((img) => {
+    return <img src={s3File(img)} />
   })}
 </div>
