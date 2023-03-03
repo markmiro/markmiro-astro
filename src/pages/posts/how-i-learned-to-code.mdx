@@ -1,14 +1,12 @@
 ---
-layout: ../../layouts/ProjectLayout.astro
+layout: ../../layouts/PostLayout.astro
 draft: false
-emoji: 🥖
-title: JPEG Degrader
-description: Bake an image by recursively running JPEG compression on it (with filters)
-primaryLink: https://markmiro.github.io/jpeg-text-degrader
-primaryLinkText: Visit Site
-source: https://github.com/markmiro/jpeg-text-degrader
-date: Mar 20-Apr 2, 2018
+title: How I learned to code
+description:
+date: Feb 17, 2023
 ---
+
+import { s3File } from "@lib/s3";
 
 Every programmer is influenced by various programmer figures. Maybe it's someone in your office. I learned to program by starting with Flash, the animation software, and then somehow fell in love with programming.
 
@@ -30,9 +28,9 @@ I also go into some books on software architecture:
 
 I struggled mightily to try to write code that didn't end in a big tangle by the time I was done with it. I learned with the industry. When I started, we didn't have YouTube, and blog posts weren't good enough to learn a whole language. A lot of this had to do with there not being that much online then. I'm writing this at 31, but I feel like I've been around the block. I started programming when I was about 14.
 
-{/* Here's a screenshot of my personal Flash website from 2005: */}
-{/* TODO: fix s3 not working */}
-{/* ![]({s3File('mdesign.jpg')}) */}
+Here's a screenshot of my personal Flash website from 2005:
+
+<img src={s3File('mdesign.jpg')} />
 
 Flash was way ahead of its time. But people don't care if your website has nice animations unless there's useful content that people want to look at, consume, or interact with. I come from a family of artists (painters, potters, etc.) Anyhow, I digress.
 
