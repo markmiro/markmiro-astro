@@ -13,13 +13,38 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
 ---
 
 <Layout title={title}>
-  <PostWrapper>
-    <h1 class="text-center">Side Projects</h1>
-  </PostWrapper>
+  <div class="p-8 md:p-10">
+    <div class="ml-auto mr-auto max-w-lg md:max-w-3xl lg:max-w-6xl">
+      <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-8">
+        <img
+          src="/figma-export/markmiro-portrait-1x.jpg"
+          srcset="/figma-export/markmiro-portrait-2x.jpg 2x"
+          alt="Mark Mironyuk"
+          class="w-[50px] h-[75px] sm:w-[100px] sm:h-[150px] flex-shrink-0 rounded-lg"
+        />
+        <div
+          class="sm:text-lg md:text-2xl leading-tight sm:leading-snug max-w-[34ch]"
+        >
+          <div class="font-bold text-4xl lg:text-5xl">
+            Mark Miro<span class="text-gray-300">nyuk</span>
+          </div>
+          <div class="mb-2"></div>
+          Hi, I'm a creative JavaScript and React developer / designer based in Sacramento,
+          CA.
+          <div class="mb-1"></div>
+          <a href="/about" class="text-base block underline">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
   <div class="p-8 md:p-10 bg-gray-50">
     <div
       class="ml-auto mr-auto max-w-lg md:max-w-3xl lg:max-w-6xl grid md:grid-cols-2 gap-8"
     >
+      <div class="prose lg:prose-xl md:col-span-2">
+        <h2 class="">Recent Work</h2>
+      </div>
       {
         allProjects
           .filter((p) => p.frontmatter?.draft !== true)
@@ -53,7 +78,7 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
     >
       <div>
         <div class="prose lg:prose-xl mb-10">
-          <h1>Experiments</h1>
+          <h2>Experiments</h2>
         </div>
         <ul>
           {
@@ -88,7 +113,7 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
       </div>
       <hr class="md:hidden" />
       <div class="prose lg:prose-xl">
-        <h1>📚 Reference</h1>
+        <h2>📚 Reference</h2>
         <ul>
           {
             reference.map((r) => (
@@ -101,7 +126,7 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
           }
         </ul>
         <hr />
-        <h1>Tools</h1>
+        <h2>Tools</h2>
         <Tools />
       </div>
     </div>
