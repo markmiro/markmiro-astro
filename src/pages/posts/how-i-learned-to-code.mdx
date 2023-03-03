@@ -1,0 +1,83 @@
+---
+layout: ../../layouts/ProjectLayout.astro
+draft: false
+emoji: 🥖
+title: JPEG Degrader
+description: Bake an image by recursively running JPEG compression on it (with filters)
+primaryLink: https://markmiro.github.io/jpeg-text-degrader
+primaryLinkText: Visit Site
+source: https://github.com/markmiro/jpeg-text-degrader
+date: Mar 20-Apr 2, 2018
+---
+
+Every programmer is influenced by various programmer figures. Maybe it's someone in your office. I learned to program by starting with Flash, the animation software, and then somehow fell in love with programming.
+
+Some of my first big influences were Learn HTML in 24 Hours, and similar books. I read Learn Java in 21 days and tried to read it faster than that over a winter break when I was in High School.
+
+I read Learn SQL in 10 Minutes. It was a short little book.
+
+I also got into the O’Reilly series of books. I read:
+
+- Python
+- Java (I read bits of it)
+- ActionScript
+
+I also go into some books on software architecture:
+
+- Head First Design Patterns
+- Effective Java, by Joshua Bloch
+- Clean Code
+
+I struggled mightily to try to write code that didn't end in a big tangle by the time I was done with it. I learned with the industry. When I started, we didn't have YouTube, and blog posts weren't good enough to learn a whole language. A lot of this had to do with there not being that much online then. I'm writing this at 31, but I feel like I've been around the block. I started programming when I was about 14.
+
+{/* Here's a screenshot of my personal Flash website from 2005: */}
+{/* TODO: fix s3 not working */}
+{/* ![]({s3File('mdesign.jpg')}) */}
+
+Flash was way ahead of its time. But people don't care if your website has nice animations unless there's useful content that people want to look at, consume, or interact with. I come from a family of artists (painters, potters, etc.) Anyhow, I digress.
+
+At one time I knew what it was like to write enterprisy Java. It was hard! It was painful and time-consuming. You spent most of your time battling accidental complexity that naturally grew out of the object-oriented (OOP) approach. So people thought maybe if they just used the tools better and developed better practices, then maybe they could tame some of this complexity.
+
+Now, most of what I know about OOP is mostly useless. After reading Sams Teach Yourself Java in 21 Days I had this major ephiphany about how software should be written. OOP was it. Everything was an object. If you had a Person class, you could extend it to add more things. And then you have abstract classes, and finally interfaces. By the time you wrote interfaces, you were deep in abstraction land. It made you feel so smart when you finally "got it". I read several books on the topic. I would practice implementing design patterns. I remember being asked to implement design patterns in programming interviews (at least once).
+
+But these days (2023), I can't imagine reading a book to learn programming. I'm not sure how I'd approach it now, tbh. I picked up The Pragmatic Programmer recently to give it a read and I'm not sure what I got out of it. The book was important and widely referenced at the time, but I definitely wouldn't recommend it now. The industry has evolved.
+
+So if you're getting into programming now, I think it's worth remembering just how quickly best practices can change, and the half-life of your skill-set. For example, within 15 years, OOP went from being _the_ paradigm for programming, to being a vestigial organ of old systems that you need to interact with to get things done. Classes have gone from indespensible to a necessary evil in a relatively short time.
+
+Flash was also everwhere when I first started. I learned it around 2005. By [2010](https://en.wikipedia.org/wiki/Thoughts_on_Flash#:~:text=On%20April%2029%2C%202010%2C%20Steve,iPhone%2C%20iPod%20Touch%20and%20iPad.) Steve Jobs published an open letter explaining why Flash wouldn't be on the iPhone and other devices. That was the major milestone in the beginning of the end for Flash.
+
+So I learned JavaScript and jQuery. Building web applications on the web was painful. Flash was way better in every way except in the ways that mattered. It was great for creators, but it was not the right platform for your audience. Flash websites would often make your computer's fans spin. And there were many concerns about security that were over my head at the time.
+
+JavaScript is now quite good. And with TypeScript it's better than ActionScript 3, a language that tried to front-run the JavaScript standards process in the hopes of bringing future JavaScript into the hands of developers before browsers could catch up. There are a lot of important lessons in how Macromedia, and later Adobe (after it aquired Flash) that the entire industry has really taken to heart. Now, the dream of creating a closed-source platform like Flash that would run on any device is dead. Java tried to be that. Companies tried to create their own "platform" on top of JavaScript itself. You can think of Elm and other languages as attempting to do exactly this. The principle seems like it would work, but ultimately the work ends up inspiring approaches that are closer to a standard.
+
+Consider, React, and how you write HTML inside your JavaScript. It was such a weird thing to do back then. But because I had experience with Flash, it wasn't as big a jump for me as it was for others. For example, Flash with ActionScript 3 had a feature called [E4X](https://en.wikipedia.org/wiki/ECMAScript_for_XML). The idea was you could embed XML within your code like this:
+
+```jsx
+var sales = (
+  <sales vendor="John">
+    <item type="peas" price="4" quantity="6"/>
+    <item type="carrot" price="3" quantity="10"/>
+    <item type="chips" price="5" quantity="3"/>
+  </sales>
+);
+```
+
+In Flash, you didn't have anything like the DOM until until late in its evolution. So when I saw code like this, it wasn't such a big shock:
+
+```jsx
+const App = () => {
+  return (
+    <div>
+      <p>Hello, there!</p>
+    </div>
+  );
+};
+```
+
+React was worked not just because of JSX, but because it didn't have templates. And because you could nest these components as deeply as you wanted to. This was a problem I ran into when I used [Backbone.js](https://backbonejs.org). The big idea behind it was to bring MVC to the JavaScript to make building complex applications easier. The thinking then was that you wanted to maintain a separation of concerns between the frontend and the backend. And OOP thinking was still big at the time.
+
+It took a while for people to realize that all you really needed was components—which we'll call a paradigm for the moment—and some functional utilities / tools to make working with complex state trees easier. React's detractors (in hindsight) weren't exactly wrong in wanting to separate busines logic from presentation. UIs change frequently. But you don't want your backend or database schema to have to change every time a designer wants to change the interface. From the frontend perspective, the thinking is, "If we can just be allowed to make the perfect UI, then once we get there, the backend no longer has to change." It's a nice thought.
+
+If I'm learning a language now, I would go to the main site for the language, and read their documentation. Sometimes, it will be split between Guides and a Reference. And the guides are as good as any book, open-sourced, and easy to skim. And if you need more help seeing someone actually use a language, library, or tool then you go on YouTube. It makes things way easier.
+
+The rest of staying up-to-date is reading blog posts and following some of the big names on Twitter.

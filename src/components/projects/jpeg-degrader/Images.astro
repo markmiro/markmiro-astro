@@ -1,0 +1,15 @@
+---
+import { localToS3 } from "@lib/s3";
+const allGifs = await Astro.glob("../../../../public/s3/projects/jpeg-degrader/results/*.gif");
+const allImgs = await Astro.glob("../../../../public/s3/projects/jpeg-degrader/results/*.jpeg");
+---
+
+<div class="flex flex-col items-center">
+  {allImgs.map((img) => {
+    return <img src={localToS3(img.default)} />
+  })}
+  
+  {allGifs.map((gif) => {
+    return <img src={localToS3(gif.default)} />
+  })}
+</div>

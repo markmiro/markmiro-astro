@@ -1,0 +1,101 @@
+---
+layout: ../../layouts/ProjectLayout.astro
+draft: false
+emoji: 🥖
+title: JPEG Degrader
+description: Bake an image by recursively running JPEG compression on it (with filters)
+primaryLink: https://markmiro.github.io/jpeg-text-degrader
+primaryLinkText: Visit Site
+source: https://github.com/markmiro/jpeg-text-degrader
+date: Mar 20-Apr 2, 2018
+# img: /projects/degrader/degraded-2.gif
+---
+
+import { s3File } from "@lib/s3";
+import { Tweet, YouTube } from "astro-embed";
+import Images from "/src/components/projects/jpeg-degrader/Images.astro";
+
+{/* ## Summary */}
+
+{/* TODO: make it loop (https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loop) and autoplay */}
+
+{/* <video controls autoplay id="video">
+  <source
+    src="https://markmiro-website-content.s3.amazonaws.com/projects/degraded/vid.webm"
+    type="video/webm"
+  />
+</video> */}
+
+## Goals
+
+My initial goal was to algorithmically take a jpeg and then compress it, and then compress it again and again while recording the process. I continued to play with it until I discovered that rotating the hue on each iteration caused the JPEG artifacts to behave like [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), or a [reaction-diffusion system](https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system).
+
+## Results
+
+Scroll down to the [solution](#solution) to see how I got these results.
+
+<Images />
+
+## Solution
+
+There's 3 parts to this:
+1. Draw something to an HTML [canvas](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement).
+2. Generate a degraded JPEG image from the canvas.
+3. Copy the degraded image back to the canvas.
+4. Go to step 2.
+
+With each iteration, we'll get a more degraded image.
+
+Suppose a setup like this:
+```html
+<canvas id="canvas"></canvas>
+<img id="img" />
+<script>
+  const $canvas = document.getElementById("canvas");
+  const ctx = $canvas.getContext("2d");
+  const $img = document.getElementById("img");
+</script>
+```
+
+We convert the canvas to an image like this:
+
+```js
+$img.src = canvas.toDataURL("image/jpeg", 80);
+```
+
+And we draw the image back onto the canvas like so:
+
+```js
+ctx.drawImage($img, 0, 0);
+```
+
+Do this enough times and we "bake" our image.
+
+![]({s3File('projects/jpeg-degrader/crush.jpeg')})
+
+![]({s3File('projects/jpeg-degrader/crush-2.jpeg')})
+
+Because the browser APIs don't have an option to provide sharpness, you won't get the exact same effect. However, with a few modifications and tweaks, we can get some nice effects.
+
+Add a few more tweaks and filters, and you get this:
+
+![]({s3File('projects/jpeg-degrader/results/ezgif-5-ca0acd317f.gif')})
+
+I used [ezgif](https://ezgif.com/) to shrink the GIFs and to further refine them (cropping, removing frames, looping, etc).
+
+---
+
+Languages:
+
+- HTML
+- CSS
+- TypeScript
+
+Libraries:
+
+- gif.js
+- dat.gui
+
+Hosting:
+
+- GitHub Pages
