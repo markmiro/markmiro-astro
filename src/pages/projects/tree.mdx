@@ -12,19 +12,27 @@ date: Nov 10-Jul 12, 2022
 
 ## Summary
 
-
+The idea was to emulate a lot of what sites like [WorkFlowy](https://workflowy.com) do, but have that as a standalone headless library that can be included in the same way you might include something like [Headless UI](https://headlessui.com) or [Radix](https://www.radix-ui.com/).
 
 ## Goals
 
+In my case, I wanted to build a [web browser](/projects/mosaic) with tabs on the left-hand side and to have the interface for interacting with tabs to look much like WorkFlowy. When you have nested tabs in your browser, you don't want the interactions to feel like work. So the idea was you would essentially be in a big WorkFlowy document and you could write notes for the tabs you visited, manage lots of tabs, and you would use a lot of keyboard shortcuts, but it would feel natural because each tab would feel more like a bullet in a text file. The shortcuts you'd use would be the same ones you already use to modify text. Want to delete a tab? Press <kbd>⌘-delete</kbd> on a mac. Want a new tab? Press <kbd>shift-return</kbd> and type your search query. Want to add notes? Press <kbd>return</kbd> and then press <kbd>tab</kbd> to nest the bullet under the existing tab.
 
+One of the most fluid interfaces for dealing with deeply nested data is WorkFlowy. You can add as many levels as you want and the UI doesn't get crammed. You can always zoom in and it will show you breadcrumbs to help you get back. Imagine if you could write code, or manipulate folders and files with the same ease.
 
 ## Solution
 
+I created a library to do this. I used it within a web brower I worked on. I created a stateless system to make it easy to test, implement undo/redo, etc. It gives you a structure you can put into a Redux state tree or some other state-management system.
 
+I wrote unit tests for each function. This was really satisfying. The contraints and features were straightforward and unlikely to change, but there was enough complexity that tests provided confidence. It would be really bad if one of the functions had a bug and messed up the state of the nested tree.
 
 ## Learnings
 
+Different implementations came with different tradeoffs. For example, should each node have a reference to the previous and next nodes? Adding them introduces complexity to each modification operation, but it makes traversing nodes much easier. But the duplication of data also makes data corruption a serious issue. It becomes possible for the entire structure to get into an invalid state.
 
+One learning was just how important the initial assumptions going into this would be. Every detail has major ramifications on the implementation. For example, would the data be stored in a relational database or a document database? Should the tree content be stored in the tree, or should the tree link to data in a separate structure?
+
+Finally, JavaScript doesn't provide a natural way of working with stateless trees. That is why I chose [Ramda.js](https://ramdajs.com). It provided functions like `over()`, `lensPath()`, etc. that were useful for statelessly modifying nested structures. It was much better than manually creating a new tree that references all the old nodes that were unchanged, and "modifying" the desired node.
 
 ---
 

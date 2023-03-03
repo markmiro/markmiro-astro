@@ -1,32 +1,28 @@
 ---
 layout: ../../layouts/ProjectLayout.astro
-draft: true
-emoji: 🔨
-title: Example
-description: Example
-primaryLink: https://tailwind-todo-app.vercel.app/
+draft: false
+emoji: 📝
+title: Tailwind Todo
+description: A todo app built with Tailwind, Prisma, and NextAuth.
+primaryLink: https://tailwind-todo-app.vercel.app
 primaryLinkText: Visit Site
 source: https://github.com/markmiro/tailwind-todo-app
-date: Aug 22-Aug 24, 2022
+date: Aug 22-Sep 14, 2022
 ---
 
 import { Tweet, YouTube } from "astro-embed";
 
 ## Summary
 
+I built this app to get more experience with Tailwind CSS and a few other libraries that are becoming more popular in the React ecosystem. I also wanted to try out the new NextAuth library, which is a great way to add authentication to your Next.js app.
 
-
-## Goals
-
-
-
-## Solution
-
-
+The stack is close to the [T3 stack](https://create.t3.gg), except I'm not using tRPC.
 
 ## Learnings
 
+Some interactions are a bit slow. I suspect it's because I'm using a free database (Railway) and free function hosting (Vercel). React query could bypass the issue by doing optimistic updates, and syncing to the backend in the background.
 
+Dragging to reorder items would be a nice addition.
 
 ---
 
@@ -35,18 +31,30 @@ Languages:
 - HTML
 - CSS
 - TypeScript
+- Prisma
+- SQL
 
 Libraries:
 
-- Prettier
 - Lodash
-- Chakra UI
+- Prisma
+- Prettier
+- commitlint
+- husky
+- Superjson
+- NextAuth
 
 Environment:
 
-- create-react-app
 - Next.js
+- PNPM
+
+Backend:
+
+- PostgreSQL
+- Vercel serverless functions
 
 Hosting:
 
 - Vercel
+- Railway (for DB)

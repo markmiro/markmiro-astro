@@ -16,19 +16,26 @@ import { Tweet, YouTube } from "astro-embed";
 
 ## Summary
 
-
+I tend to have lots of tabs open. This project was an experiment in building a web browser that made managing tabs effortless.
 
 ## Goals
 
-
+I wanted a web browser I could use myself. Some ideas I wanted to play with:
+- What if pages opened in narrow "mobile" views by default? Lots of web-pages are dense and packed with information. What if we only expanded the tab into desktop-mode as necessary?
+- What if we had tabs on the left in a scrollable view?
+- Tab screenshots?
+- Nested tabs?
+- What if the tab UI was text-based and interacting with tabs resembled [WorkFlowy](https://workflowy.com)? You could rename tabs, add notes, put tabs in folders, and it all feels as fluid as if you were just typing text in a text editor?
 
 ## Solution
 
-
+I used [Electron.js](https://www.electronjs.org) for the basics, and I used create-react-app.
 
 ## Learnings
 
+I learned that building a web browser using JS and Electron was a tricky proposition. Electron wasn't designed for making web browsers.
 
+Electron.js also didn't support Chrome extensions.
 
 ---
 

@@ -4,8 +4,8 @@ draft: false
 emoji: 👻 
 title: Ghost Tabs Chrome Extension
 description: Old tabs slowly fade away, but you can always bring them back.
-primaryLink: https://ghosttabs.com
-primaryLinkText: Download Chrome Extension
+primaryLink: https://youtu.be/hmUZrfUhLBA
+primaryLinkText: Watch on YouTube
 source: https://github.com/markmiro/ghost-tabs-chrome-extension
 date: Oct 13-Nov 15, 2022
 ---
@@ -14,17 +14,33 @@ import { Tweet, YouTube } from "astro-embed";
 
 ## Summary
 
+I was inspired by this tweet:
+
 <div class="not-prose">
   <Tweet id="https://twitter.com/beyang/status/1580598928411459586" />
 </div>
 
 ## Goals
 
-
+See which tabs are old so you can close them yourself.
 
 ## Solution
 
+<YouTube id="https://youtu.be/hmUZrfUhLBA" />
+
+I knew there were ways to manipulate images in JS, and my first thought was that I'd get the favicon from the browser and modify it, and then set the icon to my modified one. This would have been ideal because I wouldn't need the Chrome extension to have access to individual pages.
+
+For historical context, the favicon was a feature that was introduced last-minute by Internet Explorer in the early days of the web. A senior developer built it for fun and showed it to a Program Manager who gave it the OK. You can read more about it on that program manager's blog [here](https://ruthlessray.wordpress.com/2013/09/02/inventing-favicon-ico/).
+
+It was a long saga trying to get the extension working. I first tried getting the favicon from Chrome's API. This had some [limitations](https://stackoverflow.com/questions/10665321/reliably-getting-favicons-in-chrome-extensions-chrome-favicon). I decided to get the favicon from the web page directly. This was a little tricky since the icon could be in many different formats. And SVG icons needed to be processed in their own way.
+
+I was able to get the icon fading working. Next, I needed to make sure my extension was a good citizen. I decided to reset the HTML back to its original state after the user uninstalled the extension. Turns out, reseting the HTML didn't cause the icon to reset. I found a hack to force the favicon to reset.
+
+Because my Chrome extension was injecting a little script into each page, I also wanted a way to detect if the user had uninstalled the extension. Turns out there's no API for this. So I instead had the content scripts call try to communicate with the host Ghost Tabs Chrome extension, and if it failed, it would reset the icon back to the original state.
+
 ## Learnings
+
+I now know why this kind of extension doesn't exist in the [Chrome Web Store](https://chrome.google.com/webstore). I gave it my best shot, and I have an extension that can fade your tabs, but it does so at a cost. And if you try to uninstall it, you'll be frustrated for a while until the browser eventually resets all the icons back to normal.
 
 ---
 
@@ -39,8 +55,8 @@ Libraries:
 - Prettier
 - Lodash
 - Tachyons
+- Ramda
 - react-beautiful-dnd
-- ramda
 
 Environment:
 
