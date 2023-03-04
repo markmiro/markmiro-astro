@@ -1,0 +1,20 @@
+---
+import { s3File } from "@lib/s3";
+export interface Props {
+  src: string;
+}
+
+const { src } = Astro.props;
+---
+
+{/* TODO: make it loop (https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loop) and autoplay */}
+<video controls autoplay id="video">
+  <source src={s3File(src)} type="video/webm" />
+</video>
+<script>
+  const $video = document.getElementById("video") as HTMLVideoElement;
+  if ($video) {
+    $video.loop = true;
+    $video.autoplay = true;
+  }
+</script>
