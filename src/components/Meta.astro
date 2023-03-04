@@ -1,4 +1,6 @@
 ---
+import { s3File } from '@lib/s3';
+
 interface Props {
   title: string;
   description: string;
@@ -10,7 +12,7 @@ interface Props {
 const {
   title,
   description = "",
-  image = "/figma-export/meta-tag-image.jpg",
+  image = s3File("figma-export/meta-tag-image.jpg"),
   pageType = "website",
 } = Astro.props;
 ---

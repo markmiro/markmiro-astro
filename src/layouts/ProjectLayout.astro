@@ -4,13 +4,21 @@ import ProjectImage from "@components/ProjectImage.astro";
 import { Icon } from "astro-icon";
 import _ from "lodash";
 import { extractLastUrlPathItem } from "@lib/extractLastUrlPathItem";
-const { frontmatter, title } = Astro.props;
-const title2 = title || frontmatter.title || "Untitled";
+import { s3File } from "@lib/s3";
 
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { frontmatter } = Astro.props;
+const title = Astro.props.title || frontmatter.title || "Untitled";
+const description = Astro.props.description || frontmatter.description || "";
 const slug = extractLastUrlPathItem(Astro.url);
+const image = s3File(`figma-export/project-${slug}-1x.png`);
 ---
 
-<PostLayout title={title2}>
+<PostLayout title={title} description={description} image={image}>
   <div class="not-prose">
     <ProjectImage slug={slug} />
     <div class="flex flex-wrap items-center gap-3 text-sm mt-2 text-gray-500">
