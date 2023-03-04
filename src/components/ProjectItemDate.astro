@@ -1,6 +1,6 @@
 ---
 import { parseFrontmatterDateRange } from "@lib/parseFrontmatterDateRange";
-import { formatDistanceToNow } from "date-fns";
+import { RelativeDate } from "./RelativeDate";
 
 export interface Props {
   date: string;
@@ -11,8 +11,8 @@ const { date } = Astro.props;
 const [_, toDate] = parseFrontmatterDateRange(date);
 ---
 
-<div class="text-gray-500 text-sm font-normal flex items-center">
+<time datetime={toDate.toISOString()} class="text-gray-500 text-sm font-normal flex items-center">
   {date}
   <span class="flex-1 border-b mx-2" />
-  {formatDistanceToNow(toDate, { addSuffix: true })}
-</div>
+  <RelativeDate client:idle date={toDate} />
+</time>
