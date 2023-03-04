@@ -3,7 +3,7 @@ import PostLayout from "./PostLayout.astro";
 import ProjectImage from "@components/ProjectImage.astro";
 import { Icon } from "astro-icon";
 import _ from "lodash";
-import { extractLastUrlPathItem } from "src/lib/extractLastUrlPathItem";
+import { extractLastUrlPathItem } from "@lib/extractLastUrlPathItem";
 const { frontmatter, title } = Astro.props;
 const title2 = title || frontmatter.title || "Untitled";
 

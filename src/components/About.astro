@@ -1,7 +1,11 @@
+---
+import { s3File } from "@lib/s3";
+---
+
 <div class="not-prose text-center">
   <img
-    src="/figma-export/markmiro-portrait-1x.jpg"
-    srcset="/figma-export/markmiro-portrait-2x.jpg 2x"
+    src={s3File("figma-export/markmiro-portrait-1x.jpg")}
+    srcset={s3File("figma-export/markmiro-portrait-2x.jpg 2x")}
     alt="Mark Mironyuk"
     class="w-[100px] h-[150px] ml-auto mr-auto rounded-lg"
   />
@@ -13,8 +17,8 @@
   </h3>
   <div class="mb-1 md:mb-2"></div>
   <p class="leading-snug text-gray-400 text-sm md:text-lg">
-    My legal last name includes the grayed-out part,<br />but I almost always leave it
-    off for online accounts.
+    My legal last name includes the grayed-out part,<br />but I almost always
+    leave it off for online accounts.
   </p>
 
   <div class="mb-2 md:mb-4"></div>

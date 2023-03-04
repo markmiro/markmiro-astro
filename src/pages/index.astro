@@ -6,6 +6,7 @@ import Layout from "@layouts/Layout.astro";
 import { compareFrontmatterDateDesc } from "@lib/compareFrontmatterDateDesc";
 import { extractLastUrlPathItem } from "@lib/extractLastUrlPathItem";
 import { allExperiments, reference } from "@lib/_content";
+import { s3File } from "@lib/s3";
 const title = "Index";
 
 const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
@@ -16,8 +17,8 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
     <div class="ml-auto mr-auto max-w-lg md:max-w-3xl lg:max-w-6xl">
       <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-8">
         <img
-          src="/figma-export/markmiro-portrait-1x.jpg"
-          srcset="/figma-export/markmiro-portrait-2x.jpg 2x"
+          src={s3File("figma-export/markmiro-portrait-1x.jpg")}
+          srcset={s3File("figma-export/markmiro-portrait-2x.jpg 2x")}
           alt="Mark Mironyuk"
           class="w-[50px] h-[75px] sm:w-[100px] sm:h-[150px] flex-shrink-0 rounded-lg"
         />
