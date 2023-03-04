@@ -1,5 +1,5 @@
 ---
-import ProjectImage from "@components/ProjectImage.astro";
+import ProjectImageThumb from "@components/ProjectImageThumb.astro";
 import ProjectItemDate from "@components/ProjectItemDate.astro";
 import Tools from "@components/Tools.astro";
 import Layout from "@layouts/Layout.astro";
@@ -7,19 +7,23 @@ import { compareFrontmatterDateDesc } from "@lib/compareFrontmatterDateDesc";
 import { extractLastUrlPathItem } from "@lib/extractLastUrlPathItem";
 import { allExperiments, reference } from "@lib/_content";
 import { s3File } from "@lib/s3";
-const title = "Index";
+const title = "";
+const description =
+  "Hi, I'm a creative JavaScript and React developer / designer based in Sacramento, CA.";
 
 const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
   <div class="p-8 md:p-10">
     <div class="ml-auto mr-auto max-w-lg md:max-w-3xl lg:max-w-6xl">
-      <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-8">
+      <div
+        class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-3 md:gap-8"
+      >
         <img
           src={s3File("figma-export/markmiro-portrait-1x.jpg")}
           srcset={s3File("figma-export/markmiro-portrait-2x.jpg 2x")}
-          alt="Mark Mironyuk"
+          alt="Portrait of Mark Mironyuk"
           class="w-[50px] h-[75px] sm:w-[100px] sm:h-[150px] flex-shrink-0 rounded-lg"
         />
         <div
@@ -29,8 +33,7 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
             Mark Miro<span class="text-gray-300">nyuk</span>
           </div>
           <div class="mb-2"></div>
-          Hi, I'm a creative JavaScript and React developer / designer based in Sacramento,
-          CA.
+          {description}
           <div class="mb-1"></div>
           <a href="/about" class="text-base block underline">Learn More →</a>
         </div>
@@ -50,17 +53,16 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
           .filter((p) => p.frontmatter?.draft !== true)
           .sort(compareFrontmatterDateDesc)
           .map((page) => (
-            <a
-              href={page.url}
-              class="block group"
-            >
+            <a href={page.url} class="block group">
               <div class="font-bold mb-2">
-                <div class="group-hover:underline">{page.frontmatter.title}</div>
+                <div class="group-hover:underline">
+                  {page.frontmatter.title}
+                </div>
                 {page.frontmatter?.date && (
                   <ProjectItemDate date={page.frontmatter?.date} />
                 )}
               </div>
-              <ProjectImage slug={extractLastUrlPathItem(page.url)} />
+              <ProjectImageThumb slug={extractLastUrlPathItem(page.url)} />
               {page.frontmatter?.description && (
                 <div class="text-sm my-1 leading-snug text-gray-500">
                   {page.frontmatter.description}
