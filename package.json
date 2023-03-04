@@ -5,6 +5,7 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "vercel build --prod && vercel --prebuilt --prod",
     "astro": "astro",
     "format": "prettier --write --plugin-search-dir=. .",
     "//sync": "Make sure access keys are set up correctly: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html",
