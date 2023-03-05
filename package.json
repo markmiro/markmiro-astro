@@ -10,6 +10,7 @@
     "//sync": "Make sure access keys are set up correctly: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html",
     "s3-down": "aws s3 sync s3://markmiro-website-content ../s3",
     "s3-up": "aws s3 sync ../s3 s3://markmiro-website-content",
+    "deploy:preview": "pnpm run s3-up && vercel build && vercel deploy --prebuilt",
     "deploy": "pnpm run s3-up && vercel build --prod && vercel deploy --prebuilt --prod"
   },
   "dependencies": {
