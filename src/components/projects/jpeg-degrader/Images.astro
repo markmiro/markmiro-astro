@@ -1,34 +1,24 @@
 ---
+import Gallery, { Img } from "@components/Gallery";
 import { listFileNames, s3File } from "@lib/s3";
+import imageSize from "image-size";
 const files = await listFileNames("projects/jpeg-degrader/results");
 const gifs = files.filter((file) => file?.endsWith(".gif"));
 const jpegs = files.filter((file) => file?.match(/\.jpe?g$/i));
-import imageSize from "image-size";
+
+const jpegs2: Img[] = jpegs.map((img) => ({
+  smallURL: s3File(img),
+  largeURL: s3File(img),
+  width: imageSize("../s3/" + img).width as number,
+  height: imageSize("../s3/" + img).height as number,
+}));
+
+const gifs2: Img[] = gifs.map((img) => ({
+  smallURL: s3File(img),
+  largeURL: s3File(img),
+  width: (imageSize("../s3/" + img).width as number) * 2,
+  height: (imageSize("../s3/" + img).height as number) * 2,
+}));
 ---
 
-<div class="flex flex-col items-center not-prose gap-3">
-  {
-    jpegs.map((img) => {
-      return (
-        <img
-          class="border bg-gray-100"
-          src={s3File(img)}
-          width={imageSize("../s3/" + img).width}
-          height={imageSize("../s3/" + img).height}
-        />
-      );
-    })
-  }
-  {
-    gifs.map((img) => {
-      return (
-        <img
-          class="border bg-gray-100"
-          src={s3File(img)}
-          width={imageSize("../s3/" + img).width}
-          height={imageSize("../s3/" + img).height}
-        />
-      );
-    })
-  }
-</div>
+<Gallery client:only galleryID="jpeg-degrader" images={[...jpegs2, ...gifs2]} />

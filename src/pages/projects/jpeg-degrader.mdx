@@ -16,6 +16,10 @@ import S3Video from "@components/S3Video.astro";
 import Images from "@components/projects/jpeg-degrader/Images.astro";
 import { Tweet, YouTube } from "astro-embed";
 
+## Results
+
+<Images />
+
 ## Summary
 
 This project is a fun way to "bake" an image by recursively running JPEG compression on it (with filters) to create interesting effects.
@@ -25,12 +29,6 @@ This project is a fun way to "bake" an image by recursively running JPEG compres
 ## Goals
 
 My initial goal was to algorithmically take a jpeg and then compress it, and then compress it again and again while recording the process. I continued to play with it until I discovered that rotating the hue on each iteration caused the JPEG artifacts to behave like [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), or a [reaction-diffusion system](https://en.wikipedia.org/wiki/Reaction%E2%80%93diffusion_system).
-
-## Results
-
-Scroll down to the [solution](#solution) to see how I got these results.
-
-<Images />
 
 ## Solution
 

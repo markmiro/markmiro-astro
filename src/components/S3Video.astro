@@ -8,7 +8,7 @@ const { src } = Astro.props;
 ---
 
 {/* TODO: make it loop (https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loop) and autoplay */}
-<video controls autoplay id="video">
+<video controls autoplay id="video" class="w-full border border-gray-400 rounded-lg shadow-md">
   <source src={s3File(src)} type="video/webm" />
 </video>
 <script>
