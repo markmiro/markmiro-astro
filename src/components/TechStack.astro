@@ -16,7 +16,7 @@ interface Props {
 const { stack } = Astro.props;
 ---
 
-<div class="divide-y">
+<div class="grid md:grid-cols-auto-1fr gap-y-2 gap-x-6">
   <TechStackItem stack={stack} title="Languages" filter={language} />
   <TechStackItem stack={stack} title="Packages" filter={pkg} />
   <TechStackItem stack={stack} title="Environment" filter={env} />

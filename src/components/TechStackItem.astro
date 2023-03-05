@@ -20,7 +20,7 @@ const matches = findMatches(filter);
 
 {
   matches.length > 0 && (
-    <div class="grid md:grid-cols-2">
+    <>
       <div class="font-semibold">{title}:</div>
       <div>
         {matches.map((key) => {
@@ -33,6 +33,6 @@ const matches = findMatches(filter);
           );
         })}
       </div>
-    </div>
+    </>
   )
 }
