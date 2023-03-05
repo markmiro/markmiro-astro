@@ -7,7 +7,6 @@ import { compareFrontmatterDateDesc } from "@lib/compareFrontmatterDateDesc";
 import { extractLastUrlPathItem } from "@lib/extractLastUrlPathItem";
 import { allExperiments, reference } from "@lib/_content";
 import { s3File } from "@lib/s3";
-import TechStack from "@components/TechStack.astro";
 const title = "";
 const description =
   "Hi, I'm a creative JavaScript and React developer / designer based in Sacramento, CA.";
@@ -135,5 +134,3 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
     </div>
   </div>
 </Layout>
-
-<!-- <TechStack stack={["js", "mdx", ""]} /> -->
