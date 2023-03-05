@@ -4,6 +4,7 @@ import Meta from "@components/Meta.astro";
 import Head from "@components/Head.astro";
 import PostNav from "@components/PostNav.astro";
 import PostWrapper from "@components/PostWrapper.astro";
+import Pagination from "@components/Pagination.astro";
 
 export interface Props {
   title: string;
@@ -44,6 +45,7 @@ const image = Astro.props.image || frontmatter?.image || "";
       </h1>
       <slot />
     </PostWrapper>
+    <Pagination />
     <Footer />
     <style is:global>
       .tweet-body {
