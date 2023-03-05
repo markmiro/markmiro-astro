@@ -10,7 +10,21 @@ source: https://github.com/markmiro/typing-test
 date: Jan 25-Apr 22, 2021
 ---
 
-Initial version:
+import S3Image from "@components/S3Image.astro";
+import S3Video from "@components/S3Video.astro";
+import { Tweet, YouTube } from "astro-embed";
+
+## Goals
+
+I was initially inspired by seeing people using 10fastfingers and wanting something that was a little cleaner.
+
+<S3Image src="projects/typing-test/10fastfingers.com_typing-test_english.png" />
+
+I googled around to see what else was out there and none of the other typing test apps were very appealing.
+
+## Solution
+
+My initial version was quite simple:
 
 <iframe src="https://codesandbox.io/embed/typing-test-b55zi?fontsize=14&hidenavigation=1&theme=dark&view=preview"
   style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
@@ -19,4 +33,61 @@ Initial version:
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
-import { Tweet, YouTube } from "astro-embed";
+After I had the basics working, I decided to get authentication working.
+
+
+
+I used this app as an opportunity to learn how to do some things that I had been wanting to learn for a while:
+- Firebase
+- User authentication
+- Chakra UI
+
+## Learnings
+
+I considered building many features. I explored quite a few of them.
+
+1) Replay typed words:
+
+{/* <S3Image src="projects/typing-test/replay-typed-words.png" /> */}
+
+<S3Video src="projects/typing-test/replay-typed-words.mp4" />
+
+2) Show the user's typing speed over time:
+
+<S3Image src="projects/typing-test/stats.png" />
+
+---
+
+## Stack
+
+Languages:
+
+- HTML
+- CSS
+- TypeScript
+- JSX
+- YAML
+
+Libraries:
+
+- React
+- Chakra UI
+- Firebase
+- date-fns
+- Reach Router
+- Framer Motion
+- Lodash
+- React Table
+- statistics.js
+- Jest
+- Tailwind CSS
+
+Environment:
+
+- Gatsby (I was trying this as an alternative to Next.js)
+- NPM
+
+Hosting:
+
+- Vercel
+- Google Cloud (for Firebase)
