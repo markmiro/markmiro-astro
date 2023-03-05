@@ -1,5 +1,6 @@
 ---
 import type { StackItem, StackKey } from "@lib/_stacks";
+import { Icon } from "astro-icon";
 
 interface Props {
   title: string;
@@ -27,7 +28,9 @@ const matches = findMatches(filter);
           const url = filter[key].site || filter[key].git || filter[key].docs;
           return (
             // TODO: uppercase?
-            <span class="mm-comma-item">
+            // File from node_modules/vscode-icons/icons/file_type_astro.svg
+            <span class="mm-comma-item inline-flex items-center">
+              <Icon name="file_type_astro" class="inline-block w-5 mr-1" />
               {url ? <a href={url}>{filter[key].name}</a> : filter[key].name}
             </span>
           );

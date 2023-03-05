@@ -54,6 +54,8 @@ const image = Astro.props.image || frontmatter?.image || "";
       /* mm stands for "Mark Miro" */
       .mm-comma-item::after {
         content: "•";
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
       }
       .mm-comma-item:last-child::after {
         content: "";
