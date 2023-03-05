@@ -19,15 +19,17 @@ const image = s3File(`figma-export/project-${slug}-1x.png`);
 ---
 
 <PostLayout title={title} description={description} image={image}>
-  <div class="not-prose">
-    <ProjectImage slug={slug} />
+  <div class="not-prose group">
+    <a href={frontmatter.primaryLink}>
+      <ProjectImage slug={slug} />
+    </a>
     <div class="flex flex-wrap items-center gap-3 text-sm mt-2 text-gray-500">
       {
         frontmatter.primaryLink && (
           <a
             href={frontmatter.primaryLink}
             target="_blank"
-            class="shadow-md bg-black text-white hover:bg-neutral-800 rounded-lg px-3 py-1 flex items-center gap-2"
+            class="shadow-md bg-black text-white group-hover:bg-neutral-800 hover:bg-neutral-800 rounded-lg px-4 py-2 text-lg"
           >
             {frontmatter.primaryLinkText} ↗
           </a>
@@ -44,7 +46,7 @@ const image = s3File(`figma-export/project-${slug}-1x.png`);
           </a>
         )
       }
-      <div class="grow"></div>
+      <span class="flex-1 border-b" />
       {frontmatter.date && <div>{frontmatter.date}</div>}
     </div>
   </div>
