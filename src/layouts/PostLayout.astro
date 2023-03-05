@@ -22,19 +22,33 @@ const image = Astro.props.image || frontmatter?.image || "";
   <head>
     <Head />
     <title>{title} • Mark Miro</title>
-    <Meta title={title} description={description} image={image} pageType="article" />
+    <Meta
+      title={title}
+      description={description}
+      image={image}
+      pageType="article"
+    />
   </head>
   <body>
     <PostWrapper>
       <PostNav />
-      <h1>{title}</h1>
+      <h1>
+        {title}
+        {
+          description && (
+            <small class="block text-xl font-normal text-gray-400">
+              {description}
+            </small>
+          )
+        }
+      </h1>
       <slot />
     </PostWrapper>
     <Footer />
+    <style is:global>
+      .tweet-body {
+        word-break: break-word;
+      }
+    </style>
   </body>
 </html>
-<style is:global>
-  .tweet-body {
-    word-break: break-word;
-  }
-</style>
