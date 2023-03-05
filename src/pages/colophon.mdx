@@ -3,30 +3,54 @@ layout: ../layouts/PostLayout.astro
 title: Colophon
 ---
 
+import TechStack from "@components/TechStack.astro";
+
 This site was built using [Astro](https://astro.build).
 
-Languages:
+## Process
 
-- HTML
-- CSS
-- TypeScript
-- JSX
-- MDX
+I first started with some Markdown content and a previous website. My old site was built using Next.js. I've tried Gatsby in the past, but I've wanted to try Astro.js and so far it's been pretty good. The main thing is that Astro components require getting a little used to. I prefer React because it's closer to JS, there's less magic, and the components are more portable. But Astro still uses JSX, so it's not too bad.
 
-Libraries:
+---
 
-- React
-- Tailwind
-- Prettier
-- Lodash
-- AWS CLI
+## Stack
 
-Environment:
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "jsx",
+    "mdx",
+    "tailwindCss",
+    "prettier",
+    "lodash",
+    "pnpm",
+    "astro",
+    "vercel",
+    "s3",
+  ]}
+/>
 
-- PNPM
-- Astro
+Editor:
 
-Hosting:
+I use [VS Code](https://code.visualstudio.com/) with the following extensions:
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+- [Auto Import](https://marketplace.visualstudio.com/items?itemName=steoates.autoimport)
+- [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)
+- [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
+- [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+- [GitHub Theme](https://marketplace.visualstudio.com/items?itemName=GitHub.github-vscode-theme)
+- [HTML Snippets](https://marketplace.visualstudio.com/items?itemName=abusaidm.html-snippets)
+- [Path IntelliSense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
+- [Prisma](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma)
+- [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
+- [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+- [Lorem ipsum](https://marketplace.visualstudio.com/items?itemName=Tyriar.lorem-ipsum)
 
-- Vercel
-- Amazon S3 for images
+Other apps:
+- [Figma](https://www.figma.com/) for the design.
+- [Kap](https://getkap.co/) for capturing GIFs.
+- zsh for the terminal.

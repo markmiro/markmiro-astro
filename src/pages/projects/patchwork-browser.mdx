@@ -10,6 +10,7 @@ source: https://github.com/markmiro/mosaic
 date: Apr 24, 2019-Jul 4, 2022
 ---
 
+import TechStack from "@components/TechStack.astro";
 import { Tweet, YouTube } from "astro-embed";
 
 {/* https://medium.com/@markmiro/what-might-a-web-browser-from-the-future-look-like-8b854be25d1f */}
@@ -21,6 +22,7 @@ I tend to have lots of tabs open. This project was an experiment in building a w
 ## Goals
 
 I wanted a web browser I could use myself. Some ideas I wanted to play with:
+
 - What if pages opened in narrow "mobile" views by default? Lots of web-pages are dense and packed with information. What if we only expanded the tab into desktop-mode as necessary?
 - What if we had tabs on the left in a scrollable view?
 - Tab screenshots?
@@ -41,23 +43,20 @@ Electron.js also didn't support Chrome extensions.
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- TypeScript
-
-Libraries:
-
-- React
-- Prettier
-- Lodash
-- Ramda.js (like lodash)
-- react-beautiful-dnd
-- Tachyons
-- Jest
-
-Environment:
-
-- create-react-app
-- Electron.js
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "react",
+    "prettier",
+    "lodash",
+    "ramda",
+    "reactBeautifulDnd",
+    "tachyons",
+    "jest",
+    "createReactApp",
+    "electron",
+  ]}
+/>

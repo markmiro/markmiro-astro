@@ -10,6 +10,8 @@ source: https://github.com/markmiro/resume
 date: Feb 24-Feb 25, 2023
 ---
 
+import TechStack from "@components/TechStack.astro";
+
 ## Summary
 
 Resume built with Next.js and Tailwind CSS, and deployed on Vercel as a static site.
@@ -26,24 +28,16 @@ I've tried printing in Safari on both iOS and macOS and the results are not as g
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- TypeScript
-- JSX
-- YAML
-
-Libraries:
-
-- React
-- Tailwind CSS
-
-Environment:
-
-- Next.js
-- NPM
-
-Hosting:
-
-- Vercel
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "jsx",
+    "yaml",
+    "tailwindCss",
+    "next",
+    "npm",
+    "vercel",
+  ]}
+/>

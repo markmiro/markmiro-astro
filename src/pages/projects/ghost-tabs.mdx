@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/ProjectLayout.astro
 draft: false
-emoji: 👻 
+emoji: 👻
 title: Ghost Tabs Chrome Extension
 description: Old tabs slowly fade away, but you can always bring them back.
 primaryLink: https://youtu.be/hmUZrfUhLBA
@@ -11,6 +11,7 @@ date: Oct 13-Nov 15, 2022
 ---
 
 import { Tweet, YouTube } from "astro-embed";
+import TechStack from "@components/TechStack.astro";
 
 ## Summary
 
@@ -46,22 +47,16 @@ I now know why this kind of extension doesn't exist in the [Chrome Web Store](ht
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- TypeScript
-
-Libraries:
-
-- Prettier
-- Tachyons
-
-Environment:
-
-- PNPM
-- Chrome Extension API
-
-Hosting:
-
-- GitHub Pages
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "prettier",
+    "tachyons",
+    "pnpm",
+    "chromeExtensionsApi",
+    "ghPages",
+  ]}
+/>

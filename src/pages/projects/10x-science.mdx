@@ -9,6 +9,7 @@ primaryLinkText: Visit 10x Science
 source: https://github.com/markmiro/10x-science
 date: May 10-Aug 3, 2021
 ---
+import TechStack from "@components/TechStack.astro";
 
 ## Summary
 
@@ -21,26 +22,16 @@ The site was easy to set up. I chose [Notion](https://notion.so) because I have 
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- JavaScript
-- JSX
-
-Libraries:
-
-- React
-
-Environment:
-
-- Next.js
-
-Hosting:
-
-- Vercel
-
-Tools
-
-- Notion
-- ConvertKit
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "jsx",
+    "react",
+    "next",
+    "vercel",
+    "notion",
+    "convertkit",
+  ]}
+/>

@@ -1,0 +1,38 @@
+---
+import type { StackItem, StackKey } from "@lib/_stacks";
+
+interface Props {
+  title: string;
+  filter: Record<any, StackItem>;
+  stack: StackKey[];
+}
+
+const { title, stack, filter } = Astro.props;
+
+function findMatches(filter: Record<any, StackItem>) {
+  const stackKeys = Object.keys(filter) as StackKey[];
+  const found = stackKeys.filter((key) => stack.includes(key));
+  return found;
+}
+
+const matches = findMatches(filter);
+---
+
+{
+  matches.length > 0 && (
+    <div class="grid md:grid-cols-2">
+      <div class="font-semibold">{title}:</div>
+      <div>
+        {matches.map((key) => {
+          const url = filter[key].site || filter[key].git || filter[key].docs;
+          return (
+            // TODO: uppercase?
+            <span class="mm-comma-item">
+              {url ? <a href={url}>{filter[key].name}</a> : filter[key].name}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  )
+}

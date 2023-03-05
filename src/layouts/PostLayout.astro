@@ -51,6 +51,13 @@ const image = Astro.props.image || frontmatter?.image || "";
       .tweet-body {
         word-break: break-word;
       }
+      /* mm stands for "Mark Miro" */
+      .mm-comma-item::after {
+        content: "•";
+      }
+      .mm-comma-item:last-child::after {
+        content: "";
+      }
     </style>
   </body>
 </html>

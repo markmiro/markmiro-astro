@@ -10,6 +10,7 @@ source: https://github.com/markmiro/tailwind-todo-app
 date: Aug 22-Sep 14, 2022
 ---
 
+import TechStack from "@components/TechStack.astro";
 import { Tweet, YouTube } from "astro-embed";
 
 ## Summary
@@ -26,35 +27,25 @@ Dragging to reorder items would be a nice addition.
 
 ---
 
-Languages:
+## Stack
 
-- HTML
-- CSS
-- TypeScript
-- JSX
-- Prisma
-
-Libraries:
-
-- Lodash
-- Prisma
-- Prettier
-- commitlint
-- husky
-- Superjson
-- NextAuth
-
-Environment:
-
-- Next.js
-- PNPM
-
-Backend:
-
-- PostgreSQL
-- Vercel serverless functions
-
-Hosting:
-
-- Vercel
-- Railway (for DB)
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "jsx",
+    "prisma",
+    "prettier",
+    "commitlint",
+    "husky",
+    "superJson",
+    "nextAuth",
+    "next",
+    "pnpm",
+    "postgres",
+    "vercel",
+    "railway",
+  ]}
+/>

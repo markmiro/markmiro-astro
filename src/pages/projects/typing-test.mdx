@@ -10,6 +10,7 @@ source: https://github.com/markmiro/typing-test
 date: Jan 25-Apr 22, 2021
 ---
 
+import TechStack from "@components/TechStack.astro";
 import S3Image from "@components/S3Image.astro";
 import S3Video from "@components/S3Video.astro";
 import { Tweet, YouTube } from "astro-embed";
@@ -26,7 +27,8 @@ I googled around to see what else was out there and none of the other typing tes
 
 My initial version was quite simple:
 
-<iframe src="https://codesandbox.io/embed/typing-test-b55zi?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+<iframe
+  src="https://codesandbox.io/embed/typing-test-b55zi?fontsize=14&hidenavigation=1&theme=dark&view=preview"
   style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
   title="typing-test"
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -35,9 +37,8 @@ My initial version was quite simple:
 
 After I had the basics working, I decided to get authentication working.
 
-
-
 I used this app as an opportunity to learn how to do some things that I had been wanting to learn for a while:
+
 - Firebase
 - User authentication
 - Chakra UI
@@ -46,13 +47,13 @@ I used this app as an opportunity to learn how to do some things that I had been
 
 I considered building many features. I explored quite a few of them.
 
-1) Replay typed words:
+1. Replay typed words:
 
 {/* <S3Image src="projects/typing-test/replay-typed-words.png" /> */}
 
 <S3Video src="projects/typing-test/replay-typed-words.mp4" />
 
-2) Show the user's typing speed over time:
+2. Show the user's typing speed over time:
 
 <S3Image src="projects/typing-test/stats.png" />
 
@@ -60,34 +61,25 @@ I considered building many features. I explored quite a few of them.
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- TypeScript
-- JSX
-- YAML
-
-Libraries:
-
-- React
-- Chakra UI
-- Firebase
-- date-fns
-- Reach Router
-- Framer Motion
-- Lodash
-- React Table
-- statistics.js
-- Jest
-- Tailwind CSS
-
-Environment:
-
-- Gatsby (I was trying this as an alternative to Next.js)
-- NPM
-
-Hosting:
-
-- Vercel
-- Google Cloud (for Firebase)
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "react",
+    "chakraUi",
+    "firebase",
+    "googleCloud",
+    "dateFns",
+    "reachRouter",
+    "framerMotion",
+    "lodash",
+    "reactTable",
+    "statisticsJs",
+    "jest",
+    "tailwindCss",
+    "npm",
+    "vercel",
+  ]}
+/>

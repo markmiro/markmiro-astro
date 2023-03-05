@@ -10,8 +10,9 @@ source: https://github.com/markmiro/huet
 date: Dec 4, 2018-Mar 21, 2019
 ---
 
+import TechStack from "@components/TechStack.astro";
 import { Tweet, YouTube } from "astro-embed";
-import { Code } from 'astro/components';
+import { Code } from "astro/components";
 
 ## Summary
 
@@ -70,7 +71,8 @@ If we change the background `bg="white"`, we want all the children to update rec
 
 The first step was to see if I could get the contrast calculations working, even for intermediate values, and to have them propogate through the UI using React's context.
 
-<iframe src="https://codesandbox.io/embed/qkqm90x8w6?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+<iframe
+  src="https://codesandbox.io/embed/qkqm90x8w6?fontsize=14&hidenavigation=1&theme=dark&view=preview"
   style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
   title="Initial contrast experiment"
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -79,7 +81,8 @@ The first step was to see if I could get the contrast calculations working, even
 
 I created an example based on the GitHub website UI to have a more realistic test case.
 
-<iframe src="https://codesandbox.io/embed/yw6vxn7q1v?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+<iframe
+  src="https://codesandbox.io/embed/yw6vxn7q1v?fontsize=14&hidenavigation=1&theme=dark&view=preview"
   style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
   title="Contrast"
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -88,7 +91,8 @@ I created an example based on the GitHub website UI to have a more realistic tes
 
 I eventually created a library called Huet. This library comes with a helper UI to help you test how well your Huet-colored interface will work with different themes. It's a little buggy, but it's a start.
 
-<iframe src="https://codesandbox.io/embed/k04vm52xov?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+<iframe
+  src="https://codesandbox.io/embed/k04vm52xov?fontsize=14&hidenavigation=1&theme=dark&view=preview"
   style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
   title="Huet Example"
   allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
@@ -107,21 +111,18 @@ The biggest learning was I didn't have a set of people that wanted to use it. I 
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- JavaScript
-- JSX
-
-Libraries:
-
-- React
-- Rollup
-- Lodash
-- Prettier
-- chroma-js
-
-Environment:
-
-- create-react-app
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "jsx",
+    "react",
+    "rollup",
+    "lodash",
+    "prettier",
+    "chroma",
+    "createReactApp",
+    "npm",
+  ]}
+/>

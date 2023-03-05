@@ -10,6 +10,7 @@ source: https://github.com/markmiro
 date: May 27-Oct 26, 2021
 ---
 
+import TechStack from "@components/TechStack.astro";
 import { Tweet, YouTube } from "astro-embed";
 
 ## Summary
@@ -60,29 +61,25 @@ Some highlights:
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- TypeScript
-- JSX
-- Solidity
-
-Libraries:
-
-- React
-- Prettier
-- Lodash
-- Ethers.js
-- Chakra UI
-
-Environment:
-
-- create-react-app
-- Hardhat
-
-Hosting:
-
-- Vercel
-- Pinata
-- Various Ethereum L2s (Optimism, Arbitrum, and Polygon)
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "jsx",
+    "solidity",
+    "react",
+    "prettier",
+    "lodash",
+    "ethers",
+    "chakraUi",
+    "createReactApp",
+    "hardhat",
+    "vercel",
+    "pinata",
+    "arbitrum",
+    "optimism",
+    "polygon",
+  ]}
+/>

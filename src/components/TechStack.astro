@@ -1,0 +1,25 @@
+---
+import {
+  language,
+  env,
+  StackKey,
+  hosting,
+  appsTools,
+  pkg,
+} from "@lib/_stacks";
+import TechStackItem from "./TechStackItem.astro";
+
+interface Props {
+  stack: StackKey[];
+}
+
+const { stack } = Astro.props;
+---
+
+<div class="divide-y">
+  <TechStackItem stack={stack} title="Languages" filter={language} />
+  <TechStackItem stack={stack} title="Packages" filter={pkg} />
+  <TechStackItem stack={stack} title="Environment" filter={env} />
+  <TechStackItem stack={stack} title="Hosting" filter={hosting} />
+  <TechStackItem stack={stack} title="Apps & Tools" filter={appsTools} />
+</div>

@@ -10,43 +10,33 @@ primaryLinkText: Example
 date: Jan 1-Jan 2, 2023
 ---
 
+import TechStack from "@components/TechStack.astro";
 import { Tweet, YouTube } from "astro-embed";
 
 ## Summary
 
-
-
 ## Goals
-
-
 
 ## Solution
 
-
-
 ## Learnings
-
-
 
 ---
 
-Languages:
+## Stack
 
-- HTML
-- CSS
-- TypeScript
-- JSX
-
-Libraries:
-
-- React
-- Prettier
-- Lodash
-
-Environment:
-
-- Next.js
-
-Hosting:
-
-- Vercel
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "jsx",
+    "react",
+    "prettier",
+    "tailwindCss",
+    "next",
+    "vercel",
+    "pnpnm",
+  ]}
+/>

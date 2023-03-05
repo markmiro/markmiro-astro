@@ -10,6 +10,8 @@ source: https://github.com/markmiro/tree
 date: Nov 10-Jul 12, 2022
 ---
 
+import TechStack from "@components/TechStack.astro";
+
 ## Summary
 
 The idea was to emulate a lot of what sites like [WorkFlowy](https://workflowy.com) do, but have that as a standalone headless library that can be included in the same way you might include something like [Headless UI](https://headlessui.com) or [Radix](https://www.radix-ui.com/).
@@ -38,19 +40,16 @@ Finally, JavaScript doesn't provide a natural way of working with stateless tree
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- TypeScript
-
-Libraries:
-
-- Rrettier
-- Ramda
-- Jest
-
-Environment:
-
-- Yarn
-- create-react-app
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "prettier",
+    "ramda",
+    "jest",
+    "yarn",
+    "createReactApp",
+  ]}
+/>

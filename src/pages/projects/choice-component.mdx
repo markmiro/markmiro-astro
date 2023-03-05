@@ -11,6 +11,7 @@ date: Sep 22-Feb 3, 2023
 ---
 
 import { Tweet, YouTube } from "astro-embed";
+import TechStack from "@components/TechStack.astro";
 
 ## Summary
 
@@ -24,35 +25,28 @@ The goal was to write a nested menu that works on desktop and mobile.
 
 Getting the search to work on mobile was painful. The first time I tried to get a sticky header with an input working was around 2013. There are all sorts of solutions online that try to calculate where to place the input so it doesn't scroll out of view but none of them were satisfactory.
 
-{/* TODO:
-- Make click on search item on mobile work
-- Remove handle */}
+{/* // TODO:
+// - Make click on search item on mobile work
+// - Remove handle */}
 
 ---
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- TypeScript
-- JSX
-
-Libraries:
-
-- React
-- Prettier
-- Faker
-- framer-motion
-- react-laag
-- Chakra UI
-- Tailwind CSS
-
-Environment:
-
-- Next.js
-
-Hosting:
-
-- Vercel
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "jsx",
+    "react",
+    "prettier",
+    "faker",
+    "framerMotion",
+    "reactLaag",
+    "tailwindCss",
+    "next",
+    "vercel",
+  ]}
+/>

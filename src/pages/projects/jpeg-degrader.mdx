@@ -10,6 +10,7 @@ source: https://github.com/markmiro/jpeg-text-degrader
 date: Mar 20-Apr 2, 2018
 ---
 
+import TechStack from "@components/TechStack.astro";
 import S3Image from "@components/S3Image.astro";
 import S3Video from "@components/S3Video.astro";
 import Images from "@components/projects/jpeg-degrader/Images.astro";
@@ -84,17 +85,15 @@ I used [ezgif](https://ezgif.com/) to shrink the GIFs and to further refine them
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- TypeScript
-
-Libraries:
-
-- gif.js
-- dat.gui
-
-Hosting:
-
-- GitHub Pages
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "gifJs",
+    "datGui",
+    "ghPages",
+    "npm"
+  ]}
+/>

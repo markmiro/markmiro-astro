@@ -10,31 +10,25 @@ source: https://github.com/markmiro/compare-cids
 date: Jun 4-Jun 19, 2021
 ---
 
+import TechStack from "@components/TechStack.astro";
 import { Tweet, YouTube } from "astro-embed";
 
 ---
 
 ## Stack
 
-Languages:
-
-- HTML
-- CSS
-- TypeScript
-- JSX
-
-Libraries:
-
-- React
-- Prettier
-- Lodash
-- Chakra UI
-
-Environment:
-
-- create-react-app
-- Next.js
-
-Hosting:
-
-- Vercel
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "jsx",
+    "react",
+    "prettier",
+    "lodash",
+    "tachyons",
+    "createReactApp",
+    "vercel",
+  ]}
+/>

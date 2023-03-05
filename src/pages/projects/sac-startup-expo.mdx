@@ -11,28 +11,11 @@ source: https://github.com/markmiro/sacstartupexpo.github.io
 date: Jan 28, 2015-Dec 23, 2016
 ---
 
+import TechStack from "@components/TechStack.astro";
 import { Tweet, YouTube } from "astro-embed";
 
 ---
 
 ## Stack
 
-Languages:
-
-- HTML
-- Jade (Pug)
-- CSS
-- Sass
-- JavaScript
-
-Build:
-
-- Gulp.js
-
-Environment:
-
-- Google Web Starter Kit
-
-Hosting:
-
-- GitHub Pages
+<TechStack stack={["html", "pug", "css", "sass", "js", "gulp", "ghPages"]} />
