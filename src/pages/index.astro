@@ -1,16 +1,13 @@
 ---
-import ProjectImageThumb from "@/components/ProjectImageThumb.astro";
-import ProjectItemDate from "@/components/ProjectItemDate.astro";
 import Tools from "@/components/Tools.astro";
 import Layout from "@/layouts/Layout.astro";
-import { compareFrontmatterDateRangeDesc, extractLastUrlPathItem } from "@/lib/misc";
 import { allExperiments, reference } from "@/lib/_content";
 import { s3File } from "@/lib/s3";
+import ProjectsAll from "@/components/ProjectsAll.astro";
 const title = "";
 const description =
   "Hi, I'm a creative JavaScript and React developer / designer based in Sacramento, California.";
 
-const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
 ---
 
 <Layout title={title} description={description}>
@@ -47,29 +44,7 @@ const allProjects = await Astro.glob<Frontmatter>("./projects/*.mdx");
       <div class="prose lg:prose-xl md:col-span-2">
         <h2 class="">Latest</h2>
       </div>
-      {
-        allProjects
-          .filter((p) => p.frontmatter?.draft !== true)
-          .sort(compareFrontmatterDateRangeDesc)
-          .map((page) => (
-            <a href={page.url} class="block group">
-              <div class="font-bold mb-2">
-                <div class="group-hover:underline">
-                  {page.frontmatter.title}
-                </div>
-                {page.frontmatter?.date && (
-                  <ProjectItemDate date={page.frontmatter?.date} />
-                )}
-              </div>
-              <ProjectImageThumb slug={extractLastUrlPathItem(page.url)} />
-              {page.frontmatter?.description && (
-                <div class="text-sm my-1 leading-snug text-gray-500">
-                  {page.frontmatter.description}
-                </div>
-              )}
-            </a>
-          ))
-      }
+      <ProjectsAll />
     </div>
   </div>
   <hr />

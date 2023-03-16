@@ -4,7 +4,7 @@ export interface Props {
 }
 
 const { href } = Astro.props;
-const isActive = Astro.url.pathname === href;
+const isActive = Astro.url.pathname.startsWith(href);
 ---
 
 <a

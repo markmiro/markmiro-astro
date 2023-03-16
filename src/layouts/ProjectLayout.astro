@@ -5,6 +5,7 @@ import { Icon } from "astro-icon";
 import _ from "lodash";
 import { extractLastUrlPathItem } from "@/lib/misc";
 import { s3File } from "@/lib/s3";
+import ProjectPagination from "@/components/ProjectPagination.astro";
 
 export interface Props {
   title: string;
@@ -52,3 +53,4 @@ const image = s3File(`figma-export/project-${slug}-1x.png`);
   </div>
   <slot />
 </PostLayout>
+<ProjectPagination />

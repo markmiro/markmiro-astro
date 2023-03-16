@@ -1,0 +1,32 @@
+---
+import {
+  compareFrontmatterDateRangeDesc,
+  extractLastUrlPathItem,
+} from "@/lib/misc";
+import ProjectImageThumb from "@/components/ProjectImageThumb.astro";
+import ProjectItemDate from "@/components/ProjectItemDate.astro";
+
+const allProjects = await Astro.glob<Frontmatter>("../pages/projects/*.mdx");
+---
+
+{
+  allProjects
+    .filter((p) => p.frontmatter?.draft !== true)
+    .sort(compareFrontmatterDateRangeDesc)
+    .map((page) => (
+      <a href={page.url} class="block group">
+        <div class="font-bold mb-2">
+          <div class="group-hover:underline">{page.frontmatter.title}</div>
+          {page.frontmatter?.date && (
+            <ProjectItemDate date={page.frontmatter?.date} />
+          )}
+        </div>
+        <ProjectImageThumb slug={extractLastUrlPathItem(page.url)} />
+        {page.frontmatter?.description && (
+          <div class="text-sm my-1 leading-snug text-gray-500">
+            {page.frontmatter.description}
+          </div>
+        )}
+      </a>
+    ))
+}
