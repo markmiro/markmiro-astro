@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 // @ts-ignore-next-line
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";

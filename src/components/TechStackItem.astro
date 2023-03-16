@@ -22,13 +22,13 @@ const matches = findMatches(filter);
   matches.length > 0 && (
     <>
       <div class="font-semibold">{title}:</div>
-      <div>
+      <div class="mb-4 md:mb-0">
         {matches.map((key) => {
           const url = filter[key].site || filter[key].git || filter[key].docs;
           return (
             // TODO: uppercase?
             <span class="mm-comma-item">
-              {url ? <a href={url}>{filter[key].name}</a> : filter[key].name}
+              {url ? <a href={url} class="font-normal">{filter[key].name}</a> : filter[key].name}
             </span>
           );
         })}
