@@ -1,10 +1,10 @@
 ---
-import PostLayout from "@/layouts/PostLayout.astro";
+import ItemLayout from "@/layouts/ItemLayout.astro";
 import { compareFrontmatterDateDesc } from "@/lib/misc";
 
 const allPosts = await Astro.glob<Frontmatter>("./*.mdx");
 ---
-<PostLayout title="Posts" description="My most recent blog posts">
+<ItemLayout title="Posts" description="My most recent blog posts">
   <ul>
     {
       allPosts
@@ -33,7 +33,7 @@ const allPosts = await Astro.glob<Frontmatter>("./*.mdx");
         ))
     }
     <li>
-      See more posts on <a href="https://medium.com/@markmiro"> 📝 Medium</a>.
+      See more posts on <a href="https://medium.com/@markmiro">📝 Medium</a>.
     </li>
   </ul>
-</PostLayout>
+</ItemLayout>

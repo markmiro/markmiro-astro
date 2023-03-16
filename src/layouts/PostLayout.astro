@@ -1,9 +1,6 @@
 ---
-import Footer from "@/components/Footer.astro";
-import Meta from "@/components/Meta.astro";
-import Head from "@/components/Head.astro";
-import PostWrapper from "@/components/PostWrapper.astro";
-import Nav from "@/components/Nav.astro";
+import PostPagination from "@/components/PostPagination.astro";
+import ItemLayout from "./ItemLayout.astro";
 
 export interface Props {
   title: string;
@@ -17,45 +14,7 @@ const description = Astro.props.description || frontmatter?.description || "";
 const image = Astro.props.image || frontmatter?.image || "";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <Head />
-    <title>{title} • Mark Miro</title>
-    <Meta
-      title={title}
-      description={description}
-      image={image}
-      pageType="article"
-    />
-  </head>
-  <body>
-    <Nav />
-    <PostWrapper>
-      <h1>
-        {title}
-        {
-          description && (
-            <small class="block text-xl font-normal text-gray-400">
-              {description}
-            </small>
-          )
-        }
-      </h1>
-      <slot />
-    </PostWrapper>
-    <Footer />
-    <style is:global>
-      .tweet-body {
-        word-break: break-word;
-      }
-      /* mm stands for "Mark Miro" */
-      .mm-comma-item::after {
-        content: "•";
-      }
-      .mm-comma-item:last-child::after {
-        content: "";
-      }
-    </style>
-  </body>
-</html>
+<ItemLayout title={title} description={description} image={image}>
+  <slot />
+  <PostPagination slot="end" />
+</ItemLayout>
