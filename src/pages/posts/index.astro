@@ -1,6 +1,6 @@
 ---
 import PostLayout from "@layouts/PostLayout.astro";
-import { compareFrontmatterDateDesc2 } from "@lib/compareFrontmatterDateDesc";
+import { compareFrontmatterDateDesc } from "@lib/compareFrontmatterDateDesc";
 
 const allPosts = await Astro.glob<Frontmatter>("./*.mdx");
 ---
@@ -9,7 +9,7 @@ const allPosts = await Astro.glob<Frontmatter>("./*.mdx");
     {
       allPosts
         .filter((p) => p.frontmatter?.draft !== true)
-        .sort(compareFrontmatterDateDesc2)
+        .sort(compareFrontmatterDateDesc)
         .map((page) => (
           <li>
             <div>

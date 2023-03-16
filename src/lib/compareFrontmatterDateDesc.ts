@@ -2,7 +2,7 @@ import type { MDXInstance } from "astro";
 import { getUnixTime } from "date-fns";
 import { parseFrontmatterDateRange } from "./parseFrontmatterDateRange";
 
-export function compareFrontmatterDateDesc(
+export function compareFrontmatterDateRangeDesc(
   a: MDXInstance<Frontmatter>,
   b: MDXInstance<Frontmatter>
 ) {
@@ -12,7 +12,7 @@ export function compareFrontmatterDateDesc(
   return getUnixTime(bTo) - getUnixTime(aTo);
 }
 
-export function compareFrontmatterDateDesc2(
+export function compareFrontmatterDateDesc(
   a: MDXInstance<Frontmatter>,
   b: MDXInstance<Frontmatter>
 ) {
