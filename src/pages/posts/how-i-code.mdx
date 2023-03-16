@@ -1,0 +1,23 @@
+---
+layout: ../../layouts/PostLayout.astro
+draft: false
+title: Attributes
+description: Example
+date: Jan 1, 2023
+---
+
+I've worked with a lot of different teams. Some care about design, and some don't. If you're working with me, you might wanna know where I tend to lean.
+
+Order of importance:
+1. Get it working
+2. Clean API / intuitive UI. Which one wins depends on the situation.
+3. Clean code
+4. Clean commit history
+
+In larger companies, the importance of code reviews and collaboration means a clean commit history is more essential.
+
+Programming
+- I favor clean API design over clean code. I like clean code and a clean commit history, but if I had to sacrifice an API for it, I'd choose the API. This is important under time pressure.
+- WET code is fine. I like to allow repetition to help me decide what to abstract, and how.
+- Write code to be easy to delete. I like my code to be polite and easy to work with. I don't want it to impose unecessarily. Working with it should be a pleasure.
+- Co-locating code as much as possible. For example, if a "like" button on a post, I want to keep the button CSS, JS, and even the DB query in the same file if possible. Don't want the button anymore? Delete the file and you're done. Second best would be to keep the code in the same directory.

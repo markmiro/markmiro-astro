@@ -1,0 +1,76 @@
+---
+layout: ../../layouts/PostLayout.astro
+draft: false
+title: When co-locating code is making your code harder to understand
+description:
+date: Mar 14, 2023
+---
+
+import { Tweet, YouTube } from "astro-embed";
+import S3Image from "@components/S3Image.astro";
+
+Deeply nested code benefits from you knowing that the variables declared deeply inside aren't used outside. But this happens at the expense of not immediately seeing the dependencies of the inner blocks.
+
+```js
+function first() {
+  const bla = 2;
+  const second = (a) => {
+    const foobar = a + bla;
+    const third = (b) => {
+      const foobarbaz = foobar + b;
+      return foobarbaz;
+    };
+    return third(3);
+  };
+  return second(3);
+}
+```
+
+The reason for writing code like the kind above is to make it clear that `second()` and `third()` are not used anywhere else, and aren't meant to be.
+
+However, it's not immediately obvious that `bla` is only used in `second()`. And the deep nesting makes it hard to follow what the code is doing.
+
+With each level of nesting, you put more variables "in play" that may or may not be used later. It's like you're introducing characters in a story. You don't want to introduce too many characters at once, or you'll lose the reader.
+
+But if the function is in its own separate file, we can break out the inner functions while maintaining the intent of keeping these functions private to the outside.
+
+```js
+export function first() {
+  const bla = 2;
+  return second(3, bla);
+}
+
+const second = (a, bla) => {
+  const foobar = a + bla;
+  return third(3, foobar);
+};
+
+const third = (b, foobar) => {
+  const foobarbaz = foobar + b;
+  return foobarbaz;
+};
+```
+
+Now, it's clearer that `bla` is only used in `second()`. But now it's not as immediately obvious that `third()` is only used in one place because it's not co-located as closely to where it's used.
+
+```js
+export function first() {
+  const bla = 2;
+  return second(3, bla);
+}
+
+const second = (a, bla) => {
+  const foobar = a + bla;
+
+  const third = (b) => {
+    const foobarbaz = foobar + b;
+    return foobarbaz;
+  };
+
+  return third(3);
+};
+```
+
+Now `bla` is still in scope for `third()`. So this option may appear like it better co-locates `third()` with where it's used, but it does so at the expense of making `bla` more visible than it needs to be.
+
+To be silly, we could break out `second()` and `third()` into its own module to make the dependencies between these functions more clear, but that would clearly be overkill.

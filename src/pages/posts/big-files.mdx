@@ -1,0 +1,46 @@
+---
+layout: ../../layouts/PostLayout.astro
+draft: false
+title: Big files = good
+description: Why bigger is sometimes better
+date: Mar 13, 2023
+---
+
+import { Tweet, YouTube } from "astro-embed";
+import S3Image from "@components/S3Image.astro";
+
+I'm not the first to say big files are often better, but I want to add some of my own reasons.
+
+Dan Abramov has a tweet about it:
+
+<div class="not-prose">
+  <Tweet id="https://twitter.com/dan_abramov/status/1295119726197317633?s=20" />
+</div>
+
+And Theo makes the same point in this video:
+
+<div class="not-prose">
+  <Tweet id="https://twitter.com/t3dotgg/status/1633708287215665154?s=20" />
+</div>
+
+Here's my addition...
+
+<S3Image src="posts/SCR-20230313-qaa-3.png" />
+
+A big file is great because scrolling to the next function is easy. Notice how large the <span class="text-teal-500">scroll area in teal</span> is? As long as your cursor is anywhere in that area, you can scroll to the next function.
+
+But if all your functions are broken up into separate files, you have to move your mouse and click on the next file, or remember the name and type it in. See how small the <span class="text-red-500">red area</span> is?
+
+Your brain is better at recognition than recall. So scrolling to the function you want is better than clicking around, or opening up the wrong file. This is especially likely if many of your files are named similarly.
+
+Finally, even if you're using your keyboard / search to get to your desired function or code fragment, it's easier to search a file than a bunch of files. When you're searching a file, you can search for the function name, or a keyword that's in the function. But when you're searching a bunch of files, you have to remember the name of the file, or search for a keyword that's in the file name.
+
+---
+
+When your file is large enough, then you get to use your judgement and pattern-recognition to decide how to break up your code. A lot of this will depend on the dependencies between different parts of your code. Code that is more [tightly coupled](https://en.wikipedia.org/wiki/Coupling_(computer_programming) should be closer together in directory tree.
+
+You could think of tightly coupled code as little knots in your code. The rest of the connections between your code should be simple and straightforward. Little knots are good because it more easily fits all the complexity into one place where you can see it.
+
+<div class="max-w-sm ml-auto mr-auto">
+  <S3Image src="posts/2023-03-13 19-38.jpg" />
+</div>
