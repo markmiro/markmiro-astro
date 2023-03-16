@@ -11,3 +11,13 @@ export function compareFrontmatterDateDesc(
   const [_bFr, bTo] = parseFrontmatterDateRange(b.frontmatter.date);
   return getUnixTime(bTo) - getUnixTime(aTo);
 }
+
+export function compareFrontmatterDateDesc2(
+  a: MDXInstance<Frontmatter>,
+  b: MDXInstance<Frontmatter>
+) {
+  // fr (from) to (to)
+  const [aDate] = parseFrontmatterDateRange(a.frontmatter.date);
+  const [bDate] = parseFrontmatterDateRange(b.frontmatter.date);
+  return getUnixTime(bDate) - getUnixTime(aDate);
+}

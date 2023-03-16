@@ -1,13 +1,15 @@
 ---
 import PostLayout from "@layouts/PostLayout.astro";
+import { compareFrontmatterDateDesc2 } from "@lib/compareFrontmatterDateDesc";
 
-const allPosts = await Astro.glob("./*.mdx");
+const allPosts = await Astro.glob<Frontmatter>("./*.mdx");
 ---
-<PostLayout title="Posts">
+<PostLayout title="Posts" description="My most recent blog posts">
   <ul>
     {
       allPosts
         .filter((p) => p.frontmatter?.draft !== true)
+        .sort(compareFrontmatterDateDesc2)
         .map((page) => (
           <li>
             <div>
