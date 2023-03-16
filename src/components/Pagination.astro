@@ -1,7 +1,5 @@
 ---
-import { compareFrontmatterDateDesc } from "@lib/compareFrontmatterDateDesc";
-import { extractLastUrlPathItem } from "@lib/extractLastUrlPathItem";
-import clsx from "clsx";
+import { compareFrontmatterDateDesc,extractLastUrlPathItem } from "@lib/misc";
 import PaginationLink from "./PaginationLink.astro";
 
 const allProjects = await Astro.glob<Frontmatter>("../pages/projects/*.mdx");

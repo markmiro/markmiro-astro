@@ -1,6 +1,6 @@
 ---
 import PostLayout from "@layouts/PostLayout.astro";
-import { compareFrontmatterDateDesc } from "@lib/compareFrontmatterDateDesc";
+import { compareFrontmatterDateDesc } from "@lib/misc";
 
 const allPosts = await Astro.glob<Frontmatter>("./*.mdx");
 ---
