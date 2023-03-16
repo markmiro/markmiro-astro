@@ -1,5 +1,5 @@
 ---
-import TestLayout from "@layouts/TestLayout.astro";
+import TestLayout from "@/layouts/TestLayout.astro";
 import _ from "lodash";
 const { pathname } = new URL(Astro.url);
 const slug = _.last(pathname.split("/"));

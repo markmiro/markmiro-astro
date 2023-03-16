@@ -1,10 +1,10 @@
 ---
 import PostLayout from "./PostLayout.astro";
-import ProjectImage from "@components/ProjectImage.astro";
+import ProjectImage from "@/components/ProjectImage.astro";
 import { Icon } from "astro-icon";
 import _ from "lodash";
-import { extractLastUrlPathItem } from "@lib/misc";
-import { s3File } from "@lib/s3";
+import { extractLastUrlPathItem } from "@/lib/misc";
+import { s3File } from "@/lib/s3";
 
 export interface Props {
   title: string;

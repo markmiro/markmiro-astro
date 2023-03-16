@@ -1,6 +1,6 @@
 ---
-import Gallery, { Img } from "@components/Gallery";
-import { listFileNames, s3File } from "@lib/s3";
+import Gallery, { Img } from "@/components/Gallery";
+import { listFileNames, s3File } from "@/lib/s3";
 import imageSize from "image-size";
 const files = await listFileNames("projects/jpeg-degrader/results");
 const gifs = files.filter((file) => file?.endsWith(".gif"));
