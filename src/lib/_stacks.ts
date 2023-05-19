@@ -87,7 +87,9 @@ type PkgKey =
   | "webpack"
   | "cypress"
   | "jest"
-  | "reactTestingLibrary";
+  | "reactTestingLibrary"
+  | "hsluvTs"
+  | "cryptoJs";
 
 type EnvKey =
   // packages
@@ -383,6 +385,18 @@ export const pkg: Record<PkgKey, StackItem> = {
     npm: "https://www.npmjs.com/package/@testing-library/react",
     git: "https://github.com/testing-library/react-testing-library",
     tags: ["test", "react"],
+  },
+  hsluvTs: {
+    name: "hsluv-ts",
+    npm: "https://www.npmjs.com/package/hsluv-ts",
+    git: "https://github.com/gfmio/hsluv-ts",
+    tags: [],
+  },
+  cryptoJs: {
+    name: "crypto-js",
+    npm: "https://www.npmjs.com/package/crypto-js",
+    git: "https://github.com/brix/crypto-js",
+    tags: [],
   },
 };
 
