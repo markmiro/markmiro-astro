@@ -1,0 +1,49 @@
+---
+layout: ../../layouts/PostLayout.astro
+draft: true
+title: "Beyond design systems: way systems"
+description:
+date: Apr 14, 2023
+---
+
+Starting from the top... at the most fundamental level, there's a lot of fuzziness to styling. Percieved colors don't map linearly to their numerical representation. In fact, non-linearity is all over our perception. For example, going from 2px margin to 10px is quite noticable. But adding 10px to a 100px margin is hardly noticable.
+
+* It's easier to percieve colors when they're on a dark background than a light one.
+* Letter apertures are usually made wider for small text to aid readiability.
+* The human eye is more sensitive to changes in luminance than in hue.
+
+If you want some text to stand out, you can add underlines, bold, italics, change the font size, etc. There are many ways. But if you try *too hard*, you make your text invisible. Your text will resemble loud ad copy. The user's eye will just skip over it, and they'll have to actively look for the thing that's crying out for their attention to spot it. Imagine that—making the font a little bigger makes it stand out, but making it a lot bigger doesn't just suffer from diminishing returns, it makes the text invisible.
+
+Say you want a button to stand out. You don't make it big and red. No, maybe you make it a little bigger than usual, and surround it in plenty of white space.
+
+In design there are many ways to solve the same problem. If you want to divide two elements, you can use background color, white space, a border, a shadow, or all of the above in some combination.
+
+Good design is consistent, but too much consistency makes everything look like everything else.
+
+Wayfinding is important. You want to show the user where they are in relation to the rest of the product or app. Too much wayfinding / context and you've got a busy interface. Too little and the user is lost.
+
+And this is where we get to way systems. You could, if you wanted to, make a website show all the web pages at once if the user has a wide enough screen. If your site only has 5 pages, why not? Each page gets its own column. If you have a simple site, the user doesn't even have to scroll to see everything.
+
+[TK: show a screenshot of a website showing home, about, contact, etc. in columns on a wide screen.]
+
+Now suppose you have a button that opens a popover. Suppose it has a list of settings. If you have a small list, they all fit. With more items, maybe a modal works better, and so on.
+
+Popover -> Modal or Drawer -> Page
+
+When we're on mobile, we can fit less on a screen, and we quickly need to break things up into multiple pages.
+
+Once you have a page, you might have a list of settings, but at this point you probably have enough that you need to break it up into sections. And these sections need links, so you can jump to them, so now you have a left menu or a master-detail view. And some of these settings might themselves make use of popovers or modals.
+
+And if you've got all these settings, maybe you still want to keep your old popover, but you want to limit the number of settings to just a few, and then link to the full settings page. Or maybe you want a command menu to quickly find these settings.
+
+And each time we add complexity, the developer often needs to revisit the old approach, scrap it, and build something new. But the direction is effectively the same. In fact, it's often smart to start off with a settings page since you can link to it. After all, how do you link to a popover? It's not impossible but it's certainly not obvious.
+
+What we want is for every setting to get its own URL. And now we can link to it, bookmark it, etc. But this will take a lot of work. Imagine setting all that up.
+
+Further, we want to somehow maintain the table, column, and cell that each setting corresponds to in the code. There's an invisible thread that goes from the database, to the API, to the UI, and back.
+
+Large parts of apps are things like settings, or more generally just CRUD (create, remove, update, and delete).
+
+One solution is to literally generate unique IDs in your source code. I know—it looks bad and ugly. But if we expose them to URLs, we can link to them. These would be universal IDs. You can then move the settings around, and the links will still work. In fact, you can link to individual buttons.
+
+Another thing: imagine having a context flag. You can add layers of context to your settings.
