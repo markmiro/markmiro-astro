@@ -1,0 +1,116 @@
+---
+layout: ../../layouts/PostLayout.astro
+draft: false
+title: Too much Tailwind?
+description:
+date: Apr 11, 2023
+---
+
+import S3Image from "@/components/S3Image.astro";
+
+Does the following look like a reasonable way to style your components?
+
+```html
+<div class="md:nx-h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]">
+  <!-- ... -->
+</div>
+```
+
+Second, is it possible to reject the above code while accepting this snippet from Tailwind's home page?
+
+```html
+<div class="bg-slate-100 rounded-xl p-8 dark:bg-slate-800">
+  <!-- ... -->
+</div>
+```
+
+Tailwind has some unholy syntax. Take a look at this:
+```html
+<div class="grid grid-cols-[1fr_500px_2fr]">
+  <!-- ... -->
+</div>
+```
+
+This is because it's shoe-horning custom CSS into a class name system. You want a value dynamically configurable, even the unholy syntax won't do it for you.
+
+In some sense, it all started with this:
+https://chromestatus.com/metrics/css/popularity
+
+<S3Image src="posts/most-popular-styles.png" />
+
+If every site needs the same 100 styles, why not make them available as classes? This is what Tailwind does.
+
+Tailwind initially worked for a few simple reasons:
+- Keeping CSS close to where it's used means you don't get dead / unused CSS.
+- The most common CSS properties could be written out in a shorthand.
+- You don't need all the colors and all the size increments available. Designers do want to limit options for the sake of consistency.
+- Finally, the shorthand can be written as CSS classes, and extracted at build time.
+
+But I was just looking at Turborepo's docs, saw this monstrosity, and recoiled:
+
+```html
+<div class="nextra-scrollbar nx-overflow-y-auto nx-p-4 nx-grow md:nx-h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]">
+  <!-- ... -->
+</div>
+```
+
+It isn't the worst Tailwind I've seen, but here's what's going on:
+- There's a custom `nextra-scrollbar` class that has nothing to do with Tailwind.
+- `nx-` is a prefix configured in tailwind to limit styling conflicts.
+- At the medium width breakpoint, we set the height to 100% of the viewport minus the height of the navbar minus 3.75rem.
+
+How to improve it?
+
+I already like shorthand styles, but at this point, the above is like an uncanny valley between CSS and Regex. Regex is hard to read, but it's really compact. Tailwind is not. oddly, it can be improved with more tooling. I'm going to assume you're using React.
+
+## 1) Get rid of the nx prefix
+
+```jsx
+<div className={twnx`nextra-scrollbar overflow-y-auto p-4 grow md:h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]`}>
+  ...
+</div>
+```
+
+This is one solution, but it's not so great. Ideally, we add the prefix at build time.
+
+```jsx
+<div className="nextra-scrollbar overflow-y-auto p-4 grow md:h-[calc(100vh-var(--nextra-navbar-height)-3.75rem)]">
+  ...
+</div>
+```
+
+## 2) Get rid of custom CSS language
+
+Next, we want an escape hatch out of Tailwind that lets us write normal CSS property values.
+
+This is easy enough to do in React's JSX:
+
+```jsx
+<div className="nextra-scrollbar overflow-y-auto p-4 grow" style={{ height: "calc(100vh - var(--nextra-navbar-height) - 3.75rem)"}}>
+  ...
+</div>
+```
+
+The above isn't shorter, but it's far more obvious that we're not doing any unholy custom class name generation. However, we lost our media query. Getting it back isn't possible unless we introduce more libraries. And when we do introduce them, we need to make sure we don't lose Tailwind's breakpoint values.
+
+In Tailwind, or rather, in a class, you can't have spaces. Spaces would result in multiple classes being generated.
+
+```jsx
+<div className={`nextra-scrollbar overflow-y-auto p-4 grow md:h-${twcss`calc(100vh - var(--nextra-navbar-height) - 3.75rem)`}`}>
+  ...
+</div>
+```
+
+The above looks worse and more confusing, but it gets us closer to vanilla CSS.
+
+A common challenge with styling is:
+- If you have a shorthand syntax, how does it interact with normal CSS?
+- How do you interact with JS when you need to?
+
+Traditionally, a single class name maps to multiple CSS properties. With tailwind Tailwind, this is far less common, but still happens.
+
+We can learn by looking at actual programming languages. For example, Python is a cleaner and simpler version of what can be done in C. And C prevents you from having to write machine code. A great abstraction makes the lower level completely irrelevant. However, there is no perfect abstraction of the lower level stuff, and escape hatches are necessary.
+
+When you write React, you can escape out into JS. React might make it clear with API choices. For example, `dangerouslySetInnerHTML` is a clear signal that you're escaping out of React's world and now responsible handling the DOM manually.
+
+Here, we've got a medium breakpoint. In React, it may make sense to have two separate components: one for mobile and one for desktop. This will make it easier to update one without affecting the other.
