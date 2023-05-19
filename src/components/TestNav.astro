@@ -1,5 +1,6 @@
 ---
 const allPosts = await Astro.glob("../pages/test/*.(md|mdx)");
+const allPosts2 = await Astro.glob("../pages/test/*.astro");
 ---
 
 <!-- https://docs.astro.build/en/tutorial/5-astro-api/1/ -->
@@ -14,8 +15,18 @@ const allPosts = await Astro.glob("../pages/test/*.(md|mdx)");
       </li>
     ))
   }
+    {
+      allPosts2.map((post) => (
+        <li>
+          <a href={post.url}>{post.url}</a>
+        </li>
+      ))
+    }
   <li>
     <a href="/test/example">Example</a>
+  </li>
+  <li>
+    <a href="/test/nav2">Nav2</a>
   </li>
   <li>
     <a href="/test/url">Url</a>
