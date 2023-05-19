@@ -1,0 +1,92 @@
+---
+layout: ../../layouts/ProjectLayout.astro
+draft: false
+emoji: #️⃣
+title: Hash Gradient
+description: CSS gradient fingerprint from hash
+primaryLink: https://css-gradient-hash-fingerprint.vercel.app/
+primaryLinkText: View Demo
+source: https://github.com/markmiro/css-gradient-hash-fingerprint
+date: Apr 20-Feb 3, 2023
+---
+
+import { Tweet, YouTube } from "astro-embed";
+import TechStack from "@/components/TechStack.astro";
+import S3Image from "@/components/S3Image.astro";
+
+## Summary
+
+{/* <Tweet id="https://twitter.com/markmiro/status/1649149344334110721" /> */}
+
+Take some hex code, hash it, and then use that to generate a custom gradient.
+
+## Goals
+
+These two ethereum addresses appear the same at first glance, but are they?
+
+```
+0x8d5455354d4ce72a50cd55390df690a782a97958
+0x8d5455354d3ce72a50cd55390df691a782a97958
+```
+
+By hashing the address and turning it into a gradient, we can visually see that they are different. Even a single character change will result in a completely different gradient.
+
+<S3Image src="posts/gradient-near-duplicate.png" />
+
+[Blockies](https://github.com/download13/blockies) are a popular solution for identicons, but I was curious if there was a more space-efficient option that could work in when you wanted to display the actual hex code, like an ethereum address:
+
+```
+0x8d5455354d3ce72a50cd55390df690a782a97958
+```
+
+<S3Image src="posts/blockies.png" />
+
+However, you can see that often colors clash with blockies. This is because they're not using a perceptual color space. I had the same issue, as you can see below.
+
+<S3Image src="posts/low-contrast-gradients.png" />
+
+Another thing I wanted was to make it easier to visually spot two of the same two hashes in a list:
+
+```
+0x9d3d0eb58dfea38a52f47ada9b716fddbaffe30f
+0xfa5dc7f9afe8b25d3f13cf82aaeee40413a2043c
+0xe5048cbd4e08ca25153a3b90efbbcf00c5c6fcea
+0xecf1a1cd2fdb0eb62012aad9dd80a3c0c7991aaf
+0xc4fb60b515f8eaeadbe29b6284ccbb81bdf50b4f
+0xff3eccd42371e1dddf62bf6c5e6c54eff7dc9aa7
+0x919de6ca87eacae89ed5b7e7f718abd3c79cf119
+0xf33f91aaa5f5293cf9ebe5bbe3d7ea8eda5d3b0a
+0x9d3d0eb58dfea38a52f47ada9b716fddbaffe30f
+0x4e75c86fafd62fcfea4adc81cd37063ddf4678f8
+0xc8ae78503c1fa5df07afd655f31ed3bdbcf5fcbd
+```
+
+But with gradients, the duplicates nearly pop out:
+
+<S3Image src="posts/gradient-fingerprint-duplicates.png" />
+
+## Learnings
+
+The perceptual color space turned out to be a great idea. But I'm less convinced that colors will help that much in spotting duplicates. However, they're still useful for visually ensuring that the hex code is correct.
+
+---
+
+## Stack
+
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "jsx",
+    "react",
+    "prettier",
+    "cryptoJs",
+    "lodash",
+    "hsluvTs",
+    "tailwindCss",
+    "next",
+    "vercel",
+  ]}
+/>
