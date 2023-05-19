@@ -20,6 +20,9 @@ export function parseFrontmatterDateRange(dateRange: string) {
   const [fr, to] = split(dateRange);
   const frDate = parse(fr, PARSE_FORMAT, new Date());
   const toDate = parse(to, PARSE_FORMAT, new Date());
+
+  if (!toDate) return [frDate, frDate];
+
   return [frDate, toDate];
 }
 

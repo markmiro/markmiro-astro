@@ -8,7 +8,7 @@ export interface Props {
 
 const { date } = Astro.props;
 
-const [_, toDate] = parseFrontmatterDateRange(date);
+const [toDate] = parseFrontmatterDateRange(date);
 ---
 
 <time datetime={toDate.toISOString()} class="text-gray-500 text-sm font-normal flex items-center">
