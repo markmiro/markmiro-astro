@@ -1,0 +1,75 @@
+---
+layout: ../../layouts/ProjectLayout.astro
+draft: false
+emoji: 🏋️‍♂️
+title: Algorithmic Logo Resizing
+description: A proof of concept for sizing logos by their visual weight.
+primaryLink: https://optical-logo-resize.vercel.app
+primaryLinkText: Visit Demo
+source: https://github.com/markmiro/optical-logo-resize
+date: Apr 29, 2023
+---
+
+import TechStack from "@/components/TechStack.astro";
+import { Tweet, YouTube } from "astro-embed";
+
+## Goals
+
+The idea came from TJ:
+
+<div class="not-prose">
+  <Tweet id="https://twitter.com/tjkohl/status/1651839022082187269" />
+</div>
+
+Many websites have sections that display logos of partners, clients, etc. Sizing them appropriately, requires a good eye. It's most natural to merely ensure that each logo fits within a set of equally sized boxes. But this is what you get:
+
+
+## Solution
+
+I didn't expect a simple algorithm to work as well as it did. To size logos by their visual weight, you can actually use the actual "weight". In our case, we have white logos on a black background.
+
+We add up the light pixels. So each white pixel gets a weight of 1. Each black pixel gets a weight of 0. A gray pixel might be 0.5. Instead of adding up all the pixels, I take a sample.
+
+The proportion of white to black pixels gives us the "weight" of the logo. If the logo is nothing but black pixels, it has a total weight of zero. If it's totally filled, then it has the weight of 1.
+
+For logos on a white background, we might invert the calculations.
+
+## Learnings
+
+Turns out, AI wasn't needed. I also learned from TJ that if he had two circle logos, and one of them was filled and the other was just an outline, he would make the second one bigger. This reinforces the idea that adding pixels is more important than the bounds of the logo.
+
+The physics approach of modeling a cow as a sphere remains undefeated.
+
+## Future
+
+There are a few directions this experiment could go:
+
+1) Build a tool where you upload logos, and it sizes them for you.
+2) Build a Figma plugin.
+3) Build a React component.
+
+Other ideas:
+- Sampling means that logos with fine detail might not be properly weighted. Maybe blur the image first?
+- Re-centering logos would be nice. We'd do this by finding the logo's center of mass, again with the same sorts of weight calculations.
+- Have a way to reduce the algorithmic adjustments. For example, maybe you do want an outline of a circle to have the same weight as a filled circle.
+- Calculate weight of colored logos using a perceptual color space
+- Properly sizing icons
+
+---
+
+## Stack
+
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "jsx",
+    'lodsash',
+    "tailwind",
+    "next",
+    "pnpm",
+    "vercel",
+  ]}
+/>
