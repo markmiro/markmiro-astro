@@ -20,8 +20,17 @@ const image = s3File(`figma-export/project-${slug}-1x.png`);
 ---
 
 <ItemLayout title={title} description={description} image={image}>
-  <div class="not-prose group">
-    <a href={frontmatter.primaryLink}>
+  <!-- hovering image should highlight the primary project link  -->
+  <script>
+    document.getElementsByClassName('js-project-image-link')[0].addEventListener('mouseenter', () => {
+      document.getElementsByClassName('js-primary-link')[0].classList.add('bg-blue-600')
+    })
+    document.getElementsByClassName('js-project-image-link')[0].addEventListener('mouseleave', () => {
+      document.getElementsByClassName('js-primary-link')[0].classList.remove('bg-blue-600')
+    })
+  </script>
+  <div class="not-prose">
+    <a class="js-project-image-link" href={frontmatter.primaryLink}>
       <ProjectImage slug={slug} />
     </a>
     <div class="flex flex-wrap items-center gap-3 text-sm mt-2 text-gray-500">
@@ -30,7 +39,7 @@ const image = s3File(`figma-export/project-${slug}-1x.png`);
           <a
             href={frontmatter.primaryLink}
             target="_blank"
-            class="w-full sm:w-auto text-center shadow-md bg-black text-white group-hover:bg-blue-600 rounded-lg px-4 py-2 text-lg transition-colors"
+            class="js-primary-link w-full sm:w-auto text-center shadow-md bg-black text-white hover:bg-blue-600 rounded-lg px-4 py-2 text-lg transition-colors"
           >
             {frontmatter.primaryLinkText} ↗
           </a>
