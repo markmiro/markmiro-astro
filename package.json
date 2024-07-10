@@ -13,7 +13,12 @@
     "astro": "astro",
     "docker": "docker compose up --build",
     "format": "prettier --write --plugin-search-dir=. .",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "//sync": "Make sure access keys are set up correctly: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html",
+    "s3-down": "aws s3 sync s3://markmiro-website-content ../s3",
+    "s3-up": "aws s3 sync ../s3 s3://markmiro-website-content",
+    "deploy:preview": "bun run s3-up && vercel build && vercel deploy --prebuilt",
+    "deploy": "bun run s3-up && vercel build --prod && vercel deploy --prebuilt --prod"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
