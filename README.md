@@ -4,20 +4,19 @@ Original README.md from astro: [README_ASTRO.md](README_ASTRO.md).
 
 To use with VSCode with prettier, follow [this guide](https://github.com/withastro/prettier-plugin-astro/blob/main/README.md#using-in-vs-code).
 
-I once had a Vercel build fail because it was missing the `shiki` dependency though it worked locally. I was able to repro by running `pnpm exec vercel run build` locally. I fixed it by adding `shiki` to the `devDependencies` in `package.json`.
 
 ## Development
 
 Install dependencies
 
 ```sh
-pnpm install
+bun install
 ```
 
 Run the dev server:
 
 ```sh
-pnpm run dev
+bun run dev
 ```
 
 ## S3 Files
@@ -33,19 +32,19 @@ Locally, the files should be one level above this root directory. I tried to get
 To download, run:
 
 ```sh
-pnpm run s3-down
+bun run s3-down
 ```
 
 To upload, run:
 
 ```sh
-pnpm run s3-up
+bun run s3-up
 ```
 
 ## Deploying
 
 ```sh
-pnpm run deploy
+bun run deploy
 ```
 
 ## Troubleshooting
