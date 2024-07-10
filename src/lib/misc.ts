@@ -14,6 +14,7 @@ export function parseFrontmatterDateRange(dateRange: string) {
       const year = to.split(",")[1].trim();
       fr = `${fr}, ${year}`;
     }
+    if (!to) to = fr;
     return [fr, to];
   }
 
@@ -28,7 +29,7 @@ export function parseFrontmatterDateRange(dateRange: string) {
 
 export function compareFrontmatterDateRangeDesc(
   a: MDXInstance<Frontmatter>,
-  b: MDXInstance<Frontmatter>
+  b: MDXInstance<Frontmatter>,
 ) {
   // fr (from) to (to)
   const [_aFr, aTo] = parseFrontmatterDateRange(a.frontmatter.date);
@@ -38,7 +39,7 @@ export function compareFrontmatterDateRangeDesc(
 
 export function compareFrontmatterDateDesc(
   a: MDXInstance<Frontmatter>,
-  b: MDXInstance<Frontmatter>
+  b: MDXInstance<Frontmatter>,
 ) {
   // fr (from) to (to)
   const [aDate] = parseFrontmatterDateRange(a.frontmatter.date);

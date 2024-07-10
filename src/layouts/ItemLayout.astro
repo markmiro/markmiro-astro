@@ -9,6 +9,7 @@ export interface Props {
   title: string;
   description: string;
   image?: string;
+  frontmatter?: Frontmatter;
 }
 
 const { frontmatter } = Astro.props;
@@ -17,7 +18,7 @@ const description = Astro.props.description || frontmatter?.description || "";
 const image = Astro.props.image || frontmatter?.image || "";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <Head />
@@ -44,7 +45,7 @@ const image = Astro.props.image || frontmatter?.image || "";
       </h1>
       <slot />
     </PostWrapper>
-    <slot name="end"/>
+    <slot name="end" />
     <Footer />
     <style is:global>
       .tweet-body {

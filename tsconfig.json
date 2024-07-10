@@ -9,6 +9,6 @@
       "@/layouts/*": ["src/layouts/*"],
       "@/components/*": ["src/components/*"],
       "*": ["src/types/global.d.ts"]
-    },
-  },
+    }
+  }
 }

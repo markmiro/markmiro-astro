@@ -1,9 +1,16 @@
 ---
 import ItemLayout from "@/layouts/ItemLayout.astro";
 import { compareFrontmatterDateDesc } from "@/lib/misc";
+import type { MDXInstance } from "astro";
 
-const allPosts = await Astro.glob<Frontmatter>("./*.mdx");
+let allPosts: MDXInstance<Frontmatter>[] = [];
+try {
+  allPosts = await Astro.glob<Frontmatter>("./*.mdx");
+} catch (err) {
+  // Astro throws when no posts, so we ignore
+}
 ---
+
 <ItemLayout title="Posts" description="My most recent blog posts">
   <ul>
     {

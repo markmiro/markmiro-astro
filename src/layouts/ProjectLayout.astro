@@ -1,7 +1,7 @@
 ---
 import ItemLayout from "./ItemLayout.astro";
 import ProjectImage from "@/components/ProjectImage.astro";
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import _ from "lodash";
 import { extractLastUrlPathItem } from "@/lib/misc";
 import { s3File } from "@/lib/s3";
@@ -10,6 +10,7 @@ import ProjectPagination from "@/components/ProjectPagination.astro";
 export interface Props {
   title: string;
   description: string;
+  frontmatter: Frontmatter;
 }
 
 const { frontmatter } = Astro.props;
@@ -22,12 +23,20 @@ const image = s3File(`figma-export/project-${slug}-1x.png`);
 <ItemLayout title={title} description={description} image={image}>
   <!-- hovering image should highlight the primary project link  -->
   <script>
-    document.getElementsByClassName('js-project-image-link')[0].addEventListener('mouseenter', () => {
-      document.getElementsByClassName('js-primary-link')[0].classList.add('bg-blue-600')
-    })
-    document.getElementsByClassName('js-project-image-link')[0].addEventListener('mouseleave', () => {
-      document.getElementsByClassName('js-primary-link')[0].classList.remove('bg-blue-600')
-    })
+    document
+      .getElementsByClassName("js-project-image-link")[0]
+      .addEventListener("mouseenter", () => {
+        document
+          .getElementsByClassName("js-primary-link")[0]
+          .classList.add("bg-blue-600");
+      });
+    document
+      .getElementsByClassName("js-project-image-link")[0]
+      .addEventListener("mouseleave", () => {
+        document
+          .getElementsByClassName("js-primary-link")[0]
+          .classList.remove("bg-blue-600");
+      });
   </script>
   <div class="not-prose">
     <a class="js-project-image-link" href={frontmatter.primaryLink}>
@@ -56,7 +65,7 @@ const image = s3File(`figma-export/project-${slug}-1x.png`);
           </a>
         )
       }
-      <span class="flex-1 border-b" />
+      <span class="flex-1 border-b"></span>
       {frontmatter.date && <div>{frontmatter.date}</div>}
     </div>
   </div>

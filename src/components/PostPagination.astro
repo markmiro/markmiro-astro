@@ -1,5 +1,5 @@
 ---
-import { compareFrontmatterDateDesc,extractLastUrlPathItem } from "@/lib/misc";
+import { compareFrontmatterDateDesc, extractLastUrlPathItem } from "@/lib/misc";
 import PaginationLink from "./PaginationLink.astro";
 
 const appPosts = await Astro.glob<Frontmatter>("../pages/posts/*.mdx");
@@ -9,7 +9,7 @@ const sortedPosts = appPosts
 const slug = extractLastUrlPathItem(Astro.url);
 
 const currentIndex = sortedPosts.findIndex(
-  (p) => extractLastUrlPathItem(p.url) === slug
+  (p) => extractLastUrlPathItem(p.url) === slug,
 );
 
 const prevPost = sortedPosts[currentIndex - 1];

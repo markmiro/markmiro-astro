@@ -12,7 +12,7 @@ export type Img = {
 
 export default function Gallery(props: { images: Img[]; galleryID: string }) {
   useEffect(() => {
-    let lightbox = new PhotoSwipeLightbox({
+    let lightbox: PhotoSwipeLightbox | null = new PhotoSwipeLightbox({
       gallery: "#" + props.galleryID,
       children: "a",
       pswpModule: () => import("photoswipe"),
@@ -20,7 +20,7 @@ export default function Gallery(props: { images: Img[]; galleryID: string }) {
     lightbox.init();
 
     return () => {
-      lightbox.destroy();
+      lightbox?.destroy();
       lightbox = null;
     };
   }, []);

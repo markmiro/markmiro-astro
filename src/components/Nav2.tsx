@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function Nav2() {
+export function Nav2a() {
   useEffect(() => {
     const $container = document.querySelector<HTMLDivElement>(".mm-items");
     if (!$container) throw new Error("Container required");

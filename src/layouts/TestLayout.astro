@@ -6,13 +6,14 @@ import TestNav from "@/components/TestNav.astro";
 
 export interface Props {
   title: string;
+  frontmatter?: Frontmatter;
 }
 
 const { frontmatter } = Astro.props;
-const title = Astro.props.title || frontmatter.title || "Untitled";
+const title = Astro.props.title || frontmatter?.title || "Untitled";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <Head />

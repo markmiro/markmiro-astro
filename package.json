@@ -1,45 +1,47 @@
 {
   "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "astro dev --port 3001",
     "start": "astro dev --port 3001",
-    "build": "astro build",
-    "preview": "astro preview",
+    "build": "astro check && astro build",
+    "preview": "astro preview --port 3000 --host",
     "astro": "astro",
+    "docker": "docker compose up --build",
     "format": "prettier --write --plugin-search-dir=. .",
-    "//sync": "Make sure access keys are set up correctly: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html",
-    "s3-down": "aws s3 sync s3://markmiro-website-content ../s3",
-    "s3-up": "aws s3 sync ../s3 s3://markmiro-website-content",
-    "deploy:preview": "pnpm run s3-up && vercel build && vercel deploy --prebuilt",
-    "deploy": "pnpm run s3-up && vercel build --prod && vercel deploy --prebuilt --prod"
+    "tsc": "tsc"
   },
   "dependencies": {
-    "@astrojs/mdx": "0.16.0",
-    "@astrojs/react": "2.0.2",
-    "@astrojs/tailwind": "3.0.1",
-    "@tailwindcss/container-queries": "0.1.0",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "astro": "^2.0.6",
-    "astro-embed": "0.2.1",
-    "astro-icon": "0.8.0",
-    "clsx": "1.2.1",
-    "date-fns": "2.29.3",
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/mdx": "^3.1.2",
+    "@astrojs/react": "^3.6.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "astro": "^4.11.5",
+    "astro-icon": "^1.1.0",
+    "date-fns": "3.6.0",
     "lodash": "4.17.21",
-    "photoswipe": "5.3.6",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-social-media-embed": "2.3.4",
-    "shiki": "0.14.0",
-    "tailwindcss": "^3.0.24"
+    "photoswipe": "^5.4.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "3.282.0",
+    "@aws-sdk/client-s3": "3.596.0",
     "@tailwindcss/aspect-ratio": "0.4.2",
-    "@tailwindcss/typography": "0.5.9",
-    "@types/lodash": "4.14.191",
-    "image-size": "1.0.2",
-    "prettier": "2.8.3",
-    "prettier-plugin-astro": "0.8.0"
+    "@tailwindcss/container-queries": "0.1.1",
+    "@tailwindcss/typography": "0.5.13",
+    "@types/lodash": "4.17.5",
+    "astro-embed": "0.7.2",
+    "clsx": "2.1.1",
+    "image-size": "^1.1.1",
+    "prettier": "3.3.2",
+    "prettier-plugin-astro": "0.14.0"
   }
 }
