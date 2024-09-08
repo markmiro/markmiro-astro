@@ -15,5 +15,6 @@ export default {
     require("@tailwindcss/typography"),
     require("@tailwindcss/container-queries"),
     require("@tailwindcss/aspect-ratio"),
+    require("tailwindcss-animate"),
   ],
 };

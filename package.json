@@ -47,6 +47,7 @@
     "clsx": "2.1.1",
     "image-size": "^1.1.1",
     "prettier": "3.3.2",
-    "prettier-plugin-astro": "0.14.0"
+    "prettier-plugin-astro": "0.14.0",
+    "tailwindcss-animate": "^1.0.7"
   }
 }
