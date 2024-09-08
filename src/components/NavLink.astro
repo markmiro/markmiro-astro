@@ -1,17 +1,22 @@
 ---
 export interface Props {
   href: string;
+  isExact?: boolean;
 }
 
-const { href } = Astro.props;
-const isActive = Astro.url.pathname.startsWith(href);
+const { href, isExact = false } = Astro.props;
+const isActive = isExact
+  ? Astro.url.pathname === href
+  : Astro.url.pathname.startsWith(href);
 ---
 
 <a
   href={href}
-  class={`block px-4 py-2 md:px-6 md:py-4 hover:bg-gray-100 ${
-    isActive && "bg-gray-50"
-  }`}
+  class={`group block py-1 px-1 md:py-1 ${isActive && 'cursor-default'}`}
 >
-  <slot />
+  <div class=`px-2.5 py-0.5 transition-colors group-hover:bg-black/5 rounded-full ${
+    isActive ? "bg-black text-white group-hover:bg-black" : "bg-transparent"
+  }`>
+    <slot />
+  </div>
 </a>
