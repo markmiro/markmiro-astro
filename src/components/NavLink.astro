@@ -14,8 +14,8 @@ const isActive = isExact
   href={href}
   class={`group block py-1 px-1 md:py-1 ${isActive && 'cursor-default'}`}
 >
-  <div class=`px-2.5 py-0.5 transition-colors group-hover:bg-black/5 rounded-full ${
-    isActive ? "bg-black text-white group-hover:bg-black" : "bg-transparent"
+  <div class=`px-2.5 py-0.5 transition-colors rounded-full ${
+    isActive ? "bg-black text-white group-hover:bg-black" : "bg-transparent group-hover:bg-black/5"
   }`>
     <slot />
   </div>
