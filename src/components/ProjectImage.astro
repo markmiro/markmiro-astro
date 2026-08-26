@@ -2,18 +2,25 @@
 import { s3File } from "@/lib/s3";
 export interface Props {
   slug?: string;
+  src?: string;
 }
 
-const { slug } = Astro.props;
+const { slug, src } = Astro.props;
+const imageSrc = src || (slug && s3File(`figma-export/project-${slug}-1x.png`));
+const imageSrcset = src
+  ? undefined
+  : slug
+    ? s3File(`figma-export/project-${slug}-2x.png 2x`)
+    : undefined;
 ---
 
 {
-  slug && (
+  imageSrc && (
     <div class="not-prose aspect-w-2 aspect-h-1 border border-gray-400 rounded-lg bg-gray-50 overflow-hidden shadow-md shadow-gray-300 group-hover:scale-[99%] transition-transform">
       <img
-        alt={`Project ${slug} preview image`}
-        src={s3File(`figma-export/project-${slug}-1x.png`)}
-        srcset={s3File(`figma-export/project-${slug}-2x.png 2x`)}
+        alt={`Project ${slug || "preview"} preview image`}
+        src={imageSrc}
+        srcset={imageSrcset}
       />
     </div>
   )

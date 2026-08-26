@@ -104,7 +104,8 @@ type EnvKey =
   | "pnpm"
   | "yarn"
   // misc
-  | "chromeExtensionsApi";
+  | "chromeExtensionsApi"
+  | "vscodeExtensionsApi";
 
 export const language: Record<LangKey, StackItem> = {
   html: { name: "HTML", tags: [] },
@@ -442,6 +443,11 @@ export const env: Record<EnvKey, StackItem> = {
   chromeExtensionsApi: {
     name: "Chrome Extensions API",
     docs: "https://developer.chrome.com/docs/extensions",
+    tags: [],
+  },
+  vscodeExtensionsApi: {
+    name: "VS Code Extension API",
+    docs: "https://code.visualstudio.com/api/extension-guides/color-theme",
     tags: [],
   },
 };
