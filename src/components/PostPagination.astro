@@ -1,8 +1,13 @@
 ---
+import type { MDXInstance } from "astro";
 import { compareFrontmatterDateDesc, extractLastUrlPathItem } from "@/lib/misc";
 import PaginationLink from "./PaginationLink.astro";
 
-const appPosts = await Astro.glob<Frontmatter>("../pages/posts/*.mdx");
+const appPosts = Object.values(
+  import.meta.glob<MDXInstance<Frontmatter>>("../pages/posts/*.mdx", {
+    eager: true,
+  }),
+);
 const sortedPosts = appPosts
   .filter((p) => p.frontmatter?.draft !== true)
   .sort(compareFrontmatterDateDesc);

@@ -2,24 +2,29 @@
 import Gallery from "@/components/Gallery";
 import type { Img } from "@/components/Gallery";
 import { listFileNames, s3File } from "@/lib/s3";
-import imageSize from "image-size";
+import { imageSizeFromFile } from "image-size/fromFile";
 const files = await listFileNames("projects/jpeg-degrader/results");
 const gifs = files.filter((file) => file?.endsWith(".gif"));
 const jpegs = files.filter((file) => file?.match(/\.jpe?g$/i));
 
-const jpegs2: Img[] = jpegs.map((img) => ({
-  smallURL: s3File(img),
-  largeURL: s3File(img),
-  width: imageSize("../s3/" + img).width as number,
-  height: imageSize("../s3/" + img).height as number,
-}));
+const jpegs2: Img[] = await Promise.all(
+  jpegs.map(async (img) => {
+    const { width, height } = await imageSizeFromFile("../s3/" + img);
+    return { smallURL: s3File(img), largeURL: s3File(img), width, height };
+  }),
+);
 
-const gifs2: Img[] = gifs.map((img) => ({
-  smallURL: s3File(img),
-  largeURL: s3File(img),
-  width: (imageSize("../s3/" + img).width as number) * 2,
-  height: (imageSize("../s3/" + img).height as number) * 2,
-}));
+const gifs2: Img[] = await Promise.all(
+  gifs.map(async (img) => {
+    const { width, height } = await imageSizeFromFile("../s3/" + img);
+    return {
+      smallURL: s3File(img),
+      largeURL: s3File(img),
+      width: width * 2,
+      height: height * 2,
+    };
+  }),
+);
 ---
 
 <Gallery client:only galleryID="jpeg-degrader" images={[...jpegs2, ...gifs2]} />
