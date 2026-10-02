@@ -1,0 +1,89 @@
+---
+const extensionId = "markmiro.colorful-github-vscode-theme";
+
+const themes = [
+  { slug: "a-github-dark-dimmed-1-red", name: "Dark Dimmed 🔴 Red" },
+  { slug: "a-github-dark-dimmed-2-orange", name: "Dark Dimmed 🟠 Orange" },
+  { slug: "a-github-dark-dimmed-3-green", name: "Dark Dimmed 🟢 Green" },
+  { slug: "a-github-dark-dimmed-4-blue", name: "Dark Dimmed 🔵 Blue" },
+  { slug: "a-github-dark-dimmed-5-purple", name: "Dark Dimmed 🟣 Purple" },
+  { slug: "a-github-dark-dimmed-brown", name: "Dark Dimmed 🟤 Brown" },
+  { slug: "a-github-dark-dimmed-muted", name: "Dark Dimmed 🩶 Muted" },
+  { slug: "a-github-dark-dimmed-vampire", name: "Dark Dimmed 🧛 Vampire" },
+  { slug: "a-github-dark-vampire", name: "Dark 🧛 Vampire" },
+  { slug: "a-github-dark-muted", name: "Dark 🩶 Muted" },
+  {
+    slug: "a-github-dark-high-contrast-1-red",
+    name: "Dark High Contrast 🔴 Red",
+  },
+  {
+    slug: "a-github-dark-high-contrast-2-orange",
+    name: "Dark High Contrast 🟠 Orange",
+  },
+  {
+    slug: "a-github-dark-high-contrast-3-green",
+    name: "Dark High Contrast 🟢 Green",
+  },
+  {
+    slug: "a-github-dark-high-contrast-4-blue",
+    name: "Dark High Contrast 🔵 Blue",
+  },
+  {
+    slug: "a-github-dark-high-contrast-5-purple",
+    name: "Dark High Contrast 🟣 Purple",
+  },
+  { slug: "a-github-light-1-red", name: "Light 🔴 Red" },
+  { slug: "a-github-light-2-orange", name: "Light 🟠 Orange" },
+  { slug: "a-github-light-3-green", name: "Light 🟢 Green" },
+  { slug: "a-github-light-4-blue", name: "Light 🔵 Blue" },
+  { slug: "a-github-light-5-purple", name: "Light 🟣 Purple" },
+];
+
+function previewUrl(slug: string) {
+  return `https://vscodethemes.com/e/${extensionId}/${slug}`;
+}
+
+function screenshotUrl(slug: string) {
+  return `https://vscodethemes.com/e/${extensionId}/${slug}.png?language=js`;
+}
+---
+
+<div class="not-prose">
+  <p class="text-sm text-gray-500 mb-3">
+    From{" "}
+    <a
+      class="underline hover:text-gray-700"
+      href={`https://vscodethemes.com/e/${extensionId}`}
+      target="_blank"
+      rel="noreferrer"
+    >
+      VS Code Themes
+    </a>
+    .
+  </p>
+  <div class="grid sm:grid-cols-2 gap-4">
+    {
+      themes.map((theme) => (
+        <a
+          class="group block"
+          href={previewUrl(theme.slug)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <div class="border border-gray-400 rounded-lg bg-gray-50 overflow-hidden shadow-md shadow-gray-300 group-hover:scale-[99%] transition-transform">
+            <img
+              src={screenshotUrl(theme.slug)}
+              alt={`${theme.name} VS Code theme screenshot`}
+              width="1200"
+              height="630"
+              loading="lazy"
+            />
+          </div>
+          <div class="text-sm mt-1.5 text-gray-600 group-hover:underline">
+            {theme.name}
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</div>

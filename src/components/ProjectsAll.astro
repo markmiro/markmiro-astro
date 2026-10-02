@@ -21,7 +21,10 @@ const allProjects = await Astro.glob<Frontmatter>("../pages/projects/*.mdx");
             <ProjectItemDate date={page.frontmatter?.date} />
           )}
         </div>
-        <ProjectImageThumb slug={extractLastUrlPathItem(page.url)} />
+        <ProjectImageThumb
+          slug={extractLastUrlPathItem(page.url)}
+          src={page.frontmatter?.image}
+        />
         {page.frontmatter?.description && (
           <div class="text-sm my-1 leading-snug text-gray-500">
             {page.frontmatter.description}
