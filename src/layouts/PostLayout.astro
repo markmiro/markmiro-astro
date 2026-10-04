@@ -1,21 +1,21 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import PostPagination from "@/components/PostPagination.astro";
 import ItemLayout from "./ItemLayout.astro";
 
 export interface Props {
-  title: string;
-  description: string;
-  image?: string;
-  frontmatter?: Frontmatter;
+  post: CollectionEntry<"posts">;
 }
 
-const { frontmatter } = Astro.props;
-const title = Astro.props.title || frontmatter?.title || "Untitled";
-const description = Astro.props.description || frontmatter?.description || "";
-const image = Astro.props.image || frontmatter?.image || "";
+const { post } = Astro.props;
+const { title, description, image } = post.data;
 ---
 
-<ItemLayout title={title} description={description} image={image}>
+<ItemLayout
+  title={title || "Untitled"}
+  description={description || ""}
+  image={image || ""}
+>
   <slot />
-  <PostPagination slot="end" />
+  <PostPagination slot="end" id={post.id} />
 </ItemLayout>

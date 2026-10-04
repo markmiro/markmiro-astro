@@ -1,0 +1,84 @@
+---
+draft: false
+emoji: 🦀
+title: Crabby Keys
+description: A typing test app.
+primaryLink: https://crabbykeys.vercel.app
+primaryLinkText: Visit Crabby Keys
+source: https://github.com/markmiro/typing-test
+date: Jan 25-Apr 22, 2021
+---
+
+import TechStack from "@/components/TechStack.astro";
+import S3Image from "@/components/S3Image.astro";
+import S3Video from "@/components/S3Video.astro";
+import { Tweet, YouTube } from "astro-embed";
+
+## Goals
+
+I was initially inspired by seeing people using 10fastfingers and wanting something that was a little cleaner.
+
+<S3Image src="projects/typing-test/10fastfingers.com_typing-test_english.png" />
+
+I googled around to see what else was out there and none of the other typing test apps were very appealing.
+
+## Solution
+
+My initial version was quite simple:
+
+<iframe
+  src="https://codesandbox.io/embed/typing-test-b55zi?fontsize=14&hidenavigation=1&theme=dark&view=preview"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="typing-test"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+After I had the basics working, I decided to get authentication working.
+
+I used this app as an opportunity to learn how to do some things that I had been wanting to learn for a while:
+
+- Firebase
+- User authentication
+- Chakra UI
+
+## Learnings
+
+I considered building many features. I explored quite a few of them.
+
+1. Replay typed words:
+
+{/* <S3Image src="projects/typing-test/replay-typed-words.png" /> */}
+
+<S3Video src="projects/typing-test/replay-typed-words.mp4" />
+
+2. Show the user's typing speed over time:
+
+<S3Image src="projects/typing-test/stats.png" />
+
+---
+
+## Stack
+
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "js",
+    "ts",
+    "react",
+    "chakraUi",
+    "firebase",
+    "googleCloud",
+    "dateFns",
+    "reachRouter",
+    "framerMotion",
+    "lodash",
+    "reactTable",
+    "statisticsJs",
+    "jest",
+    "tailwindCss",
+    "npm",
+    "vercel",
+  ]}
+/>

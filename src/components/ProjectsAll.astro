@@ -1,40 +1,28 @@
 ---
-import type { MDXInstance } from "astro";
-import {
-  compareFrontmatterDateRangeDesc,
-  extractLastUrlPathItem,
-} from "@/lib/misc";
+import { getCollection } from "astro:content";
+import { compareFrontmatterDateRangeDesc } from "@/lib/misc";
 import ProjectImageThumb from "@/components/ProjectImageThumb.astro";
 import ProjectItemDate from "@/components/ProjectItemDate.astro";
 
-const allProjects = Object.values(
-  import.meta.glob<MDXInstance<Frontmatter>>("../pages/projects/*.mdx", {
-    eager: true,
-  }),
+const allProjects = await getCollection(
+  "projects",
+  ({ data }) => data.draft !== true,
 );
 ---
 
 {
-  allProjects
-    .filter((p) => p.frontmatter?.draft !== true)
-    .sort(compareFrontmatterDateRangeDesc)
-    .map((page) => (
-      <a href={page.url} class="block group">
-        <div class="font-bold mb-2">
-          <div class="group-hover:underline">{page.frontmatter.title}</div>
-          {page.frontmatter?.date && (
-            <ProjectItemDate date={page.frontmatter?.date} />
-          )}
+  allProjects.sort(compareFrontmatterDateRangeDesc).map((project) => (
+    <a href={`/projects/${project.id}`} class="block group">
+      <div class="font-bold mb-2">
+        <div class="group-hover:underline">{project.data.title}</div>
+        {project.data.date && <ProjectItemDate date={project.data.date} />}
+      </div>
+      <ProjectImageThumb slug={project.id} src={project.data.image} />
+      {project.data.description && (
+        <div class="text-sm my-1 leading-snug text-gray-500">
+          {project.data.description}
         </div>
-        <ProjectImageThumb
-          slug={extractLastUrlPathItem(page.url)}
-          src={page.frontmatter?.image}
-        />
-        {page.frontmatter?.description && (
-          <div class="text-sm my-1 leading-snug text-gray-500">
-            {page.frontmatter.description}
-          </div>
-        )}
-      </a>
-    ))
+      )}
+    </a>
+  ))
 }
