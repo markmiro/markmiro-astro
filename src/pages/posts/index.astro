@@ -1,40 +1,33 @@
 ---
 import ItemLayout from "@/layouts/ItemLayout.astro";
 import { compareFrontmatterDateDesc } from "@/lib/misc";
-import type { MDXInstance } from "astro";
+import { getCollection } from "astro:content";
 
-const allPosts = Object.values(
-  import.meta.glob<MDXInstance<Frontmatter>>("./*.mdx", { eager: true }),
+const allPosts = await getCollection(
+  "posts",
+  ({ data }) => data.draft !== true,
 );
 ---
 
 <ItemLayout title="Posts" description="My most recent blog posts">
   <ul>
     {
-      allPosts
-        .filter((p) => p.frontmatter?.draft !== true)
-        .sort(compareFrontmatterDateDesc)
-        .map((page) => (
-          <li>
-            <div>
-              {page.frontmatter?.emoji && (
-                <span class="mr-2">{page.frontmatter.emoji}</span>
-              )}
-              <a href={page.url}>{page.frontmatter.title}</a>
-            </div>
-            {page.frontmatter?.description && (
-              <div class="text-gray-500">{page.frontmatter.description}</div>
-            )}
-            {page.frontmatter?.date && (
-              <time
-                class="text-gray-500 text-sm"
-                datetime={page.frontmatter.date}
-              >
-                {page.frontmatter.date}
-              </time>
-            )}
-          </li>
-        ))
+      allPosts.sort(compareFrontmatterDateDesc).map((post) => (
+        <li>
+          <div>
+            {post.data.emoji && <span class="mr-2">{post.data.emoji}</span>}
+            <a href={`/posts/${post.id}`}>{post.data.title}</a>
+          </div>
+          {post.data.description && (
+            <div class="text-gray-500">{post.data.description}</div>
+          )}
+          {post.data.date && (
+            <time class="text-gray-500 text-sm" datetime={post.data.date}>
+              {post.data.date}
+            </time>
+          )}
+        </li>
+      ))
     }
     <li>
       See more posts on <a href="https://medium.com/@markmiro">📝 Medium</a>.

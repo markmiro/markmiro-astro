@@ -1,21 +1,19 @@
 ---
-import type { MDXInstance } from "astro";
-import { compareFrontmatterDateDesc, extractLastUrlPathItem } from "@/lib/misc";
+import { getCollection } from "astro:content";
+import { compareFrontmatterDateDesc } from "@/lib/misc";
 import PaginationLink from "./PaginationLink.astro";
 
-const appPosts = Object.values(
-  import.meta.glob<MDXInstance<Frontmatter>>("../pages/posts/*.mdx", {
-    eager: true,
-  }),
-);
-const sortedPosts = appPosts
-  .filter((p) => p.frontmatter?.draft !== true)
-  .sort(compareFrontmatterDateDesc);
-const slug = extractLastUrlPathItem(Astro.url);
+export interface Props {
+  id: string;
+}
 
-const currentIndex = sortedPosts.findIndex(
-  (p) => extractLastUrlPathItem(p.url) === slug,
-);
+const { id } = Astro.props;
+
+const sortedPosts = (
+  await getCollection("posts", ({ data }) => data.draft !== true)
+).sort(compareFrontmatterDateDesc);
+
+const currentIndex = sortedPosts.findIndex((p) => p.id === id);
 
 const prevPost = sortedPosts[currentIndex - 1];
 const nextPost = sortedPosts[currentIndex + 1];
@@ -26,15 +24,15 @@ const nextPost = sortedPosts[currentIndex + 1];
 >
   <PaginationLink
     align="left"
-    href={prevPost?.url}
-    title={prevPost?.frontmatter?.title}
+    href={prevPost && `/posts/${prevPost.id}`}
+    title={prevPost?.data.title}
   >
     ← Previous
   </PaginationLink>
   <PaginationLink
     align="right"
-    href={nextPost?.url}
-    title={nextPost?.frontmatter?.title}
+    href={nextPost && `/posts/${nextPost.id}`}
+    title={nextPost?.data.title}
   >
     Next →
   </PaginationLink>

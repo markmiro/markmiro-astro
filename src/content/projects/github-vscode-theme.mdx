@@ -1,0 +1,52 @@
+---
+draft: false
+emoji: 🌈
+title: A Colorful GitHub Theme Pack
+description: GitHub's VS Code theme, tinted in a bunch of colors.
+primaryLink: https://marketplace.visualstudio.com/items?itemName=markmiro.colorful-github-vscode-theme
+primaryLinkText: View in VS Marketplace
+source: https://github.com/markmiro/github-vscode-theme
+image: https://vscodethemes.com/e/markmiro.colorful-github-vscode-theme/a-github-dark-dimmed-1-red.png?language=js
+date: May 1-Sep 22, 2025
+---
+
+import TechStack from "@/components/TechStack.astro";
+import Screenshots from "@/components/projects/github-vscode-theme/Screenshots.astro";
+
+## Previews
+
+<Screenshots />
+
+## Summary
+
+I use GitHub's VS Code theme, and I keep too many windows open. I forked [GitHub's themes](https://github.com/primer/github-vscode-theme) and tinted them so each window can be a different color.
+
+Red, orange, green, blue, purple, plus vampire, muted, and brown. Those sit on dark dimmed, dark, high contrast, and light.
+
+## Goals
+
+I wanted GitHub's syntax and UI with the grays shifted. If you squint, it should still look like GitHub.
+
+[github.com's appearance settings](https://github.com/settings/appearance) already has light, dark, dimmed, and high contrast. I used those as bases and made color families.
+
+## Solution
+
+The original theme is a big color scale. I tint the scale instead of rewriting every token.
+
+Grays get a background tint. Blues, greens, reds, ANSI colors can get a second pass so the whole theme leans one way. I do the math in OKLCH. Tint in RGB and either everything goes muddy or the bright colors clip.
+
+I started with five dark dimmed hues. Light, vampire, muted, brown, and high contrast came later. Same recipe.
+
+## Learnings
+
+Forking a theme people already use is faster than starting from scratch. You also inherit every gray they never unified. A few of those, and the CSS shadows, still don't tint.
+
+I can look at the dock and know which window is which. That's why the names have a color and an emoji.
+
+---
+
+## Stack
+
+<TechStack
+  stack={["ts", "chroma", "pnpm", "vscodeExtensionsApi"]}
+/>

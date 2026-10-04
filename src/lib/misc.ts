@@ -1,8 +1,9 @@
-import type { MDXInstance } from "astro";
 import { getUnixTime } from "date-fns";
 import { parse } from "date-fns";
 
 import _ from "lodash";
+
+type Dated = { data: { date: string } };
 
 export function parseFrontmatterDateRange(dateRange: string) {
   const PARSE_FORMAT = "MMM d, yyyy";
@@ -27,23 +28,17 @@ export function parseFrontmatterDateRange(dateRange: string) {
   return [frDate, toDate];
 }
 
-export function compareFrontmatterDateRangeDesc(
-  a: MDXInstance<Frontmatter>,
-  b: MDXInstance<Frontmatter>,
-) {
+export function compareFrontmatterDateRangeDesc(a: Dated, b: Dated) {
   // fr (from) to (to)
-  const [_aFr, aTo] = parseFrontmatterDateRange(a.frontmatter.date);
-  const [_bFr, bTo] = parseFrontmatterDateRange(b.frontmatter.date);
+  const [_aFr, aTo] = parseFrontmatterDateRange(a.data.date);
+  const [_bFr, bTo] = parseFrontmatterDateRange(b.data.date);
   return getUnixTime(bTo) - getUnixTime(aTo);
 }
 
-export function compareFrontmatterDateDesc(
-  a: MDXInstance<Frontmatter>,
-  b: MDXInstance<Frontmatter>,
-) {
+export function compareFrontmatterDateDesc(a: Dated, b: Dated) {
   // fr (from) to (to)
-  const [aDate] = parseFrontmatterDateRange(a.frontmatter.date);
-  const [bDate] = parseFrontmatterDateRange(b.frontmatter.date);
+  const [aDate] = parseFrontmatterDateRange(a.data.date);
+  const [bDate] = parseFrontmatterDateRange(b.data.date);
   return getUnixTime(bDate) - getUnixTime(aDate);
 }
 
