@@ -20,15 +20,15 @@ export const allExperiments: Experiment[] = [
   //   primaryLink: "https://runkit.com/markmiro/5c7dca0db1bae100122ee7a9",
   //   primaryLinkText: "View on RunKit",
   // },
-  {
-    title: "Wrapping Carousel",
-    description:
-      "An instructional article on how to create a wrapping carousel.",
-    emoji: "🎠",
-    primaryLink: "https://observablehq.com/@markmiro/wrapping-carousel-math",
-    primaryLinkText: "View on Observable",
-    date: "Aug 27, 2018",
-  },
+  // {
+  //   title: "Wrapping Carousel",
+  //   description:
+  //     "An instructional article on how to create a wrapping carousel.",
+  //   emoji: "🎠",
+  //   primaryLink: "https://observablehq.com/@markmiro/wrapping-carousel-math",
+  //   primaryLinkText: "View on Observable",
+  //   date: "Aug 27, 2018",
+  // },
   {
     title: "Canvas animation framework (using classes)",
     description:
