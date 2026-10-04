@@ -23,15 +23,14 @@ bun run dev
 
 Use the dedicated S3-only AWS profile. Follow [the local AWS S3 access guide](docs/aws-s3-access.md) to sign in and configure a new machine before running these commands.
 
-The ENV vars can be found in the Vercel project settings.
+Download the bucket before building or deploying. The jpeg-degrader page reads image sizes from the local copy at build time, and `bun run deploy` uploads the local copy first, so both fail without it.
 
-Unless the S3 files are being updated, it's no necessary to download them locally.
-
-Locally, the files should be one level above this root directory. I tried to get Vercel to ignore the files when placed in the repo directory, but Vercel would still try to upload them.
+Locally, the files should be one level above this root directory (`../s3`). I tried to get Vercel to ignore the files when placed in the repo directory, but Vercel would still try to upload them. The path is relative to the checkout, so each clone or worktree needs its own download.
 
 To download, run:
 
 ```sh
+export AWS_PROFILE=markmiro-s3
 bun run s3-down
 ```
 
@@ -43,7 +42,11 @@ bun run s3-up
 
 ## Deploying
 
+Refresh the local bucket copy first. `deploy` uploads `../s3` before building, so a stale copy would overwrite newer files in the bucket.
+
 ```sh
+export AWS_PROFILE=markmiro-s3
+bun run s3-down
 bun run deploy
 ```
 

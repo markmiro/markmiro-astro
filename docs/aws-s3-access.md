@@ -68,7 +68,7 @@ bun run s3-down                 # Download into ../s3
 bun run s3-up                   # Upload from ../s3
 ```
 
-Run `aws sso login --profile markmiro-s3` again when the session expires. `bun run deploy` calls `s3-up`, so set `AWS_PROFILE` in that terminal too. The bucket download lives one directory above the repo by design. Do not commit AWS credentials, SSO cache files, or the downloaded bucket contents.
+Run `aws sso login --profile markmiro-s3` again when the session expires. `bun run deploy` calls `s3-up`, so set `AWS_PROFILE` in that terminal too. The bucket download lives one directory above the repo by design, relative to each checkout, so every clone or worktree needs its own `s3-down`. `bun run build` reads image sizes from `../s3` and fails without it, and `deploy` uploads `../s3` before building, so refresh it with `s3-down` first. Do not commit AWS credentials, SSO cache files, or the downloaded bucket contents.
 
 An agent setting up another machine should verify the active profile and bucket access before running uploads. If sign-in or access fails, inspect `aws configure list --profile markmiro-s3` for the credential source, confirm the `us-east-1` SSO and `us-west-1` bucket regions, and check the Identity Center account assignment. Do not work around an access error by switching to root credentials.
 
