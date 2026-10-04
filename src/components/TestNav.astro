@@ -1,6 +1,11 @@
 ---
-const allPosts = await Astro.glob("../pages/test/*.(md|mdx)");
-// const allPosts2 = await Astro.glob("../pages/test/*.astro");
+import type { MDXInstance } from "astro";
+const allPosts = Object.values(
+  import.meta.glob<MDXInstance<Frontmatter>>("../pages/test/*.{md,mdx}", {
+    eager: true,
+  }),
+);
+// const allPosts2 = Object.values(import.meta.glob("../pages/test/*.astro", { eager: true }));
 ---
 
 <!-- https://docs.astro.build/en/tutorial/5-astro-api/1/ -->
