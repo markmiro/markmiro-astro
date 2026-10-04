@@ -1,18 +1,23 @@
-<li>
-  <a href="https://twitter.com/markmiro"> 🐦 Twitter</a>
-</li>
-<li>
-  <a href="https://medium.com/@markmiro"> 📝 Medium</a>
-</li>
-<li>
-  <a href="https://www.linkedin.com/in/markmiro"> 💼 LinkedIn</a>
-</li>
-<li>
-  <a href="https://github.com/markmiro"> 👨‍💻 GitHub</a>
-</li>
-<li>
-  <a href="https://codesandbox.io/u/markmiro"> 📦 CodeSandbox</a>
-</li>
-<li>
-  <a href="https://codepen.io/markmiro"> ✍️ CodePen</a>
-</li>
+---
+import { Icon } from "astro-icon/components";
+
+const links = [
+  { href: "https://twitter.com/markmiro", icon: "tabler:brand-x", label: "X" },
+  { href: "https://medium.com/@markmiro", icon: "tabler:brand-medium", label: "Medium" },
+  { href: "https://www.linkedin.com/in/markmiro", icon: "tabler:brand-linkedin", label: "LinkedIn" },
+  { href: "https://github.com/markmiro", icon: "tabler:brand-github", label: "GitHub" },
+  { href: "https://codesandbox.io/u/markmiro", icon: "tabler:brand-codesandbox", label: "CodeSandbox" },
+  { href: "https://codepen.io/markmiro", icon: "tabler:brand-codepen", label: "CodePen" },
+];
+---
+
+{
+  links.map(({ href, icon, label }) => (
+    <li>
+      <a href={href} class="inline-flex items-center gap-1">
+        <Icon name={icon} class="size-4" aria-hidden="true" />
+        {label}
+      </a>
+    </li>
+  ))
+}
