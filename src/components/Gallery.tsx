@@ -41,7 +41,7 @@ export default function Gallery(props: { images: Img[]; galleryID: string }) {
           rel="noreferrer"
         >
           <img
-            className="border border-gray-400 rounded-lg shadow-md"
+            className="border border-gray-400 dark:border-gray-700 rounded-lg shadow-md"
             src={image.smallURL}
             width={image.width}
             height={image.height}

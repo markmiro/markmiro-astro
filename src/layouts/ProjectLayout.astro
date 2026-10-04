@@ -27,27 +27,27 @@ const image =
       .addEventListener("mouseenter", () => {
         document
           .getElementsByClassName("js-primary-link")[0]
-          .classList.add("bg-blue-600");
+          .classList.add("bg-blue-600", "dark:bg-blue-500", "dark:text-white");
       });
     document
       .getElementsByClassName("js-project-image-link")[0]
       .addEventListener("mouseleave", () => {
         document
           .getElementsByClassName("js-primary-link")[0]
-          .classList.remove("bg-blue-600");
+          .classList.remove("bg-blue-600", "dark:bg-blue-500", "dark:text-white");
       });
   </script>
   <div class="not-prose">
     <a class="js-project-image-link" href={frontmatter.primaryLink}>
       <ProjectImage slug={slug} src={frontmatter.image} />
     </a>
-    <div class="flex flex-wrap items-center gap-3 text-sm mt-2 text-gray-500">
+    <div class="flex flex-wrap items-center gap-3 text-sm mt-2 text-gray-500 dark:text-gray-400">
       {
         frontmatter.primaryLink && (
           <a
             href={frontmatter.primaryLink}
             target="_blank"
-            class="js-primary-link w-full sm:w-auto text-center shadow-md bg-black text-white hover:bg-blue-600 rounded-lg px-4 py-2 text-lg transition-colors"
+            class="js-primary-link w-full sm:w-auto text-center shadow-md bg-black text-white hover:bg-blue-600 dark:bg-white dark:text-black dark:hover:bg-blue-500 dark:hover:text-white rounded-lg px-4 py-2 text-lg transition-colors"
           >
             {frontmatter.primaryLinkText} ↗
           </a>
@@ -58,7 +58,7 @@ const image =
           <a
             href={frontmatter.source}
             target="_blank"
-            class="hover:text-gray-700 underline flex items-center gap-1"
+            class="hover:text-gray-700 dark:hover:text-gray-300 underline flex items-center gap-1"
           >
             <Icon name="github" class="w-3" /> Project Source
           </a>

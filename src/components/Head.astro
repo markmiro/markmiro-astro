@@ -11,3 +11,16 @@ import { s3File } from "@/lib/s3";
   href={s3File("figma-export/favicon.svg")}
 />
 <meta name="generator" content={Astro.generator} />
+<meta name="color-scheme" content="light dark" />
+<script is:inline>
+  // Apply the theme before first paint to avoid a flash of the wrong colors.
+  // An explicit choice from the theme toggle wins over the OS preference.
+  (function () {
+    var stored = localStorage.getItem("theme");
+    var dark =
+      stored === "dark" ||
+      (stored !== "light" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.classList.toggle("dark", dark);
+  })();
+</script>
