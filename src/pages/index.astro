@@ -19,7 +19,7 @@ const description =
           class="sm:text-lg md:text-2xl leading-tight sm:leading-snug max-w-[45ch]"
         >
           <div class="font-bold text-4xl lg:text-5xl">
-            Mark Miro<span class="text-gray-300">nyuk</span>
+            Mark Miro<span class="text-gray-300 dark:text-gray-600">nyuk</span>
           </div>
           <div class="mb-2"></div>
           {description}
@@ -34,7 +34,7 @@ const description =
     <div
       class="ml-auto mr-auto max-w-lg md:max-w-3xl lg:max-w-6xl grid md:grid-cols-2 gap-8"
     >
-      <div class="prose lg:prose-xl md:col-span-2">
+      <div class="prose dark:prose-invert lg:prose-xl md:col-span-2">
         <h2 class="">Latest</h2>
       </div>
       <ProjectsAll />
@@ -46,7 +46,7 @@ const description =
       class="ml-auto mr-auto max-w-lg md:max-w-3xl lg:max-w-6xl grid md:grid-cols-2 gap-12"
     >
       <div>
-        <div class="prose lg:prose-xl mb-10">
+        <div class="prose dark:prose-invert lg:prose-xl mb-10">
           <h2>Experiments</h2>
         </div>
         <ul>
@@ -55,13 +55,13 @@ const description =
               .filter((ex) => ex?.draft !== true)
               .map((ex) => (
                 <li class="flex items-start w-full py-4">
-                  <div class="text-2xl w-12 h-12 mr-3 bg-gray-200 rounded-full grid place-items-center">
+                  <div class="text-2xl w-12 h-12 mr-3 bg-gray-200 dark:bg-gray-800 rounded-full grid place-items-center">
                     {ex?.emoji && <span>{ex.emoji}</span>}
                   </div>
                   <div class="flex-1">
                     <div class="leading-snug font-bold">{ex.title}</div>
                     {ex?.description && (
-                      <div class="text-sm text-gray-500 leading-snug">
+                      <div class="text-sm text-gray-500 dark:text-gray-400 leading-snug">
                         {ex.description}
                       </div>
                     )}
@@ -69,7 +69,7 @@ const description =
                       <span class="flex-1 border-b mr-2" />
                       <a
                         href={ex.primaryLink}
-                        class="no-underline text-sm px-2 py-1 rounded-md border hover:bg-gray-100"
+                        class="no-underline text-sm px-2 py-1 rounded-md border hover:bg-gray-100 dark:hover:bg-gray-800"
                       >
                         {ex.primaryLinkText} ↗
                       </a>
@@ -81,7 +81,7 @@ const description =
         </ul>
       </div>
       <hr class="md:hidden" />
-      <div class="prose lg:prose-xl">
+      <div class="prose dark:prose-invert lg:prose-xl">
         <!-- <h2>📚 Reference</h2>
         <ul>
           {

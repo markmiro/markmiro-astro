@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Dark mode is driven by the `dark` class on <html>, set in Head.astro. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --grid-template-columns-auto-1fr: auto 1fr;
 }
@@ -17,5 +20,25 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
+  }
+
+  .dark *,
+  .dark ::after,
+  .dark ::before,
+  .dark ::backdrop,
+  .dark ::file-selector-button {
+    border-color: var(--color-gray-800, currentcolor);
+  }
+
+  html {
+    color-scheme: light;
+    @apply bg-white text-gray-900;
+  }
+
+  html.dark {
+    color-scheme: dark;
+    @apply bg-gray-950 text-gray-100;
+    /* astro-embed tweet fallback border */
+    --tc-border-color: var(--color-gray-700);
   }
 }

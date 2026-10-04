@@ -1,0 +1,30 @@
+<button
+  type="button"
+  class="js-theme-toggle grid place-items-center size-8 rounded-full transition-colors hover:bg-black/5 dark:hover:bg-white/10"
+  aria-label="Toggle dark mode"
+  title="Toggle dark mode"
+>
+  <span class="dark:hidden" aria-hidden="true">☾</span>
+  <span class="hidden dark:inline" aria-hidden="true">☀︎</span>
+</button>
+
+<script>
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const root = document.documentElement;
+
+  for (const button of document.querySelectorAll(".js-theme-toggle")) {
+    button.addEventListener("click", () => {
+      const dark = !root.classList.contains("dark");
+      root.classList.toggle("dark", dark);
+      // Forget the override when it matches the OS, so OS changes apply again.
+      if (dark === media.matches) localStorage.removeItem("theme");
+      else localStorage.setItem("theme", dark ? "dark" : "light");
+    });
+  }
+
+  media.addEventListener("change", (event) => {
+    if (!localStorage.getItem("theme")) {
+      root.classList.toggle("dark", event.matches);
+    }
+  });
+</script>
