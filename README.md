@@ -19,6 +19,25 @@ Run the dev server:
 bun run dev
 ```
 
+## Testing
+
+End-to-end tests use [Playwright](https://playwright.dev) and live in `tests/`. They start their own dev server on port 4322, so they won't conflict with `bun run dev`.
+
+Install the browser once:
+
+```sh
+bunx playwright install chromium
+```
+
+Run the tests:
+
+```sh
+bun run test
+bun run test:ui # interactive mode
+```
+
+Pages that list S3 objects while rendering (like `/projects/jpeg-degrader`) are only checked when `AWS_PROFILE` or `AWS_ACCESS_KEY_ID` is set.
+
 ## S3 Files
 
 Use the dedicated S3-only AWS profile. Follow [the local AWS S3 access guide](docs/aws-s3-access.md) to sign in and configure a new machine before running these commands.
