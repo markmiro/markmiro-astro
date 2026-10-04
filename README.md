@@ -21,7 +21,7 @@ bun run dev
 
 ## S3 Files
 
-You'll need to be logged into the AWS account to download the files. Make sure you have the AWS CLI installed and configured.
+Use the dedicated S3-only AWS profile. Follow [the local AWS S3 access guide](docs/aws-s3-access.md) to sign in and configure a new machine before running these commands.
 
 The ENV vars can be found in the Vercel project settings.
 
