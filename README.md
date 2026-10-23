@@ -4,7 +4,6 @@ Original README.md from astro: [README_ASTRO.md](README_ASTRO.md).
 
 To use with VSCode with prettier, follow [this guide](https://github.com/withastro/prettier-plugin-astro/blob/main/README.md#using-in-vs-code).
 
-
 ## Development
 
 Install dependencies
@@ -18,6 +17,19 @@ Run the dev server:
 ```sh
 bun run dev
 ```
+
+The dev server listens on all interfaces and prints a `Tailscale: http://<host>:<port>` line on startup, so you can open it from other devices on your tailnet. The host is `TAILSCALE_HOST` if set, otherwise this machine's name from `tailscale status --json`, otherwise `mbp.tail0fff0.ts.net`. Any `*.tail0fff0.ts.net` host is allowed.
+
+### Ports per worktree
+
+Each git worktree gets a **slot** so several checkouts can run `pnpm dev` at once: the main checkout is slot 0 and keeps the base port, and every other worktree adds its slot to it. Slots are handed out on first use and remembered in `.git/markmiro-astro-worktree-slots.json`, which every worktree shares ([`scripts/worktree-ports.mjs`](scripts/worktree-ports.mjs)); entries for deleted worktrees are pruned. `pnpm ports` prints the plan for the current worktree.
+
+| Worktree        | Port     |
+| --------------- | -------- |
+| Main checkout   | 8791     |
+| Worktree slot N | 8791 + N |
+
+`PORT=1234 pnpm dev` overrides it. The server fails instead of picking another port if it's taken, so the printed URL is always the real one.
 
 ## Testing
 
