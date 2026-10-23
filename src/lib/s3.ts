@@ -9,8 +9,11 @@ const s3Client = new S3Client({
   // }
 });
 
+export const bucketUrl = "https://markmiro-website-content.s3.us-west-1.amazonaws.com";
+
 export function s3File(filePath: string) {
-  return `https://markmiro-website-content.s3.us-west-1.amazonaws.com/${filePath}`;
+  // Dev serves /s3/ from the local mirror; see astro.config.mjs.
+  return `${import.meta.env?.DEV ? "/s3" : bucketUrl}/${filePath}`;
 }
 
 export async function listFileNames(path: string) {

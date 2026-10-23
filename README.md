@@ -20,6 +20,8 @@ bun run dev
 
 The dev server listens on all interfaces and prints a `Tailscale: http://<host>:<port>` line on startup, so you can open it from other devices on your tailnet. The host is `TAILSCALE_HOST` if set, otherwise this machine's name from `tailscale status --json`, otherwise `mbp.tail0fff0.ts.net`. Any `*.tail0fff0.ts.net` host is allowed.
 
+In dev, S3 images and videos load from the local bucket copy in `../s3` (see [S3 Files](#s3-files)), so new files show up before they're uploaded. Files missing locally load from the bucket. `dev`, `s3-down`, and `s3-up` use the `markmiro-s3` profile and prompt you to sign in when the AWS session has expired.
+
 ### Ports per worktree
 
 Each git worktree gets a **slot** so several checkouts can run `pnpm dev` at once: the main checkout is slot 0 and keeps the base port, and every other worktree adds its slot to it. Slots are handed out on first use and remembered in `.git/markmiro-astro-worktree-slots.json`, which every worktree shares ([`scripts/worktree-ports.mjs`](scripts/worktree-ports.mjs)); entries for deleted worktrees are pruned. `pnpm ports` prints the plan for the current worktree.

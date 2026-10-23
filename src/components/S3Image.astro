@@ -1,10 +1,102 @@
 ---
+import { imageSizeFromFile } from "image-size/fromFile";
 import { s3File } from "@/lib/s3";
 export interface Props {
   src: string;
+  alt?: string;
+  // Extend past the text column, up to the image's natural width or 72rem,
+  // and no taller than 85% of the viewport.
+  breakout?: boolean;
+  // Open in a pinch-to-zoom lightbox when tapped.
+  zoomable?: boolean;
 }
 
-const { src } = Astro.props;
+const { src, alt, breakout = false, zoomable = false } = Astro.props;
+const url = s3File(src);
+// Reads from the local bucket mirror (`bun run s3-down`), like the project galleries.
+const size =
+  breakout || zoomable ? await imageSizeFromFile("../s3/" + src) : null;
+const Wrapper = zoomable ? "a" : "div";
+const linkProps = zoomable && size && {
+  href: url,
+  "data-pswp-width": size.width,
+  "data-pswp-height": size.height,
+  target: "_blank",
+  rel: "noreferrer",
+};
+// Children become the caption, e.g. a source credit.
+const hasCaption = Astro.slots.has("default");
+// Plain images stay bare so existing posts keep their spacing.
+const Figure = size || hasCaption ? "figure" : Fragment;
 ---
 
-<img src={s3File(src)} />
+<Figure>
+  {
+    size ? (
+      <Wrapper
+        {...linkProps}
+        class:list={[
+          "not-prose block",
+          breakout &&
+            "relative left-1/2 w-[min(100vw,var(--natural-width))] -translate-x-1/2 sm:w-[min(100vw_-_4rem,var(--natural-width),72rem,85vh_*_var(--aspect))]",
+          zoomable && "cursor-zoom-in",
+        ]}
+        style={`--natural-width: ${size.width}px; --aspect: ${size.width / size.height}`}
+      >
+        <img
+          src={url}
+          alt={alt}
+          width={size.width}
+          height={size.height}
+          class="h-auto w-full"
+        />
+      </Wrapper>
+    ) : (
+      <img src={url} alt={alt} />
+    )
+  }
+  {
+    hasCaption && (
+      <figcaption>
+        <slot />
+      </figcaption>
+    )
+  }
+</Figure>
+
+<script>
+  const items = document.querySelectorAll("a[data-pswp-width]");
+  if (items.length) {
+    const [{ default: PhotoSwipeLightbox }] = await Promise.all([
+      // @ts-ignore-next-line
+      import("photoswipe/lightbox"),
+      import("photoswipe/style.css"),
+    ]);
+    type Size = { x: number; y: number };
+    type ZoomLevel = {
+      fit: number;
+      panAreaSize: Size | null;
+      elementSize: Size | null;
+    };
+    // PhotoSwipe's "fit" never enlarges past the natural size, so on desktop an
+    // image that already fits inline would open at the same size with no zoom.
+    const fitScreen = ({ fit, panAreaSize, elementSize }: ZoomLevel) =>
+      panAreaSize && elementSize
+        ? Math.min(
+            panAreaSize.x / elementSize.x,
+            panAreaSize.y / elementSize.y,
+          )
+        : fit;
+    // One gallery per page, so you can swipe between zoomable images in a post.
+    new PhotoSwipeLightbox({
+      gallery: "article",
+      children: "a[data-pswp-width]",
+      bgOpacity: 1,
+      initialZoomLevel: fitScreen,
+      // Click, double-tap, or the zoom button: at least the natural size.
+      secondaryZoomLevel: (z: ZoomLevel) => Math.max(1, fitScreen(z) * 2),
+      maxZoomLevel: 4,
+      pswpModule: () => import("photoswipe"),
+    }).init();
+  }
+</script>

@@ -1,4 +1,6 @@
 import { execFileSync } from "node:child_process";
+import { createReadStream, statSync } from "node:fs";
+import path from "node:path";
 import { defineConfig } from "astro/config";
 
 import react from "@astrojs/react";
@@ -6,6 +8,7 @@ import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 import tailwindcss from "@tailwindcss/vite";
 import { worktreePorts } from "./scripts/worktree-ports.mjs";
+import { bucketUrl } from "./src/lib/s3.ts";
 
 const FALLBACK_TAILSCALE_HOST = "mbp.tail0fff0.ts.net";
 const TAILSCALE_CLIS = [
@@ -50,13 +53,45 @@ const tailscaleUrl = {
   },
 };
 
+const mirror = path.resolve("../s3");
+const contentTypes = {
+  ".gif": "image/gif",
+  ".jpeg": "image/jpeg",
+  ".jpg": "image/jpeg",
+  ".mov": "video/quicktime",
+  ".mp4": "video/mp4",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".webm": "video/webm",
+};
+
+// In dev, `s3File` points at /s3/, served from the local bucket mirror
+// (`bun run s3-down`) so new files show up before they're uploaded. Anything
+// missing locally redirects to the bucket.
+const localS3 = {
+  name: "local-s3",
+  configureServer(server) {
+    server.middlewares.use("/s3", (req, res) => {
+      const key = decodeURIComponent(new URL(req.url, "http://x").pathname).slice(1);
+      const file = path.join(mirror, key);
+      const isFile = file.startsWith(mirror + path.sep) && statSync(file, { throwIfNoEntry: false })?.isFile();
+      if (!isFile) {
+        res.writeHead(302, { Location: `${bucketUrl}/${key}` }).end();
+        return;
+      }
+      res.setHeader("Content-Type", contentTypes[path.extname(file).toLowerCase()] ?? "application/octet-stream");
+      createReadStream(file).pipe(res);
+    });
+  },
+};
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), mdx(), icon(), tailscaleUrl],
   // Fail loudly instead of shifting to another port, so the printed URL is real.
   server: { port: PORT, strictPort: true },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), localS3],
     server: {
       strictPort: true,
       allowedHosts: [

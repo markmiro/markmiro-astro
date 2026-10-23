@@ -6,8 +6,8 @@
     "node": "24.x"
   },
   "scripts": {
-    "dev": "astro dev --host",
-    "start": "astro dev --host",
+    "dev": "sh scripts/with-aws.sh astro dev --host",
+    "start": "sh scripts/with-aws.sh astro dev --host",
     "build": "astro check && astro build",
     "preview": "astro preview --port 3000 --host",
     "test": "playwright test",
@@ -18,8 +18,8 @@
     "format": "prettier --write --plugin-search-dir=. .",
     "tsc": "tsc",
     "//sync": "Make sure access keys are set up correctly: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html",
-    "s3-down": "aws s3 sync s3://markmiro-website-content ../s3",
-    "s3-up": "aws s3 sync ../s3 s3://markmiro-website-content",
+    "s3-down": "sh scripts/with-aws.sh aws s3 sync s3://markmiro-website-content ../s3",
+    "s3-up": "sh scripts/with-aws.sh aws s3 sync ../s3 s3://markmiro-website-content",
     "deploy:preview": "bun run s3-up && vercel build && vercel deploy --prebuilt",
     "deploy": "bun run s3-up && vercel build --prod && vercel deploy --prebuilt --prod"
   },
