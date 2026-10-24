@@ -87,6 +87,7 @@ const localS3 = {
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://www.markmiro.com",
   integrations: [react(), mdx(), icon(), tailscaleUrl],
   // Fail loudly instead of shifting to another port, so the printed URL is real.
   server: { port: PORT, strictPort: true },

@@ -1,0 +1,36 @@
+---
+import ItemLayout from "@/layouts/ItemLayout.astro";
+// Not linked anywhere. Visit it once in each of Mark's browsers.
+---
+
+<ItemLayout title="This browser" description="Exclude your own visits">
+  <p class="js-me-status">Checking…</p>
+  <button
+    type="button"
+    class="js-me-toggle rounded-md bg-gray-900 px-3 py-1.5 text-sm text-white dark:bg-gray-100 dark:text-gray-900"
+  >
+    …
+  </button>
+</ItemLayout>
+
+<script>
+  import { isMe, setMe } from "@/lib/visitor";
+
+  const status = document.querySelector(".js-me-status")!;
+  const button = document.querySelector(".js-me-toggle")!;
+
+  function render() {
+    status.textContent = isMe()
+      ? "This browser is marked as yours. Its views aren't counted and analytics skip it."
+      : "This browser counts as a regular visitor.";
+    button.textContent = isMe() ? "Count my visits again" : "Don't count this browser";
+  }
+
+  // Visiting the page is enough to opt out.
+  setMe(true);
+  render();
+  button.addEventListener("click", () => {
+    setMe(!isMe());
+    render();
+  });
+</script>

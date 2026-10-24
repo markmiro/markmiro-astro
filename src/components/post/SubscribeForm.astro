@@ -1,0 +1,35 @@
+---
+// A plain form that posts to Convex, so it works without JavaScript. Convex
+// redirects back to /subscribe with a status.
+---
+
+<form
+  action={`${import.meta.env.PUBLIC_CONVEX_SITE_URL}/subscribe`}
+  method="post"
+  class="flex flex-wrap gap-2"
+>
+  <label for="subscribe-email" class="sr-only">Email</label>
+  <input
+    id="subscribe-email"
+    type="email"
+    name="email"
+    required
+    autocomplete="email"
+    placeholder="you@example.com"
+    class="min-w-0 flex-1 rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm focus:border-gray-500 focus:outline-none dark:border-gray-700 dark:bg-gray-950 dark:focus:border-gray-400"
+  />
+  {/* Honeypot: hidden from people, filled in by bots. */}
+  <input
+    type="text"
+    name="website"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+    class="absolute -left-[9999px]"
+  />
+  <button
+    class="rounded-md bg-gray-900 px-3 py-1.5 text-sm text-white transition-opacity hover:opacity-80 dark:bg-gray-100 dark:text-gray-900"
+  >
+    Subscribe
+  </button>
+</form>

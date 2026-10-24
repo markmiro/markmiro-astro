@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import PostPagination from "@/components/PostPagination.astro";
+import PostFooter from "@/components/post/PostFooter.astro";
 import ItemLayout from "./ItemLayout.astro";
 
 export interface Props {
@@ -17,5 +18,8 @@ const { title, description, image } = post.data;
   image={image || ""}
 >
   <slot />
-  <PostPagination slot="end" id={post.id} />
+  <Fragment slot="end">
+    <PostFooter slug={post.id} title={title} />
+    <PostPagination id={post.id} />
+  </Fragment>
 </ItemLayout>

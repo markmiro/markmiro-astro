@@ -40,3 +40,20 @@ test("a post page shows its title", async ({ page }) => {
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText(title);
 });
+
+test("RSS feed lists every post on /posts", async ({ page, request }) => {
+  await page.goto("/posts");
+  const hrefs = await page
+    .locator('a[href^="/posts/"]')
+    .evaluateAll((links) => links.map((link) => link.getAttribute("href")!));
+
+  const response = await request.get("/rss.xml");
+  expect(response.status()).toBe(200);
+  expect(response.headers()["content-type"]).toContain("xml");
+  const xml = await response.text();
+
+  expect(xml.match(/<item>/g)).toHaveLength(hrefs.length);
+  for (const href of hrefs) {
+    expect.soft(xml).toContain(`<link>https://www.markmiro.com${href}</link>`);
+  }
+});

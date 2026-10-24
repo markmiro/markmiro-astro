@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Analytics from "@vercel/analytics/astro";
 import { s3File } from "@/lib/s3";
 ---
 
@@ -9,6 +10,12 @@ import { s3File } from "@/lib/s3";
   rel="icon"
   type="image/svg+xml"
   href={s3File("figma-export/favicon.svg")}
+/>
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="Mark Miro"
+  href={new URL("rss.xml", Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
 <meta name="color-scheme" content="light dark" />
@@ -24,3 +31,10 @@ import { s3File } from "@/lib/s3";
     document.documentElement.classList.toggle("dark", dark);
   })();
 </script>
+<script is:inline>
+  // Visiting /me marks a browser as Mark's, so analytics skip it.
+  window.webAnalyticsBeforeSend = function (event) {
+    return localStorage.getItem("mm:me") === "1" ? null : event;
+  };
+</script>
+<Analytics />

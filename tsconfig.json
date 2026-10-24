@@ -8,6 +8,7 @@
       "@/lib/*": ["src/lib/*"],
       "@/layouts/*": ["src/layouts/*"],
       "@/components/*": ["src/components/*"],
+      "@/convex/*": ["convex/*"],
       "*": ["src/types/global.d.ts"]
     }
   }
