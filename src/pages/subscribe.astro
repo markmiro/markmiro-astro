@@ -1,0 +1,36 @@
+---
+import ItemLayout from "@/layouts/ItemLayout.astro";
+import SubscribeForm from "@/components/post/SubscribeForm.astro";
+
+// Convex redirects here with ?status=… after each step.
+const messages = {
+  "check-email": "Check your inbox for a confirmation link.",
+  confirmed: "You're subscribed. New posts will arrive by email.",
+  unsubscribed: "You're unsubscribed. You won't get any more emails.",
+  invalid: "That email address doesn't look right. Try again.",
+  "invalid-link": "That link didn't work. It may be old; try subscribing again.",
+};
+---
+
+<ItemLayout title="Subscribe" description="Get new posts by email">
+  {
+    Object.entries(messages).map(([status, message]) => (
+      <p data-status={status} class="hidden font-medium" role="status">
+        {message}
+      </p>
+    ))
+  }
+  <SubscribeForm />
+  <p>
+    Prefer a feed reader? Use the <a href="/rss.xml">RSS feed</a>.
+  </p>
+</ItemLayout>
+
+<script>
+  const status = new URLSearchParams(location.search).get("status");
+  if (status) {
+    document
+      .querySelector(`[data-status="${CSS.escape(status)}"]`)
+      ?.classList.remove("hidden");
+  }
+</script>

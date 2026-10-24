@@ -1,0 +1,33 @@
+---
+import Comments from "./Comments";
+import PostStats from "./PostStats";
+import SubscribeForm from "./SubscribeForm.astro";
+
+export interface Props {
+  slug: string;
+  title: string;
+}
+
+const { slug, title } = Astro.props;
+---
+
+<div class="bg-gray-50 dark:bg-gray-900/60" data-post-slug={slug}>
+  <div class="mx-auto flex max-w-[65ch] flex-col gap-12 px-8 pb-16 pt-8">
+    <PostStats client:visible slug={slug} />
+    <div>
+      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+        Get new posts by email, or follow the <a href="/rss.xml" class="underline">RSS feed</a>.
+      </p>
+      <SubscribeForm />
+    </div>
+    <Comments client:visible slug={slug} postTitle={title} />
+  </div>
+</div>
+
+<script>
+  import { recordView } from "@/lib/visitor";
+
+  const slug = document.querySelector<HTMLElement>("[data-post-slug]")?.dataset
+    .postSlug;
+  if (slug) recordView(slug);
+</script>

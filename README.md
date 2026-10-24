@@ -73,6 +73,40 @@ To upload, run:
 bun run s3-up
 ```
 
+## Views, likes, comments, and subscriptions
+
+These run on [Convex](https://dashboard.convex.dev/t/mark-miro/markmiro-site). The pages stay static; React islands at the bottom of each post talk to Convex from the browser.
+
+- **Views**: each post sends one beacon per browser per day to Convex's `/view` endpoint. Headless browsers (including the Playwright tests) are skipped.
+- **Your own visits**: open `/me` once in each of your browsers. Those browsers aren't counted as views, and Vercel Analytics skips them.
+- **Likes**: one per browser, remembered with a random ID in localStorage.
+- **Comments**: sign-in is through [Clerk](https://dashboard.clerk.com). New comments are scored by [Jev](https://typesafe.ai) and then approved, published behind "Show comment" (sarcastic or negative), held for review, or rejected. The thresholds are in `convex/moderation.ts`. Try them with `npx convex run moderation:check '{"body": "…"}'`. To change a comment's status, edit it in the Convex dashboard.
+- **Daily digest**: a cron in `convex/crons.ts` emails the last day's comments to `DIGEST_TO` at 15:00 UTC. Days without comments send nothing.
+- **Subscribe**: the form posts straight to Convex, so it works without JavaScript. Subscribers confirm by email. After publishing a post, email it to them with `npx convex run --prod subscribers:sendPost '{"slug": "…", "title": "…"}'`.
+
+### Local setup
+
+```sh
+npx convex dev # Pushes functions on save and writes .env.local
+```
+
+The site reads `PUBLIC_CONVEX_URL`, `PUBLIC_CONVEX_SITE_URL`, and `PUBLIC_CLERK_PUBLISHABLE_KEY`; see [.env.example](.env.example).
+
+Convex functions read their own environment variables, set with `npx convex env set` (add `--prod` for production):
+
+| Variable | Value |
+| --- | --- |
+| `JEV_API_KEY` | TypeSafe API key |
+| `CLERK_JWT_ISSUER_DOMAIN` | Clerk Frontend API URL, e.g. `https://fluent-rattler-9105.clerk.accounts.dev` |
+| `SITE_URL` | Your dev server URL for dev (see `pnpm ports`), `https://www.markmiro.com` for prod |
+| `DIGEST_TO` | Where the daily comment digest goes |
+| `RESEND_API_KEY` | Resend API key. Until it's set, emails are skipped with a warning |
+| `EMAIL_FROM` | `Mark Miro <posts@updates.markmiro.com>` (`updates.markmiro.com` is the domain verified in Resend) |
+
+### Production
+
+`bun run deploy` runs `npx convex deploy` before building. Production builds read `.env.production`, which takes precedence over `.env.local`; put the production Convex URLs and Clerk key there.
+
 ## Deploying
 
 Refresh the local bucket copy first. `deploy` uploads `../s3` before building, so a stale copy would overwrite newer files in the bucket.
