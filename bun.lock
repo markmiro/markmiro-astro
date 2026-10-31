@@ -744,7 +744,7 @@
 
     "http-cache-semantics": ["http-cache-semantics@4.2.0", "", {}, "sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ=="],
 
-    "huet": ["huet@github:markmiro/huet#b01b0c2", { "dependencies": { "@types/chroma-js": "^3.1.3", "chroma-js": "^2.6.0" }, "bin": { "huet": "./dist/check.mjs" } }, "markmiro-huet-b01b0c2", "sha512-OOJo/uykNaBBDovYmGzzW5Phc1zFkAuLY7jTkY3+a8R87/IVjTnCa/s9y7ttkCpmt4+gl/MzghCM446wVz1c+g=="],
+    "huet": ["huet@github:markmiro/huet#14eb7ad", { "dependencies": { "@types/chroma-js": "^3.1.3", "chroma-js": "^2.6.0" }, "bin": { "huet": "./dist/check.mjs" } }, "markmiro-huet-14eb7ad", "sha512-HcyqAmrWjsAhskzYpak10d8u3977NdgSJhsofREOAPNq0LYLg2oha3zBIbQ/ZwPMedqQsJhIJmdF5D8Nw7Jlfw=="],
 
     "huet-react": ["huet-react@github:markmiro/huet#49e9460", { "dependencies": { "@radix-ui/react-popover": "^1.3.1", "@tabler/icons-react": "^3.50.0", "chroma-js": "^2.6.0", "file-saver": "^2.0.5", "lodash-es": "^4.18.1" }, "peerDependencies": { "huet": "^1.0.0-alpha.1", "react": ">=18.0.0", "react-dom": ">=18.0.0" } }, "markmiro-huet-49e9460", "sha512-2tJpabiKRMw9ZMbcXvgQHfpUL+OkpTKTw9kzuIi0oj1qgIFjtofHzcpEzMLZI1nd9PeI4YLRGcsZgjsFK60z7Q=="],
 
