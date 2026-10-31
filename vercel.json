@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/proxy/s3/:path*",
+      "destination": "https://markmiro-website-content.s3.us-west-1.amazonaws.com/:path*"
+    },
+    {
+      "source": "/proxy/vscodethemes/:path*",
+      "destination": "https://vscodethemes.com/:path*"
+    }
+  ]
+}

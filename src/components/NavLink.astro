@@ -12,11 +12,10 @@ const isActive = isExact
 
 <a
   href={href}
-  class={`group block py-1 px-1 md:py-1 ${isActive && 'cursor-default'}`}
+  aria-current={isActive ? "page" : undefined}
+  class={`flex h-8 items-center px-2 transition-colors sm:px-3 ${
+    isActive ? "cursor-default bg-c100 text-c0" : "hover:bg-c8"
+  }`}
 >
-  <div class=`px-2.5 py-0.5 transition-colors rounded-full ${
-    isActive ? "bg-black text-white group-hover:bg-black dark:bg-white dark:text-black dark:group-hover:bg-white" : "bg-transparent group-hover:bg-black/5 dark:group-hover:bg-white/10"
-  }`>
-    <slot />
-  </div>
+  <slot />
 </a>

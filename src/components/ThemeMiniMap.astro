@@ -1,0 +1,13 @@
+---
+// huet-react's theme mini map: the preset's hues as dots, highest contrast on
+// the left, over a pill of its neutral ramp in the same direction. The colors
+// are variables from /huet.css, so it shows whichever preset applies here.
+const dots = ["bg-(--dot-1)", "bg-(--dot-2)", "bg-(--dot-3)", "bg-(--dot-4)", "bg-(--dot-5)"];
+---
+
+<span aria-hidden="true" class="flex shrink-0 flex-col gap-[.25em]">
+  <span class="flex gap-[.25em]">
+    {dots.map((dot) => <span class={`size-[.625em] rounded-full ${dot}`} />)}
+  </span>
+  <span class="h-[.375em] rounded-full bg-(image:--neutral-pill)" />
+</span>

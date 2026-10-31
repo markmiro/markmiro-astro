@@ -65,7 +65,7 @@ export function Nav2a() {
         Contact
       </a>
       <div
-        className="mm-hover bg-black opacity-5 transition-opacity rounded-full pointer-events-none"
+        className="mm-hover bg-c100 opacity-5 transition-opacity rounded-full pointer-events-none"
         style={{
           transitionDuration: "150ms",
           transitionTimingFunction: "ease-in-out",

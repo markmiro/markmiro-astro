@@ -2,6 +2,9 @@
 import "../styles/global.css";
 import Analytics from "@vercel/analytics/astro";
 import { s3File } from "@/lib/s3";
+import { DEFAULT_PRESET, presets } from "@/lib/palette";
+
+const presetIds = presets.map((preset) => preset.id);
 ---
 
 <meta charset="UTF-8" />
@@ -29,6 +32,33 @@ import { s3File } from "@/lib/s3";
       (stored !== "light" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
     document.documentElement.classList.toggle("dark", dark);
+  })();
+</script>
+<link rel="stylesheet" href="/huet.css" />
+<script is:inline define:vars={{ presetIds, DEFAULT_PRESET }}>
+  // The color preset picked in PresetPicker.astro, also before first paint.
+  // A custom theme from the configurator brings its own CSS (customTheme.ts).
+  // Any preset but the default recolors images, which stay hidden until
+  // they're ready (see recolorImages.ts).
+  (function () {
+    var root = document.documentElement;
+    var preset = localStorage.getItem("huet-preset");
+    var custom = null;
+    if (preset === "custom") {
+      try {
+        custom = JSON.parse(localStorage.getItem("huet-custom"));
+      } catch (error) {}
+    }
+    if (custom && typeof custom.css === "string") {
+      var style = document.createElement("style");
+      style.id = "huet-custom";
+      style.textContent = custom.css;
+      document.head.append(style);
+    } else if (!presetIds.includes(preset)) {
+      preset = DEFAULT_PRESET;
+    }
+    root.dataset.huet = preset;
+    if (preset !== DEFAULT_PRESET) root.setAttribute("data-recolor-pending", "");
   })();
 </script>
 <script is:inline>

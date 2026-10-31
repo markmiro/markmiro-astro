@@ -1,0 +1,200 @@
+---
+import { Icon } from "astro-icon/components";
+import { CUSTOM_PRESET } from "@/lib/customTheme";
+import { DEFAULT_PRESET, presets } from "@/lib/palette";
+import ThemeMiniMap from "./ThemeMiniMap.astro";
+
+// Styled after huet-react's EmbeddedThemeConfigurator, squared off to match
+// the nav, and attached under the bar's top-right corner. Each option carries
+// its own `data-huet`, so it renders in that preset's colors as a preview.
+// The custom theme, made in the configurator, is listed once there is one.
+const options = [{ id: CUSTOM_PRESET, name: "Custom" }, ...presets];
+
+// Ramps for recoloring images. The default preset leaves them alone.
+const palettes = Object.fromEntries(
+  presets
+    .filter(({ id }) => id !== DEFAULT_PRESET)
+    .map(({ id, palette }) => [id, palette]),
+);
+const names = Object.fromEntries(options.map(({ id, name }) => [id, name]));
+---
+
+<button
+  type="button"
+  popovertarget="preset-picker"
+  class="js-preset-picker-button group flex h-8 items-center gap-1.5 px-2 text-[13px] sm:px-3 transition-colors hover:bg-c8 aria-expanded:bg-c8"
+  aria-label="Theme"
+  title="Theme"
+>
+  <ThemeMiniMap />
+  <Icon
+    name="tabler:chevron-down"
+    class="size-3 shrink-0 transition-transform duration-150 group-aria-expanded:rotate-180"
+    aria-hidden="true"
+  />
+</button>
+
+<div
+  id="preset-picker"
+  popover
+  role="menu"
+  aria-label="Themes"
+  class="m-0 inset-auto flex max-h-[min(28em,calc(100dvh-5rem))] w-64 flex-col border border-c100 bg-c0 font-mono text-[11px] tracking-wider text-c100 uppercase shadow-[0_6px_24px_color-mix(in_srgb,var(--c100)_16%,transparent)] not-open:hidden"
+>
+  <div class="flex items-baseline justify-between px-3 pt-2 pb-1.5">
+    <span class="font-semibold">Themes</span>
+    <a class="text-c60 hover:text-c100" href="/projects/huet">by Huet</a>
+  </div>
+  <div class="flex flex-col gap-px overflow-y-auto overscroll-contain px-1.5 pb-1.5">
+    {
+      options.map(({ id, name }) => (
+        <button
+          type="button"
+          role="menuitemradio"
+          aria-checked="false"
+          data-preset={id}
+          data-huet={id}
+          hidden={id === CUSTOM_PRESET}
+          class="js-preset group flex w-full items-center gap-3 border border-transparent bg-c0 px-2.5 py-2 text-left text-c100 hover:border-c45 aria-checked:border-c100"
+        >
+          <ThemeMiniMap />
+          <span class="grow">{name}</span>
+          <Icon
+            name="tabler:check"
+            class="size-3.5 shrink-0 invisible group-aria-checked:visible"
+            aria-hidden="true"
+          />
+        </button>
+      ))
+    }
+  </div>
+  <button
+    type="button"
+    class="js-configurator-toggle flex items-center gap-2 border-t border-c12 px-3 py-2.5 text-left uppercase transition-colors hover:bg-c8"
+  >
+    <Icon name="tabler:adjustments-horizontal" class="size-3.5 shrink-0" aria-hidden="true" />
+    <span class="js-configurator-label">Open theme configurator</span>
+  </button>
+</div>
+
+<script
+  type="application/json"
+  id="preset-palettes"
+  set:html={JSON.stringify({ palettes, names, defaultPreset: DEFAULT_PRESET })}
+/>
+
+<script>
+  import type { Palette } from "huet/images";
+  import { CUSTOM_PRESET, readCustomTheme } from "@/lib/customTheme";
+
+  const root = document.documentElement;
+  const picker = document.getElementById("preset-picker")!;
+  const button = document.querySelector<HTMLElement>(".js-preset-picker-button")!;
+  const options = [...picker.querySelectorAll<HTMLElement>(".js-preset")];
+  const customOption = options.find((option) => option.dataset.preset === CUSTOM_PRESET)!;
+
+  const { palettes, names, defaultPreset }: {
+    palettes: Record<string, Palette>;
+    names: Record<string, string>;
+    defaultPreset: string;
+  } = JSON.parse(document.getElementById("preset-palettes")!.textContent!);
+
+  function paletteOf(id: string) {
+    return id === CUSTOM_PRESET ? readCustomTheme()?.palette : palettes[id];
+  }
+
+  // Loaded on demand, so visitors on the default preset never download it.
+  let recoloring = false;
+  function recolorImages() {
+    const palette = paletteOf(root.dataset.huet!) ?? null;
+    if (!palette && !recoloring) return;
+    recoloring = true;
+    import("@/lib/recolorImages").then((module) => module.recolorImages(palette));
+  }
+  recolorImages();
+
+  function markSelected() {
+    customOption.hidden = !readCustomTheme();
+    for (const option of options) {
+      const selected = option.dataset.preset === root.dataset.huet;
+      option.setAttribute("aria-checked", String(selected));
+    }
+    const label = `Theme: ${names[root.dataset.huet!]}`;
+    button.setAttribute("aria-label", label);
+    button.title = label;
+  }
+  markSelected();
+
+  function select(preset: string) {
+    root.dataset.huet = preset;
+    // Forget the choice when it's the default, so a new default applies.
+    if (preset === defaultPreset) {
+      localStorage.removeItem("huet-preset");
+    } else {
+      localStorage.setItem("huet-preset", preset);
+    }
+    markSelected();
+    recolorImages();
+  }
+
+  for (const option of options) {
+    option.addEventListener("click", () => select(option.dataset.preset!));
+  }
+  // Themes chosen or edited in the configurator.
+  addEventListener("huet:select", (event) => select((event as CustomEvent<string>).detail));
+
+  // huet-react's configurator, loaded on demand. It stays open across pages
+  // until it's closed.
+  const configuratorLabel = picker.querySelector(".js-configurator-label")!;
+  let closeConfigurator: (() => void) | undefined;
+  async function setConfiguratorOpen(open: boolean) {
+    configuratorLabel.textContent = `${open ? "Close" : "Open"} theme configurator`;
+    if (open) {
+      localStorage.setItem("huet-configurator", "open");
+      if (closeConfigurator) return;
+      const { mountConfigurator } = await import("@/components/ThemeConfigurator");
+      closeConfigurator ??= mountConfigurator();
+    } else {
+      localStorage.removeItem("huet-configurator");
+      closeConfigurator?.();
+      closeConfigurator = undefined;
+    }
+  }
+  if (localStorage.getItem("huet-configurator") === "open") void setConfiguratorOpen(true);
+  picker.querySelector(".js-configurator-toggle")!.addEventListener("click", () => {
+    picker.hidePopover();
+    void setConfiguratorOpen(!closeConfigurator);
+  });
+
+  // Popovers open in the top layer, so place it under the nav by hand, flush
+  // with the button's right edge.
+  picker.addEventListener("beforetoggle", (event) => {
+    const open = (event as ToggleEvent).newState === "open";
+    button.setAttribute("aria-expanded", String(open));
+    if (!open) return;
+    const rect = button.getBoundingClientRect();
+    const width = picker.offsetWidth || 256;
+    const left = rect.right - width;
+    // Over the nav's bottom border, so the two borders meet.
+    picker.style.top = `${rect.bottom}px`;
+    picker.style.left = `${Math.max(0, Math.min(left, root.clientWidth - width))}px`;
+  });
+
+  // Show the current preset, which may be below the fold of the list.
+  picker.addEventListener("toggle", (event) => {
+    if ((event as ToggleEvent).newState !== "open") return;
+    // Not scrollIntoView, which can scroll the page and close the picker.
+    const selected = options.find((option) => option.ariaChecked === "true");
+    const list = selected?.parentElement;
+    if (!selected || !list) return;
+    list.scrollTop =
+      selected.offsetTop - list.offsetTop - (list.clientHeight - selected.offsetHeight) / 2;
+  });
+
+  // It's fixed in place, so don't leave it floating once the button scrolls.
+  addEventListener(
+    "scroll",
+    () => picker.matches(":popover-open") && picker.hidePopover(),
+    { passive: true },
+  );
+</script>

@@ -33,6 +33,14 @@ Each git worktree gets a **slot** so several checkouts can run `pnpm dev` at onc
 
 `PORT=1234 pnpm dev` overrides it. The server fails instead of picking another port if it's taken, so the printed URL is always the real one.
 
+## Colors
+
+Colors come from [huet](https://github.com/markmiro/huet), installed from its prebuilt `dist` branch (`github:markmiro/huet#dist`). The lockfiles pin a commit; `bun update huet` and `pnpm update huet` pull the latest build.
+
+Instead of Tailwind's palette, use contrast steps against the page background: `text-c60`, `border-c12`, `bg-c4`. They work in light and dark mode, so there's no need for `dark:` variants. Signal colors are `text-red`, `bg-blue-fill text-on-blue`, `bg-yellow-soft`, and so on. See [`src/lib/palette.ts`](src/lib/palette.ts).
+
+Each of huet's theme presets is computed in both modes at build time into `/huet.css`. The theme picker in the nav switches presets. The default, Base, matches the colors images are assumed to be in. Every other preset also recolors images in the browser, halfway toward the preset, with huet's image recoloring (`huet/images`, [`src/lib/recolorImages.ts`](src/lib/recolorImages.ts)). Hovering an image shows the original. The picker can also open huet-react's theme configurator ([`src/components/ThemeConfigurator.tsx`](src/components/ThemeConfigurator.tsx)), loaded only when opened; an edited theme becomes the picker's Custom theme, saved in localStorage ([`src/lib/customTheme.ts`](src/lib/customTheme.ts)). On page load, images wait hidden until their recolored version is ready, so the original colors don't flash. The browser can only read pixels from the site's own origin, so images from the S3 bucket and other hosts without CORS are fetched through same-origin proxies: rewrites in [`vercel.json`](vercel.json) and a dev middleware in `astro.config.mjs`, both listed in [`src/lib/imageProxies.ts`](src/lib/imageProxies.ts). Images on other hosts aren't recolored.
+
 ## Testing
 
 End-to-end tests use [Playwright](https://playwright.dev) and live in `tests/`. They start their own dev server on port 4322, so they won't conflict with `bun run dev`.

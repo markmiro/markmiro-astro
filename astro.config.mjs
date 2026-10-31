@@ -9,6 +9,7 @@ import icon from "astro-icon";
 import tailwindcss from "@tailwindcss/vite";
 import { worktreePorts } from "./scripts/worktree-ports.mjs";
 import { bucketUrl } from "./src/lib/s3.ts";
+import { imageProxies } from "./src/lib/imageProxies.ts";
 
 const FALLBACK_TAILSCALE_HOST = "mbp.tail0fff0.ts.net";
 const TAILSCALE_CLIS = [
@@ -85,6 +86,22 @@ const localS3 = {
   },
 };
 
+// In dev, stands in for vercel.json's image proxy rewrites.
+const imageProxy = {
+  name: "image-proxy",
+  configureServer(server) {
+    for (const [prefix, origin] of Object.entries(imageProxies)) {
+      server.middlewares.use(prefix, async (req, res) => {
+        const upstream = await fetch(origin + req.url);
+        res.writeHead(upstream.status, {
+          "Content-Type": upstream.headers.get("content-type") ?? "application/octet-stream",
+        });
+        res.end(Buffer.from(await upstream.arrayBuffer()));
+      });
+    }
+  },
+};
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.markmiro.com",
@@ -92,7 +109,7 @@ export default defineConfig({
   // Fail loudly instead of shifting to another port, so the printed URL is real.
   server: { port: PORT, strictPort: true },
   vite: {
-    plugins: [tailwindcss(), localS3],
+    plugins: [tailwindcss(), localS3, imageProxy],
     server: {
       strictPort: true,
       allowedHosts: [
