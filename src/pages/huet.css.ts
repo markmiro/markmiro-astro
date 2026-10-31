@@ -7,7 +7,7 @@ import { presetsCss } from "@/lib/palette";
 // animation rather than a transition, so images keep their own transitions.
 // The fade matches on the attribute alone: once recolored, an image's src is
 // a blob URL, and hovering swaps the original back in. See recolorImages.ts.
-const pendingImages = `html[data-recolor-pending] :is(${readableImages}):not([data-recolored]) {
+const pendingImages = `html[data-recolor-pending] ${readableImages}:not([data-recolored]) {
   visibility: hidden;
 }
 

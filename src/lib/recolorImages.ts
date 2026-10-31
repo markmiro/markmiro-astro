@@ -1,5 +1,5 @@
 import { recolorImage, type Palette } from "huet/images";
-import { imageProxies } from "./imageProxies";
+import { imageProxies, unrecolored } from "./imageProxies";
 
 /*
   Recolors the page's images into a huet preset, client side. huet reads each
@@ -74,7 +74,9 @@ new MutationObserver((records) => {
 
 function imagesIn(root: Element) {
   const images = root.matches("img") ? [root] : root.querySelectorAll("img");
-  return ([...images] as HTMLImageElement[]).filter((img) => readableUrl(img.src));
+  return ([...images] as HTMLImageElement[]).filter(
+    (img) => readableUrl(img.src) && !img.closest(unrecolored),
+  );
 }
 
 async function loadPixels(src: string) {
@@ -95,6 +97,8 @@ async function recolor(img: HTMLImageElement, at: number) {
   if (!original) {
     original = { src: img.currentSrc || img.src, srcset: img.getAttribute("srcset") };
     originals.set(img, original);
+    // For code that wants the original, like the lightbox's placeholder.
+    img.dataset.originalSrc = original.src;
     showOriginalOnHover(img, original);
   }
   original.pixels ??= loadPixels(original.src);

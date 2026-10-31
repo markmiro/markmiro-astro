@@ -10,8 +10,11 @@ export const imageProxies: Record<string, string> = {
   "/proxy/vscodethemes": "https://vscodethemes.com",
 };
 
+/** Where images keep their original colors: PhotoSwipe's lightbox (Gallery.tsx). */
+export const unrecolored = ".pswp";
+
 /** CSS for the images recolorImages can read: same-origin and proxied ones. */
-export const readableImages = [
+export const readableImages = `:is(${[
   'img[src^="/"]:not([src^="//"])',
   ...Object.values(imageProxies).map((origin) => `img[src^="${origin}/"]`),
-].join(", ");
+].join(", ")}):not(${unrecolored} img)`;
