@@ -20,25 +20,9 @@ const image =
 ---
 
 <ItemLayout title={title} description={description} image={image}>
-  <!-- hovering image should highlight the primary project link  -->
-  <script>
-    document
-      .getElementsByClassName("js-project-image-link")[0]
-      .addEventListener("mouseenter", () => {
-        document
-          .getElementsByClassName("js-primary-link")[0]
-          .classList.add("bg-blue-fill", "text-on-blue");
-      });
-    document
-      .getElementsByClassName("js-project-image-link")[0]
-      .addEventListener("mouseleave", () => {
-        document
-          .getElementsByClassName("js-primary-link")[0]
-          .classList.remove("bg-blue-fill", "text-on-blue");
-      });
-  </script>
-  <div class="not-prose">
-    <a class="js-project-image-link" href={frontmatter.primaryLink}>
+  <!-- Hovering the image highlights the primary link like hovering it does. -->
+  <div class="not-prose group/project">
+    <a class="project-image-link" href={frontmatter.primaryLink}>
       <ProjectImage slug={slug} src={frontmatter.image} />
     </a>
     <div class="flex flex-wrap items-center gap-3 text-sm mt-2 text-c60">
@@ -47,7 +31,7 @@ const image =
           <a
             href={frontmatter.primaryLink}
             target="_blank"
-            class="js-primary-link w-full sm:w-auto text-center shadow-md bg-c100 text-c0 hover:bg-blue-fill hover:text-on-blue rounded-lg px-4 py-2 text-lg transition-colors"
+            class="w-full sm:w-auto text-center shadow-md bg-c100 text-c0 hover:bg-blue-fill hover:text-on-blue group-has-[.project-image-link:hover]/project:bg-blue-fill group-has-[.project-image-link:hover]/project:text-on-blue rounded-lg px-4 py-2 text-lg transition-colors"
           >
             {frontmatter.primaryLinkText} ↗
           </a>
