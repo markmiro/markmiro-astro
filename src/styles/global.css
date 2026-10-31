@@ -94,8 +94,9 @@
   --tw-prose-kbd: var(--c100);
   --tw-prose-kbd-shadows: color-mix(in srgb, var(--c100) 10%, transparent);
   --tw-prose-code: var(--c100);
-  --tw-prose-pre-code: var(--c12);
-  --tw-prose-pre-bg: var(--c90);
+  /* The code block colors huet's Shiki theme uses (palette.ts). */
+  --tw-prose-pre-code: var(--huet-foreground);
+  --tw-prose-pre-bg: var(--huet-background);
   --tw-prose-th-borders: var(--c20);
   --tw-prose-td-borders: var(--c12);
 }
