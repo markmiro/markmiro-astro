@@ -38,7 +38,7 @@ type Stats = { views: number; likes: number; liked: boolean };
 function Row({ stats, onLike }: { stats?: Stats; onLike?: () => void }) {
   return (
     <div
-      className={`flex h-6 items-center justify-center gap-2 text-xs text-gray-400 transition-opacity dark:text-gray-500 ${stats ? "opacity-100" : "opacity-0"}`}
+      className={`flex h-6 items-center justify-center gap-2 text-xs text-c45 transition-opacity ${stats ? "opacity-100" : "opacity-0"}`}
     >
       <span>
         {stats?.views ?? 0} {stats?.views === 1 ? "view" : "views"}
@@ -50,7 +50,7 @@ function Row({ stats, onLike }: { stats?: Stats; onLike?: () => void }) {
         disabled={!stats}
         aria-pressed={stats?.liked ?? false}
         aria-label={stats?.liked ? "Unlike this post" : "Like this post"}
-        className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 transition-colors hover:bg-black/5 dark:hover:bg-white/10 ${stats?.liked ? "text-rose-500" : ""}`}
+        className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 transition-colors hover:bg-c8 ${stats?.liked ? "text-red" : ""}`}
       >
         <svg
           viewBox="0 0 24 24"

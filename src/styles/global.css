@@ -4,41 +4,98 @@
 /* Dark mode is driven by the `dark` class on <html>, set in Head.astro. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+  Colors come from huet (src/lib/palette.ts), not Tailwind's palette. `c{n}` is
+  n% contrast from the page background, so one class works in light and dark
+  mode: `text-c60` replaces `text-gray-500 dark:text-gray-400`. The values are
+  CSS variables set per preset in /huet.css.
+*/
+@theme inline {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentcolor;
+
+  --color-c0: var(--c0);
+  --color-c4: var(--c4);
+  --color-c8: var(--c8);
+  --color-c12: var(--c12);
+  --color-c20: var(--c20);
+  --color-c30: var(--c30);
+  --color-c45: var(--c45);
+  --color-c60: var(--c60);
+  --color-c75: var(--c75);
+  --color-c90: var(--c90);
+  --color-c100: var(--c100);
+
+  --color-red: var(--red);
+  --color-red-fill: var(--red-fill);
+  --color-on-red: var(--on-red);
+  --color-red-soft: var(--red-soft);
+  --color-yellow: var(--yellow);
+  --color-yellow-fill: var(--yellow-fill);
+  --color-on-yellow: var(--on-yellow);
+  --color-yellow-soft: var(--yellow-soft);
+  --color-green: var(--green);
+  --color-green-fill: var(--green-fill);
+  --color-on-green: var(--on-green);
+  --color-green-soft: var(--green-soft);
+  --color-blue: var(--blue);
+  --color-blue-fill: var(--blue-fill);
+  --color-on-blue: var(--on-blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-purple: var(--purple);
+  --color-purple-fill: var(--purple-fill);
+  --color-on-purple: var(--on-purple);
+  --color-purple-soft: var(--purple-soft);
+
+  /* The ends of the preset's neutral ramp, in either mode. */
+  --color-black: var(--black);
+  --color-white: var(--white);
+}
+
 @theme {
   --grid-template-columns-auto-1fr: auto 1fr;
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-*/
 @layer base {
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-
-  .dark *,
-  .dark ::after,
-  .dark ::before,
-  .dark ::backdrop,
-  .dark ::file-selector-button {
-    border-color: var(--color-gray-800, currentcolor);
+    border-color: var(--c12, currentcolor);
   }
 
   html {
     color-scheme: light;
-    @apply bg-white text-gray-900;
+    @apply bg-c0 text-c90;
+    /* astro-embed tweet fallback border */
+    --tc-border-color: var(--c20);
   }
 
   html.dark {
     color-scheme: dark;
-    @apply bg-gray-950 text-gray-100;
-    /* astro-embed tweet fallback border */
-    --tc-border-color: var(--color-gray-700);
   }
+}
+
+/* Unlayered so it beats the typography plugin's own colors. */
+.prose {
+  --tw-prose-body: var(--c75);
+  --tw-prose-headings: var(--c100);
+  --tw-prose-lead: var(--c60);
+  --tw-prose-links: var(--c100);
+  --tw-prose-bold: var(--c100);
+  --tw-prose-counters: var(--c60);
+  --tw-prose-bullets: var(--c30);
+  --tw-prose-hr: var(--c12);
+  --tw-prose-quotes: var(--c100);
+  --tw-prose-quote-borders: var(--c12);
+  --tw-prose-captions: var(--c60);
+  --tw-prose-kbd: var(--c100);
+  --tw-prose-kbd-shadows: color-mix(in srgb, var(--c100) 10%, transparent);
+  --tw-prose-code: var(--c100);
+  --tw-prose-pre-code: var(--c12);
+  --tw-prose-pre-bg: var(--c90);
+  --tw-prose-th-borders: var(--c20);
+  --tw-prose-td-borders: var(--c12);
 }

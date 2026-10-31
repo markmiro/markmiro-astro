@@ -1,4 +1,5 @@
 import { S3Client, ListObjectsV2Command } from "@aws-sdk/client-s3";
+import { bucketUrl } from "./bucket";
 
 const s3Client = new S3Client({
   region: "us-west-1",
@@ -9,7 +10,7 @@ const s3Client = new S3Client({
   // }
 });
 
-export const bucketUrl = "https://markmiro-website-content.s3.us-west-1.amazonaws.com";
+export { bucketUrl };
 
 export function s3File(filePath: string) {
   // Dev serves /s3/ from the local mirror; see astro.config.mjs.

@@ -1,26 +1,24 @@
 ---
 import NavLink from "./NavLink.astro";
+import PresetPicker from "./PresetPicker.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 ---
 
-<nav class="flex items-center pt-3">
-  <div class="border-b border-gray-200 dark:border-gray-800 grow" />
-  <ul class="flex flex-wrap justify-center items-center border rounded-full">
-    <li class="font-bold">
-      <NavLink href="/" isExact>Mark Miro</NavLink>
-    </li>
-    <li>
-      <NavLink href="/projects">Projects</NavLink>
-    </li>
-    <li>
-      <NavLink href="/posts">Posts</NavLink>
-    </li>
-    <li>
-      <NavLink href="/about">About</NavLink>
-    </li>
-    <li class="px-1">
-      <ThemeToggle />
-    </li>
+<!--
+  A full-width bar in small monospace caps: the site's pages on the left,
+  theme controls in the top right.
+-->
+<nav
+  class="flex flex-wrap border-b border-c12 font-mono text-[11px] tracking-wider uppercase"
+>
+  <ul class="flex">
+    <li class="font-bold"><NavLink href="/" isExact>Mark Miro</NavLink></li>
+    <li><NavLink href="/projects">Projects</NavLink></li>
+    <li><NavLink href="/posts">Posts</NavLink></li>
+    <li><NavLink href="/about">About</NavLink></li>
   </ul>
-  <div class="border-b border-gray-200 dark:border-gray-800 grow" />
+  <div class="ml-auto flex">
+    <PresetPicker />
+    <ThemeToggle />
+  </div>
 </nav>

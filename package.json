@@ -39,6 +39,8 @@
     "astro-icon": "^1.2.0",
     "convex": "^1.48.0",
     "date-fns": "4.4.0",
+    "huet": "github:markmiro/huet#dist",
+    "huet-react": "github:markmiro/huet#dist-react",
     "lodash": "4.18.1",
     "photoswipe": "^5.4.4",
     "react": "^19.3.0",

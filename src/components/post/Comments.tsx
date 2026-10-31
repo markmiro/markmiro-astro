@@ -35,7 +35,7 @@ function Section({ count, children }: { count?: number; children?: ReactNode }) 
         Comments
         {!!count && " "}
         {!!count && (
-          <span className="ml-2 font-normal text-gray-400 dark:text-gray-500">
+          <span className="ml-2 font-normal text-c45">
             {count}
           </span>
         )}
@@ -54,7 +54,7 @@ function LiveComments({ slug, postTitle }: Props) {
   return (
     <Section count={published?.length}>
       {comments && comments.length === 0 && (
-        <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">
+        <p className="mb-6 text-sm text-c60">
           No comments yet.
         </p>
       )}
@@ -93,13 +93,13 @@ function Comment({ comment }: { comment: CommentData }) {
       <div className="min-w-0 flex-1">
         <div className="text-sm">
           <span className="font-medium">{comment.authorName}</span>{" "}
-          <span className="text-gray-400 dark:text-gray-500">
+          <span className="text-c45">
             {formatDistanceToNow(comment._creationTime, { addSuffix: true })}
           </span>
         </div>
         {comment.status === "collapsed" ? (
           <details>
-            <summary className="mt-1 cursor-pointer text-sm text-gray-500 dark:text-gray-400">
+            <summary className="mt-1 cursor-pointer text-sm text-c60">
               Hidden because it may be sarcastic or negative. Show comment
             </summary>
             {body}
@@ -108,11 +108,11 @@ function Comment({ comment }: { comment: CommentData }) {
           body
         )}
         {comment.isOwn && (
-          <div className="mt-1 flex gap-3 text-xs text-gray-400 dark:text-gray-500">
+          <div className="mt-1 flex gap-3 text-xs text-c45">
             {ownStatus && <span>{ownStatus}</span>}
             <button
               type="button"
-              className="underline hover:text-gray-600 dark:hover:text-gray-300"
+              className="underline hover:text-c75"
               onClick={() => {
                 if (confirm("Delete your comment?")) {
                   remove({ commentId: comment._id });
@@ -137,7 +137,7 @@ function Avatar({ name, image }: { name: string; image?: string }) {
   return (
     <div
       aria-hidden="true"
-      className="grid size-8 shrink-0 place-items-center rounded-full bg-gray-200 text-sm text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+      className="grid size-8 shrink-0 place-items-center rounded-full bg-c12 text-sm text-c75"
     >
       {name.charAt(0).toUpperCase()}
     </div>
@@ -145,10 +145,10 @@ function Avatar({ name, image }: { name: string; image?: string }) {
 }
 
 const buttonClass =
-  "rounded-md bg-gray-900 px-3 py-1.5 text-sm text-white transition-opacity hover:opacity-80 disabled:opacity-50 dark:bg-gray-100 dark:text-gray-900";
+  "rounded-md bg-c90 px-3 py-1.5 text-sm text-c0 transition-opacity hover:opacity-80 disabled:opacity-50";
 
 const outlineButtonClass =
-  "rounded-md border border-gray-300 px-3 py-1.5 text-sm transition-colors hover:bg-black/5 dark:border-gray-700 dark:hover:bg-white/10";
+  "rounded-md border border-c20 px-3 py-1.5 text-sm transition-colors hover:bg-c8";
 
 function CommentForm({ slug, postTitle }: Props) {
   const { isLoading, isAuthenticated } = useConvexAuth();
@@ -169,7 +169,7 @@ function CommentForm({ slug, postTitle }: Props) {
           Sign in to comment
         </button>
         {isSignedIn && (
-          <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-2 text-xs text-c60">
             You're signed in, but comments couldn't verify your account.{" "}
             <button type="button" className="underline" onClick={() => clerk.signOut()}>
               Sign out
@@ -214,10 +214,10 @@ function CommentForm({ slug, postTitle }: Props) {
         maxLength={2000}
         rows={3}
         placeholder="Add a comment"
-        className="block w-full rounded-md border border-gray-300 bg-white p-2 text-sm focus:border-gray-500 focus:outline-none dark:border-gray-700 dark:bg-gray-950 dark:focus:border-gray-400"
+        className="block w-full rounded-md border border-c20 bg-c0 p-2 text-sm focus:border-c60 focus:outline-none"
       />
       <div className="flex items-center justify-between gap-4">
-        <span className="text-xs text-gray-400 dark:text-gray-500">
+        <span className="text-xs text-c45">
           Commenting as {user?.fullName ?? user?.username ?? "you"} ·{" "}
           <button type="button" className="underline" onClick={() => clerk.signOut()}>
             Sign out
@@ -227,7 +227,7 @@ function CommentForm({ slug, postTitle }: Props) {
           {sending ? "Posting…" : "Post"}
         </button>
       </div>
-      {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red">{error}</p>}
     </form>
   );
 }

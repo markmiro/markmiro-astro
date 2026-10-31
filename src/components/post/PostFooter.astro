@@ -11,11 +11,11 @@ export interface Props {
 const { slug, title } = Astro.props;
 ---
 
-<div class="bg-gray-50 dark:bg-gray-900/60" data-post-slug={slug}>
+<div class="bg-c4" data-post-slug={slug}>
   <div class="mx-auto flex max-w-[65ch] flex-col gap-12 px-8 pb-16 pt-8">
     <PostStats client:visible slug={slug} />
     <div>
-      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+      <p class="mb-2 text-sm text-c60">
         Get new posts by email, or follow the <a href="/rss.xml" class="underline">RSS feed</a>.
       </p>
       <SubscribeForm />
