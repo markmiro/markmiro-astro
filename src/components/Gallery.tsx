@@ -2,6 +2,7 @@ import { useEffect } from "react";
 // @ts-ignore-next-line
 import PhotoSwipeLightbox from "photoswipe/lightbox";
 import "photoswipe/style.css";
+import { openFromOriginals } from "@/lib/lightbox";
 
 export type Img = {
   smallURL: string;
@@ -17,6 +18,7 @@ export default function Gallery(props: { images: Img[]; galleryID: string }) {
       children: "a",
       pswpModule: () => import("photoswipe"),
     });
+    openFromOriginals(lightbox);
     lightbox.init();
 
     return () => {

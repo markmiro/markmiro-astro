@@ -65,6 +65,8 @@ const Figure = size || hasCaption ? "figure" : Fragment;
 </Figure>
 
 <script>
+  import { openFromOriginals } from "@/lib/lightbox";
+
   const items = document.querySelectorAll("a[data-pswp-width]");
   if (items.length) {
     const [{ default: PhotoSwipeLightbox }] = await Promise.all([
@@ -88,7 +90,7 @@ const Figure = size || hasCaption ? "figure" : Fragment;
           )
         : fit;
     // One gallery per page, so you can swipe between zoomable images in a post.
-    new PhotoSwipeLightbox({
+    const lightbox = new PhotoSwipeLightbox({
       gallery: "article",
       children: "a[data-pswp-width]",
       bgOpacity: 1,
@@ -97,6 +99,8 @@ const Figure = size || hasCaption ? "figure" : Fragment;
       secondaryZoomLevel: (z: ZoomLevel) => Math.max(1, fitScreen(z) * 2),
       maxZoomLevel: 4,
       pswpModule: () => import("photoswipe"),
-    }).init();
+    });
+    openFromOriginals(lightbox);
+    lightbox.init();
   }
 </script>
