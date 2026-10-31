@@ -52,10 +52,10 @@ importers:
         version: 4.4.0
       huet:
         specifier: github:markmiro/huet#dist
-        version: https://codeload.github.com/markmiro/huet/tar.gz/b01b0c2c1e6071125c00e0a368a5136f8b36b4b9
+        version: https://codeload.github.com/markmiro/huet/tar.gz/14eb7ad4250bc579e66390ae577506718e428175
       huet-react:
         specifier: github:markmiro/huet#dist-react
-        version: https://codeload.github.com/markmiro/huet/tar.gz/49e9460d5dbb98936a44d485f9560253e5941732(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(huet@https://codeload.github.com/markmiro/huet/tar.gz/b01b0c2c1e6071125c00e0a368a5136f8b36b4b9)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+        version: https://codeload.github.com/markmiro/huet/tar.gz/49e9460d5dbb98936a44d485f9560253e5941732(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(huet@https://codeload.github.com/markmiro/huet/tar.gz/14eb7ad4250bc579e66390ae577506718e428175)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       lodash:
         specifier: 4.18.1
         version: 4.18.1
@@ -2135,8 +2135,8 @@ packages:
       react: '>=18.0.0'
       react-dom: '>=18.0.0'
 
-  huet@https://codeload.github.com/markmiro/huet/tar.gz/b01b0c2c1e6071125c00e0a368a5136f8b36b4b9:
-    resolution: {gitHosted: true, integrity: sha512-K4Xel9aAWLhaXYuYV3tHtJ/2Qtxr/TtLSg4AGNMqxQAmuUZnFlPxPOUiz6JupijGPoJDVL4uMuiDrF41v1z0aA==, tarball: https://codeload.github.com/markmiro/huet/tar.gz/b01b0c2c1e6071125c00e0a368a5136f8b36b4b9}
+  huet@https://codeload.github.com/markmiro/huet/tar.gz/14eb7ad4250bc579e66390ae577506718e428175:
+    resolution: {gitHosted: true, integrity: sha512-yeVvzrzvnWcwbT3gKmDFvPbprmTQ7R9OxAlSrA9nBeC5Q3zzvQWAt8yzrIMMe9j4OxsI0jkGxwX3Y19xUkcZ4g==, tarball: https://codeload.github.com/markmiro/huet/tar.gz/14eb7ad4250bc579e66390ae577506718e428175}
     version: 1.0.0-alpha.1
     hasBin: true
 
@@ -5026,13 +5026,13 @@ snapshots:
 
   http-cache-semantics@4.2.0: {}
 
-  huet-react@https://codeload.github.com/markmiro/huet/tar.gz/49e9460d5dbb98936a44d485f9560253e5941732(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(huet@https://codeload.github.com/markmiro/huet/tar.gz/b01b0c2c1e6071125c00e0a368a5136f8b36b4b9)(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
+  huet-react@https://codeload.github.com/markmiro/huet/tar.gz/49e9460d5dbb98936a44d485f9560253e5941732(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(huet@https://codeload.github.com/markmiro/huet/tar.gz/14eb7ad4250bc579e66390ae577506718e428175)(react-dom@19.3.0(react@19.3.0))(react@19.3.0):
     dependencies:
       '@radix-ui/react-popover': 1.3.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@tabler/icons-react': 3.50.0(react@19.3.0)
       chroma-js: 2.6.0
       file-saver: 2.0.5
-      huet: https://codeload.github.com/markmiro/huet/tar.gz/b01b0c2c1e6071125c00e0a368a5136f8b36b4b9
+      huet: https://codeload.github.com/markmiro/huet/tar.gz/14eb7ad4250bc579e66390ae577506718e428175
       lodash-es: 4.18.1
       react: 19.3.0
       react-dom: 19.3.0(react@19.3.0)
@@ -5040,7 +5040,7 @@ snapshots:
       - '@types/react'
       - '@types/react-dom'
 
-  huet@https://codeload.github.com/markmiro/huet/tar.gz/b01b0c2c1e6071125c00e0a368a5136f8b36b4b9:
+  huet@https://codeload.github.com/markmiro/huet/tar.gz/14eb7ad4250bc579e66390ae577506718e428175:
     dependencies:
       '@types/chroma-js': 3.1.3
       chroma-js: 2.6.0

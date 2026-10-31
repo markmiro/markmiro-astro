@@ -1,5 +1,4 @@
 import {
-  contrastRatio,
   createTheme,
   hues,
   themeVariables,
@@ -114,15 +113,16 @@ const PILL_CONTRASTS = [100, 87.5, 75, 62.5, 50, 37.5, 25, 12.5, 0];
 
 /**
  * huet-react's theme mini map (ThemeMiniMap.tsx), for the preset picker: each
- * hue at full contrast as a dot, highest contrast first (`--dot-1` to
- * `--dot-5`), over a pill of the neutral ramp in the same direction.
+ * hue at full contrast as a dot, furthest from the background's lightness
+ * first (`--dot-1` to `--dot-5`), over a pill of the neutral ramp in the same
+ * direction.
  */
 function miniMapVars(theme: ReturnType<typeof createTheme>) {
   const bg = theme.relative;
   const dots = hues
-    .map((hue) => bg.contrast(100, bg.theme.ramps[hue]).hex)
-    .map((color) => ({ color, ratio: contrastRatio(theme.background, color) }))
-    .sort((a, b) => b.ratio - a.ratio);
+    .map((hue) => bg.contrast(100, bg.theme.ramps[hue]))
+    .map(({ hex, lab }) => ({ color: hex, distance: Math.abs(lab[0] - bg.lab[0]) }))
+    .sort((a, b) => b.distance - a.distance);
   const vars: Record<string, string> = {};
   dots.forEach(({ color }, i) => (vars[`--dot-${i + 1}`] = color));
   const stops = PILL_CONTRASTS.map((amount) => bg.contrast(amount).hex);
