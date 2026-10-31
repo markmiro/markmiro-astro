@@ -90,19 +90,19 @@ export function presetVars(palette: PresetPalette, dark: boolean) {
   // The ends of the neutral ramp, whichever mode is on. Shadows use black.
   vars["--black"] = theme.dark;
   vars["--white"] = theme.light;
-  Object.assign(vars, miniMapVars(theme), codeBlockVars(theme, dark));
+  Object.assign(vars, miniMapVars(theme), codeBlockVars(theme));
   return vars;
 }
 
 /**
  * The `--huet-*` variables huet's Shiki theme colors code with (see
  * astro.config.mjs), solved for readable contrast against the code block.
- * Blocks stay dark in both modes: the far end of the ramp on a light page,
- * a step up from the background on a dark one. This is what huet's
- * mountTheme would set on a `huet-bg-<amount>` block, computed ahead of time.
+ * Blocks follow the mode, a step off the page background: light on a light
+ * page, dark on a dark one. This is what huet's mountTheme would set on a
+ * `huet-bg-5` block, its default for code, computed ahead of time.
  */
-function codeBlockVars(theme: ReturnType<typeof createTheme>, dark: boolean) {
-  const block = theme.relative.contrast(dark ? 8 : 90);
+function codeBlockVars(theme: ReturnType<typeof createTheme>) {
+  const block = theme.relative.contrast(5);
   return {
     ...themeVariables(theme.tokens(block.hex, theme.background)),
     "--huet-foreground": block.contrast(100).hex,
