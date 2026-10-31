@@ -175,16 +175,18 @@ const names = Object.fromEntries(options.map(({ id, name }) => [id, name]));
 
   // Popovers open in the top layer, so place it under the nav by hand, flush
   // with the button's right edge.
-  picker.addEventListener("beforetoggle", (event) => {
-    const open = (event as ToggleEvent).newState === "open";
-    button.setAttribute("aria-expanded", String(open));
-    if (!open) return;
+  function place() {
     const rect = button.getBoundingClientRect();
     const width = picker.offsetWidth || 256;
     const left = rect.right - width;
     // Over the nav's bottom border, so the two borders meet.
     picker.style.top = `${rect.bottom}px`;
     picker.style.left = `${Math.max(0, Math.min(left, root.clientWidth - width))}px`;
+  }
+  picker.addEventListener("beforetoggle", (event) => {
+    const open = (event as ToggleEvent).newState === "open";
+    button.setAttribute("aria-expanded", String(open));
+    if (open) place();
   });
 
   // Show the current preset, which may be below the fold of the list.
@@ -198,10 +200,15 @@ const names = Object.fromEntries(options.map(({ id, name }) => [id, name]));
       selected.offsetTop - list.offsetTop - (list.clientHeight - selected.offsetHeight) / 2;
   });
 
-  // It's fixed in place, so don't leave it floating once the button scrolls.
+  // Follow the button when the page scrolls. On desktop the nav is sticky so
+  // it stays put; elsewhere, close it once the button scrolls away.
   addEventListener(
     "scroll",
-    () => picker.matches(":popover-open") && picker.hidePopover(),
+    () => {
+      if (!picker.matches(":popover-open")) return;
+      if (button.getBoundingClientRect().bottom <= 0) picker.hidePopover();
+      else place();
+    },
     { passive: true },
   );
 </script>
