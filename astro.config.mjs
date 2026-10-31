@@ -7,6 +7,7 @@ import react from "@astrojs/react";
 import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 import tailwindcss from "@tailwindcss/vite";
+import { huetShikiTheme } from "huet";
 import { worktreePorts } from "./scripts/worktree-ports.mjs";
 import { bucketUrl } from "./src/lib/s3.ts";
 import { imageProxies } from "./src/lib/imageProxies.ts";
@@ -106,6 +107,8 @@ const imageProxy = {
 export default defineConfig({
   site: "https://www.markmiro.com",
   integrations: [react(), mdx(), icon(), tailscaleUrl],
+  // Token colors are huet variables, set per theme in /huet.css (palette.ts).
+  markdown: { shikiConfig: { theme: huetShikiTheme() } },
   // Fail loudly instead of shifting to another port, so the printed URL is real.
   server: { port: PORT, strictPort: true },
   vite: {
