@@ -144,26 +144,33 @@ const names = Object.fromEntries(options.map(({ id, name }) => [id, name]));
   addEventListener("huet:select", (event) => select((event as CustomEvent<string>).detail));
 
   // huet-react's configurator, loaded on demand. It stays open across pages
-  // until it's closed.
+  // until it's closed. `isOpen` is what was asked for, which can differ from
+  // what's mounted while the module loads.
   const configuratorLabel = picker.querySelector(".js-configurator-label")!;
-  let closeConfigurator: (() => void) | undefined;
+  let isOpen = false;
+  let unmountConfigurator: (() => void) | undefined;
   async function setConfiguratorOpen(open: boolean) {
+    isOpen = open;
     configuratorLabel.textContent = `${open ? "Close" : "Open"} theme configurator`;
-    if (open) {
-      localStorage.setItem("huet-configurator", "open");
-      if (closeConfigurator) return;
-      const { mountConfigurator } = await import("@/components/ThemeConfigurator");
-      closeConfigurator ??= mountConfigurator();
-    } else {
+    if (!open) {
       localStorage.removeItem("huet-configurator");
-      closeConfigurator?.();
-      closeConfigurator = undefined;
+      unmountConfigurator?.();
+      unmountConfigurator = undefined;
+      return;
+    }
+    localStorage.setItem("huet-configurator", "open");
+    try {
+      const { mountConfigurator } = await import("@/components/ThemeConfigurator");
+      if (isOpen && !unmountConfigurator) unmountConfigurator = mountConfigurator();
+    } catch (error) {
+      void setConfiguratorOpen(false);
+      throw error;
     }
   }
   if (localStorage.getItem("huet-configurator") === "open") void setConfiguratorOpen(true);
   picker.querySelector(".js-configurator-toggle")!.addEventListener("click", () => {
     picker.hidePopover();
-    void setConfiguratorOpen(!closeConfigurator);
+    void setConfiguratorOpen(!isOpen);
   });
 
   // Popovers open in the top layer, so place it under the nav by hand, flush

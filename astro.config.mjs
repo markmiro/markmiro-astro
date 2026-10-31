@@ -106,13 +106,24 @@ const imageProxy = {
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.markmiro.com",
-  integrations: [react(), mdx(), icon(), tailscaleUrl],
+  integrations: [
+    // The theme configurator is loaded on demand, not as an island, so pages
+    // without islands lack React's fast refresh preamble; it would throw in
+    // dev. Vite compiles its JSX instead (tsconfig's react-jsx).
+    react({ exclude: [/src\/components\/ThemeConfigurator\.tsx$/] }),
+    mdx(),
+    icon(),
+    tailscaleUrl,
+  ],
   // Token colors are huet variables, set per theme in /huet.css (palette.ts).
   markdown: { shikiConfig: { theme: huetShikiTheme() } },
   // Fail loudly instead of shifting to another port, so the printed URL is real.
   server: { port: PORT, strictPort: true },
   vite: {
     plugins: [tailwindcss(), localS3, imageProxy],
+    // Bundled up front in dev, so opening the configurator doesn't make Vite
+    // re-optimize and invalidate the page's modules.
+    optimizeDeps: { include: ["huet-react", "react-dom/client", "lodash/isEqual"] },
     server: {
       strictPort: true,
       allowedHosts: [
