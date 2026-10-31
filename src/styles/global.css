@@ -69,6 +69,8 @@
   html {
     color-scheme: light;
     @apply bg-c0 text-c90;
+    /* Anchor links land below the sticky nav (Nav.astro). */
+    @apply md:scroll-pt-12;
     /* astro-embed tweet fallback border */
     --tc-border-color: var(--c20);
   }

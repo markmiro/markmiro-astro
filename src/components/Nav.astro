@@ -6,10 +6,10 @@ import ThemeToggle from "./ThemeToggle.astro";
 
 <!--
   A full-width bar in small monospace caps: the site's pages on the left,
-  theme controls in the top right.
+  theme controls in the top right. It sticks to the top on desktop.
 -->
 <nav
-  class="flex flex-wrap border-b border-c12 font-mono text-[11px] tracking-wider uppercase"
+  class="flex flex-wrap border-b border-c12 bg-c0 font-mono text-[11px] tracking-wider uppercase md:sticky md:top-0 md:z-40"
 >
   <ul class="flex">
     <li class="font-bold"><NavLink href="/" isExact>Mark Miro</NavLink></li>
