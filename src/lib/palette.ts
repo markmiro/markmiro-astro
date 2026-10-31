@@ -7,6 +7,7 @@ import {
 } from "huet";
 import { themeConfigs, type ThemeConfig } from "huet/config";
 import type { Palette } from "huet/images";
+import { codeColors } from "./codeColors";
 
 /*
   The site's colors come from huet (github:markmiro/huet#dist): each one is a
@@ -95,16 +96,23 @@ export function presetVars(palette: PresetPalette, dark: boolean) {
 
 /**
  * The `--huet-*` variables huet's Shiki theme colors code with (see
- * astro.config.mjs), solved for readable contrast against the code block.
+ * astro.config.mjs), solved for readable contrast against the code block,
+ * with more colorful syntax colors (codeColors.ts).
  * Blocks follow the mode, a step off the page background: light on a light
  * page, dark on a dark one. This is what huet's mountTheme would set on a
  * `huet-bg-5` block, its default for code, computed ahead of time.
  */
 function codeBlockVars(theme: ReturnType<typeof createTheme>) {
   const block = theme.relative.contrast(5);
+  const tokens = theme.tokens(block.hex, theme.background);
+  const vivid = Object.fromEntries(
+    hues.map((hue) => [hue, block.contrast(100, block.theme.ramps[hue]).hex]),
+  ) as Record<Hue, string>;
+  const colors = codeColors(block.hex, tokens, vivid);
   return {
-    ...themeVariables(theme.tokens(block.hex, theme.background)),
+    ...themeVariables(tokens),
     "--huet-foreground": block.contrast(100).hex,
+    ...Object.fromEntries(hues.map((hue) => [`--huet-${hue}`, colors[hue]])),
   };
 }
 
