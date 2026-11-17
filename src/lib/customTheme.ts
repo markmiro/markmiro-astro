@@ -1,8 +1,7 @@
-import type { ThemeConfig } from "huet/config";
-import type { PresetPalette } from "./palette";
+import { checkTheme, type Theme } from "huet";
 
 /*
-  A theme made in huet-react's configurator (ThemeConfigurator.tsx). It's
+  A theme made in huet-react's configurator (ThemePicker.tsx). It's
   saved in localStorage with its CSS already computed, so Head.astro can apply
   it before first paint, like a preset from /huet.css. Its `data-huet` id is
   "custom".
@@ -15,8 +14,7 @@ const STYLE_ID = "huet-custom";
 
 export interface CustomTheme {
   name: string;
-  config: ThemeConfig;
-  palette: PresetPalette;
+  theme: Theme;
   /** Its variables for `[data-huet="custom"]`, in both modes. */
   css: string;
 }
@@ -24,10 +22,10 @@ export interface CustomTheme {
 export function readCustomTheme(): CustomTheme | null {
   try {
     const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null");
-    return stored?.config && stored.palette && typeof stored.css === "string"
-      ? stored
-      : null;
+    checkTheme(stored?.theme);
+    return typeof stored.css === "string" ? stored : null;
   } catch {
+    // Missing, or saved by an older huet in another shape.
     return null;
   }
 }

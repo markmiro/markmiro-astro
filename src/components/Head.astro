@@ -36,7 +36,7 @@ const presetIds = presets.map((preset) => preset.id);
 </script>
 <link rel="stylesheet" href="/huet.css" />
 <script is:inline define:vars={{ presetIds, DEFAULT_PRESET }}>
-  // The color preset picked in PresetPicker.astro, also before first paint.
+  // The color preset picked in the nav (PresetPicker.astro), before first paint.
   // A custom theme from the configurator brings its own CSS (customTheme.ts).
   // Any preset but the default recolors images, which stay hidden until
   // they're ready (see recolorImages.ts).
@@ -49,7 +49,7 @@ const presetIds = presets.map((preset) => preset.id);
         custom = JSON.parse(localStorage.getItem("huet-custom"));
       } catch (error) {}
     }
-    if (custom && typeof custom.css === "string") {
+    if (custom && custom.theme && typeof custom.css === "string") {
       var style = document.createElement("style");
       style.id = "huet-custom";
       style.textContent = custom.css;
