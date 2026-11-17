@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
-import { ThemeConfigurator } from "huet-react";
+import { EmbeddedThemeConfigurator } from "huet-react";
 import type { Theme } from "huet";
 import isEqual from "lodash/isEqual";
 import { presetCss, presets } from "@/lib/palette";
 import { CUSTOM_PRESET, readCustomTheme, saveCustomTheme } from "@/lib/customTheme";
 
 /*
-  huet-react's theme configurator, opened from the theme picker. It edits the
-  current theme: choosing a theme in it that matches a preset selects that
-  preset, and anything else becomes the custom theme. PresetPicker.astro
+  huet-react's embedded theme configurator, in the nav like on huet's demo
+  site: a mini map of the current theme that opens a popover with a Themes
+  tab and an Edit Theme tab. Picking a theme that matches a preset selects
+  that preset, and anything else becomes the custom theme. PresetPicker.astro
   applies the choice when it gets a `huet:select` event.
 */
 
@@ -40,11 +40,11 @@ function select(theme: Theme) {
   window.dispatchEvent(new CustomEvent("huet:select", { detail: id }));
 }
 
-function Configurator() {
+export default function ThemePicker() {
   const [theme, setTheme] = useState(currentTheme);
   const [background, setBackground] = useState(currentBackground);
 
-  // Follow themes picked in the nav's picker, and the light/dark switch.
+  // Follow the light/dark switch, and themes changed elsewhere.
   useEffect(() => {
     const observer = new MutationObserver(() => {
       const next = currentTheme();
@@ -56,7 +56,8 @@ function Configurator() {
   }, []);
 
   return (
-    <ThemeConfigurator
+    <EmbeddedThemeConfigurator
+      mode="outlined"
       value={theme}
       onChange={(next) => {
         setTheme(next);
@@ -66,16 +67,4 @@ function Configurator() {
       background={background}
     />
   );
-}
-
-/** Shows the configurator. Returns a function that removes it. */
-export function mountConfigurator() {
-  const container = document.createElement("div");
-  document.body.append(container);
-  const root = createRoot(container);
-  root.render(<Configurator />);
-  return () => {
-    root.unmount();
-    container.remove();
-  };
 }

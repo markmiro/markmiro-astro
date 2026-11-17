@@ -107,10 +107,7 @@ const imageProxy = {
 export default defineConfig({
   site: "https://www.markmiro.com",
   integrations: [
-    // The theme configurator is loaded on demand, not as an island, so pages
-    // without islands lack React's fast refresh preamble; it would throw in
-    // dev. Vite compiles its JSX instead (tsconfig's react-jsx).
-    react({ exclude: [/src\/components\/ThemeConfigurator\.tsx$/] }),
+    react(),
     mdx(),
     icon(),
     tailscaleUrl,
@@ -121,9 +118,9 @@ export default defineConfig({
   server: { port: PORT, strictPort: true },
   vite: {
     plugins: [tailwindcss(), localS3, imageProxy],
-    // Bundled up front in dev, so opening the configurator doesn't make Vite
+    // Bundled up front in dev, so the theme picker doesn't make Vite
     // re-optimize and invalidate the page's modules.
-    optimizeDeps: { include: ["huet-react", "react-dom/client", "lodash/isEqual"] },
+    optimizeDeps: { include: ["huet-react", "lodash/isEqual"] },
     server: {
       strictPort: true,
       allowedHosts: [

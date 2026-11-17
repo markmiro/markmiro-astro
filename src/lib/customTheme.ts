@@ -1,7 +1,7 @@
 import { checkTheme, type Theme } from "huet";
 
 /*
-  A theme made in huet-react's configurator (ThemeConfigurator.tsx). It's
+  A theme made in huet-react's configurator (ThemePicker.tsx). It's
   saved in localStorage with its CSS already computed, so Head.astro can apply
   it before first paint, like a preset from /huet.css. Its `data-huet` id is
   "custom".
