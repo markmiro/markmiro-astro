@@ -8,5 +8,12 @@
       "source": "/proxy/vscodethemes/:path*",
       "destination": "https://vscodethemes.com/:path*"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/Mark-Mironyuk-Resume.pdf",
+      "destination": "/Mark-Mironyuk-Resume-2026-11-17.pdf",
+      "permanent": false
+    }
   ]
 }
