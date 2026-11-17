@@ -49,7 +49,7 @@ const presetIds = presets.map((preset) => preset.id);
         custom = JSON.parse(localStorage.getItem("huet-custom"));
       } catch (error) {}
     }
-    if (custom && typeof custom.css === "string") {
+    if (custom && custom.theme && typeof custom.css === "string") {
       var style = document.createElement("style");
       style.id = "huet-custom";
       style.textContent = custom.css;

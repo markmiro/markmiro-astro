@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ThemeConfigurator } from "huet-react";
-import type { ThemeConfig } from "huet/config";
+import type { Theme } from "huet";
 import isEqual from "lodash/isEqual";
-import { paletteFromConfig, presetCss, presets } from "@/lib/palette";
+import { presetCss, presets } from "@/lib/palette";
 import { CUSTOM_PRESET, readCustomTheme, saveCustomTheme } from "@/lib/customTheme";
 
 /*
@@ -15,49 +15,55 @@ import { CUSTOM_PRESET, readCustomTheme, saveCustomTheme } from "@/lib/customThe
 
 const html = document.documentElement;
 
-function currentConfig(): ThemeConfig {
+// The site's presets, so the configurator lists them with the site's image
+// settings and recognizes them when picked.
+const themes = Object.fromEntries(presets.map(({ name, theme }) => [name, theme]));
+
+function currentTheme(): Theme {
   if (html.dataset.huet === CUSTOM_PRESET) {
     const custom = readCustomTheme();
-    if (custom) return custom.config;
+    if (custom) return custom.theme;
   }
-  return (presets.find(({ id }) => id === html.dataset.huet) ?? presets[0]).config;
+  return (presets.find(({ id }) => id === html.dataset.huet) ?? presets[0]).theme;
 }
 
-function select(config: ThemeConfig) {
-  const preset = presets.find((preset) => isEqual(preset.config, config));
+// Where the page's background sits on the neutral ramp: the site only has
+// light and dark.
+const currentBackground = () => (html.classList.contains("dark") ? 0 : 1);
+
+function select(theme: Theme) {
+  const preset = presets.find((preset) => isEqual(preset.theme, theme));
   if (!preset) {
-    const palette = paletteFromConfig(config);
-    saveCustomTheme({
-      name: config.name || "Custom",
-      config,
-      palette,
-      css: presetCss(CUSTOM_PRESET, palette),
-    });
+    saveCustomTheme({ name: "Custom", theme, css: presetCss(CUSTOM_PRESET, theme) });
   }
   const id = preset?.id ?? CUSTOM_PRESET;
   window.dispatchEvent(new CustomEvent("huet:select", { detail: id }));
 }
 
 function Configurator() {
-  const [config, setConfig] = useState(currentConfig);
+  const [theme, setTheme] = useState(currentTheme);
+  const [background, setBackground] = useState(currentBackground);
 
-  // Follow themes picked in the nav's picker.
+  // Follow themes picked in the nav's picker, and the light/dark switch.
   useEffect(() => {
     const observer = new MutationObserver(() => {
-      const next = currentConfig();
-      setConfig((config) => (isEqual(config, next) ? config : next));
+      const next = currentTheme();
+      setTheme((theme) => (isEqual(theme, next) ? theme : next));
+      setBackground(currentBackground());
     });
-    observer.observe(html, { attributeFilter: ["data-huet"] });
+    observer.observe(html, { attributeFilter: ["data-huet", "class"] });
     return () => observer.disconnect();
   }, []);
 
   return (
     <ThemeConfigurator
-      value={config}
+      value={theme}
       onChange={(next) => {
-        setConfig(next);
+        setTheme(next);
         select(next);
       }}
+      themes={themes}
+      background={background}
     />
   );
 }

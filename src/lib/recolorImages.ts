@@ -1,4 +1,5 @@
-import { recolorImage, type Palette } from "huet/images";
+import type { Theme } from "huet";
+import { recolorImage } from "huet/images";
 import { imageProxies, unrecolored } from "./imageProxies";
 
 /*
@@ -30,9 +31,9 @@ function readableUrl(src: string) {
   return proxy && proxy[0] + url.pathname + url.search;
 }
 
-const LUT_SIZE = 33;
-// Halfway to the preset, with saturated colors keeping their own hue.
-const OPTIONS = { lutSize: LUT_SIZE, strength: 0.5, tint: 0 };
+// How far images go toward the theme is the theme's own `images` setting
+// (palette.ts sets the presets').
+const OPTIONS = { lutSize: 33 };
 // Longest side of a recolored image, in device pixels.
 const MAX_SIZE = 2400;
 
@@ -47,7 +48,7 @@ interface Original {
 }
 
 const originals = new Map<HTMLImageElement, Original>();
-let palette: Palette | null = null;
+let theme: Theme | null = null;
 // Bumped on every preset change so slow images don't apply a stale preset.
 let version = 0;
 
@@ -65,7 +66,7 @@ const visible = new IntersectionObserver(
 
 // Images added later, e.g. by React components.
 new MutationObserver((records) => {
-  if (!palette) return;
+  if (!theme) return;
   for (const record of records)
     for (const node of record.addedNodes)
       if (node instanceof Element)
@@ -110,7 +111,7 @@ async function recolor(img: HTMLImageElement, at: number) {
     img.dataset.recolored = "original";
     return;
   }
-  if (at !== version || !palette) return;
+  if (at !== version || !theme) return;
 
   const { naturalWidth: width, naturalHeight: height } = source;
   const scale = Math.min(1, MAX_SIZE / Math.max(width, height));
@@ -122,8 +123,8 @@ async function recolor(img: HTMLImageElement, at: number) {
           resizeQuality: "high",
         })
       : source;
-  if (at !== version || !palette) return;
-  const canvas = recolorImage(scaled, palette, OPTIONS);
+  if (at !== version || !theme) return;
+  const canvas = recolorImage(scaled, theme, OPTIONS);
   if (scaled instanceof ImageBitmap) scaled.close();
   const blob = await new Promise<Blob | null>((done) => canvas.toBlob(done));
   if (!blob || at !== version) return;
@@ -165,12 +166,12 @@ function restore(img: HTMLImageElement, original: Original) {
   original.recolored = undefined;
 }
 
-/** Recolor every image into `palette`, or put the originals back if it's null. */
-export function recolorImages(next: Palette | null) {
+/** Recolor every image into `next`, or put the originals back if it's null. */
+export function recolorImages(next: Theme | null) {
   version++;
   visible.disconnect();
-  palette = next;
-  if (!palette) {
+  theme = next;
+  if (!theme) {
     // Nothing left to wait for, so show any image still hidden.
     document.documentElement.removeAttribute("data-recolor-pending");
     for (const [img, original] of originals) restore(img, original);

@@ -10,11 +10,9 @@ import ThemeMiniMap from "./ThemeMiniMap.astro";
 // The custom theme, made in the configurator, is listed once there is one.
 const options = [{ id: CUSTOM_PRESET, name: "Custom" }, ...presets];
 
-// Ramps for recoloring images. The default preset leaves them alone.
-const palettes = Object.fromEntries(
-  presets
-    .filter(({ id }) => id !== DEFAULT_PRESET)
-    .map(({ id, palette }) => [id, palette]),
+// Themes for recoloring images. The default preset leaves them alone.
+const themes = Object.fromEntries(
+  presets.filter(({ id }) => id !== DEFAULT_PRESET).map(({ id, theme }) => [id, theme]),
 );
 const names = Object.fromEntries(options.map(({ id, name }) => [id, name]));
 ---
@@ -79,12 +77,12 @@ const names = Object.fromEntries(options.map(({ id, name }) => [id, name]));
 
 <script
   type="application/json"
-  id="preset-palettes"
-  set:html={JSON.stringify({ palettes, names, defaultPreset: DEFAULT_PRESET })}
+  id="preset-themes"
+  set:html={JSON.stringify({ themes, names, defaultPreset: DEFAULT_PRESET })}
 />
 
 <script>
-  import type { Palette } from "huet/images";
+  import type { Theme } from "huet";
   import { CUSTOM_PRESET, readCustomTheme } from "@/lib/customTheme";
 
   const root = document.documentElement;
@@ -93,23 +91,23 @@ const names = Object.fromEntries(options.map(({ id, name }) => [id, name]));
   const options = [...picker.querySelectorAll<HTMLElement>(".js-preset")];
   const customOption = options.find((option) => option.dataset.preset === CUSTOM_PRESET)!;
 
-  const { palettes, names, defaultPreset }: {
-    palettes: Record<string, Palette>;
+  const { themes, names, defaultPreset }: {
+    themes: Record<string, Theme>;
     names: Record<string, string>;
     defaultPreset: string;
-  } = JSON.parse(document.getElementById("preset-palettes")!.textContent!);
+  } = JSON.parse(document.getElementById("preset-themes")!.textContent!);
 
-  function paletteOf(id: string) {
-    return id === CUSTOM_PRESET ? readCustomTheme()?.palette : palettes[id];
+  function themeOf(id: string) {
+    return id === CUSTOM_PRESET ? readCustomTheme()?.theme : themes[id];
   }
 
   // Loaded on demand, so visitors on the default preset never download it.
   let recoloring = false;
   function recolorImages() {
-    const palette = paletteOf(root.dataset.huet!) ?? null;
-    if (!palette && !recoloring) return;
+    const theme = themeOf(root.dataset.huet!) ?? null;
+    if (!theme && !recoloring) return;
     recoloring = true;
-    import("@/lib/recolorImages").then((module) => module.recolorImages(palette));
+    import("@/lib/recolorImages").then((module) => module.recolorImages(theme));
   }
   recolorImages();
 
