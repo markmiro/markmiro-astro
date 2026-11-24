@@ -1,6 +1,5 @@
 export type Experiment = {
   title: string;
-  emoji?: string;
   description?: string;
   date?: string;
   draft?: boolean;
@@ -14,7 +13,6 @@ export const allExperiments: Experiment[] = [
   // {
   //   title: "Runkit GraphQL",
   //   description: "A D3.js graph connection visualizer for RunKit.",
-  //   emoji: "🕸️",
   //   date: "Mar 4, 2019",
   //   source: "https://github.com/markmiro/runkit-graph",
   //   primaryLink: "https://runkit.com/markmiro/5c7dca0db1bae100122ee7a9",
@@ -24,7 +22,6 @@ export const allExperiments: Experiment[] = [
   //   title: "Wrapping Carousel",
   //   description:
   //     "An instructional article on how to create a wrapping carousel.",
-  //   emoji: "🎠",
   //   primaryLink: "https://observablehq.com/@markmiro/wrapping-carousel-math",
   //   primaryLinkText: "View on Observable",
   //   date: "Aug 27, 2018",
@@ -33,7 +30,6 @@ export const allExperiments: Experiment[] = [
     title: "Canvas animation framework (using classes)",
     description:
       "A framework for creating animations with the HTML5 Canvas API.",
-    emoji: "🎨",
     primaryLink:
       "https://codesandbox.io/s/canvas-framework-using-classes-33enk8",
     primaryLinkText: "View on CodeSandbox",
@@ -43,7 +39,6 @@ export const allExperiments: Experiment[] = [
     title: "Nested tree performance playground",
     description:
       "A framework for creating animations with the HTML5 Canvas API.",
-    emoji: "🪆",
     primaryLink:
       "https://codesandbox.io/s/react-tree-reducer-example-redux-60r3p",
     primaryLinkText: "View on CodeSandbox",
@@ -56,14 +51,12 @@ export const allExperiments: Experiment[] = [
   // {
   //   title: "Image zoomer",
   //   description: "Image modal view that shows images in full view.",
-  //   emoji: "🖼️",
   //   primaryLink: "https://jlkx4.csb.app",
   //   primaryLinkText: "View on CodeSandbox",
   // },
   // {
   //   title: "Minesweeper",
   //   description: "A minesweeper game.",
-  //   emoji: "💣",
   //   primaryLink: "https://codepen.io/markmiro/full/YOaoYp",
   //   primaryLinkText: "View on CodeSandbox",
   // },
@@ -71,7 +64,6 @@ export const allExperiments: Experiment[] = [
   //   // TODO: add instruction to tell user to keep mouse over.
   //   title: "Fireworks",
   //   description: "A fireworks animation.",
-  //   emoji: "🎆",
   //   primaryLink: "https://codepen.io/markmiro/full/mwKMvZ",
   //   primaryLinkText: "View on CodePen",
   // },
@@ -79,38 +71,32 @@ export const allExperiments: Experiment[] = [
   //   // TODO: add instruction to move mouse over.
   //   title: "3D Card",
   //   description: "A card with a simulated 3D hover effect.",
-  //   emoji: "🃏",
   //   primaryLink: "https://codepen.io/markmiro/full/wbqMPa",
   //   primaryLinkText: "View on CodePen",
   // },
   // {
   //   title: "Tooltip",
-  //   emoji: "💬",
   //   description: "A tooltip component built with plain CSS and JS.",
   //   primaryLink: "https://codepen.io/markmiro/full/RYLbZx",
   //   primaryLinkText: "View on CodePen",
   // },
   // {
   //   title: "Fixed content inside scrollable window",
-  //   emoji: "📜",
   //   primaryLink: "https://codepen.io/markmiro/full/ZmEbeo",
   //   primaryLinkText: "View on CodePen",
   // },
   {
     title: "React-like library implemented in 70 lines (with example apps)",
-    emoji: "⚛️",
     primaryLink: "https://codesandbox.io/s/987kj26rzw",
     primaryLinkText: "View on CodeSandbox",
   },
   // {
   //   title: "macOS Terminal Window",
-  //   emoji: "🪟",
   //   primaryLink: "https://codepen.io/markmiro/full/zJEvod",
   //   primaryLinkText: "View on CodePen",
   // },
   // {
   //   title: 'Split view',
-  //   emoji: '🎭',
   //   // TODO: codesandbox doesn't load this one
   //   primaryLink: 'https://codesandbox.io/s/7ywkjkqj96',
   //   primaryLinkText: "View on CodeSandbox",

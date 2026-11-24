@@ -9,7 +9,7 @@
         "@astrojs/react": "^7.0.0",
         "@astrojs/rss": "^4.0.19",
         "@clerk/react": "^6.18.0",
-        "@iconify-json/tabler": "^1.2.41",
+        "@iconify-json/simple-icons": "^1.2.103",
         "@tailwindcss/vite": "^4.3.3",
         "@types/react": "^19.3.0",
         "@types/react-dom": "^19.3.0",
@@ -286,7 +286,7 @@
 
     "@floating-ui/utils": ["@floating-ui/utils@0.2.12", "", {}, "sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww=="],
 
-    "@iconify-json/tabler": ["@iconify-json/tabler@1.2.41", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-GHg+H/cnr0anaCoV383JONiOMxZQOdojWYNLgL3x0fRE07YW7c+AHiYmIhXet//oq26T830qitdP7l43ojiCXw=="],
+    "@iconify-json/simple-icons": ["@iconify-json/simple-icons@1.2.103", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-FMn+aVTsqQdYOwf5reCXXtfWapb+4ijI6WrU8ej1spWXWfA+d41TBXcKagHFwiHZyqt7kP7F04AiG1dYj2R06w=="],
 
     "@iconify/tools": ["@iconify/tools@5.0.14", "", { "dependencies": { "@cyberalien/svg-utils": "^1.2.19", "@iconify/types": "^2.0.0", "@iconify/utils": "^3.1.4", "fflate": "^0.8.3", "modern-tar": "^0.8.4", "pathe": "^2.0.3", "svgo": "^4.1.0" } }, "sha512-wJ4ZE3/HZh2iBqLwG+8FOMHe7CMJAJqwSXZSpPwMdj1gZM3Z4t2hbQMVw4Vm45oQ985qn0g89PUIcDEdKTheBA=="],
 

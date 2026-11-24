@@ -1,5 +1,6 @@
 ---
 import ItemLayout from "@/layouts/ItemLayout.astro";
+import { Icon } from "astro-icon/components";
 import { compareFrontmatterDateDesc } from "@/lib/misc";
 import { getCollection } from "astro:content";
 
@@ -15,7 +16,6 @@ const allPosts = await getCollection(
       allPosts.sort(compareFrontmatterDateDesc).map((post) => (
         <li>
           <div>
-            {post.data.emoji && <span class="mr-2">{post.data.emoji}</span>}
             <a href={`/posts/${post.id}`}>{post.data.title}</a>
           </div>
           {post.data.description && (
@@ -30,7 +30,14 @@ const allPosts = await getCollection(
       ))
     }
     <li>
-      See more posts on <a href="https://medium.com/@markmiro">📝 Medium</a>.
+      See more posts on{" "}
+      <a
+        href="https://medium.com/@markmiro"
+        class="inline-flex items-center gap-1"
+      >
+        <Icon name="simple-icons:medium" class="size-4" aria-hidden="true" />
+        Medium
+      </a>.
     </li>
   </ul>
 </ItemLayout>

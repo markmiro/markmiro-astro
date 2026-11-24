@@ -30,7 +30,7 @@
     "@astrojs/react": "^7.0.0",
     "@astrojs/rss": "^4.0.19",
     "@clerk/react": "^6.18.0",
-    "@iconify-json/tabler": "^1.2.41",
+    "@iconify-json/simple-icons": "^1.2.103",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",

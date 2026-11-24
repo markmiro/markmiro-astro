@@ -10,7 +10,6 @@ const posts = defineCollection({
     // EX: "Mar 13, 2023"
     date: z.string(),
     draft: z.boolean().default(false),
-    emoji: z.string().nullish(),
     image: z.string().optional(),
   }),
 });
@@ -24,7 +23,6 @@ const projects = defineCollection({
     // A date range. EX: "Dec 4, 2018-Mar 21, 2019" or "Apr 20-May 18, 2023"
     date: z.string(),
     draft: z.boolean().default(false),
-    emoji: z.string().nullish(),
     image: z.string().optional(),
     primaryLink: z.string().optional(),
     primaryLinkText: z.string().optional(),
