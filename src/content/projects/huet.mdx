@@ -1,11 +1,11 @@
 ---
 draft: false
 title: Huet
-description: A React library for accessibile theming. Choose the contrast you want, and let Huet calculate the colors for you.
+description: Accessible theming for any framework. Choose the contrast you want, and let Huet calculate the colors, and recolor images to match.
 primaryLink: https://markmiro.github.io/huet
 primaryLinkText: Demo
 source: https://github.com/markmiro/huet
-date: Dec 4, 2018-Mar 21, 2019
+date: Dec 4, 2018-Nov 18, 2026
 ---
 
 import TechStack from "@/components/TechStack.astro";
@@ -14,10 +14,14 @@ import { Code } from "astro/components";
 
 ## Summary
 
-A React library for accessibile theming. Choose the contrast you want, and let Huet calculate the colors for you.
+A theming library for accessible colors. Instead of picking colors, you pick how much contrast each element has against its background, and Huet calculates the colors for you. It recolors images to match the theme too.
 
-Demo:
-https://markmiro.github.io/huet
+I started it as a React library in 2018 and rebuilt it in 2026 to work with any framework.
+
+- [Demo](https://markmiro.github.io/huet)
+- [The shadcn/ui site themed with Huet](https://shadcn-huet.vercel.app)
+
+This website's colors come from Huet too. Try the theme picker in the top-right corner.
 
 ## Motivation
 
@@ -65,7 +69,7 @@ If we change the background `bg="white"`, we want all the children to update rec
 </Container>
 ```
 
-## Solution
+## First version (2018)
 
 The first step was to see if I could get the contrast calculations working, even for intermediate values, and to have them propogate through the UI using React's context.
 
@@ -97,6 +101,37 @@ I eventually created a library called Huet. This library comes with a helper UI 
   sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
 ></iframe>
 
+## Rebuild (2026)
+
+In October 2026 I picked Huet back up and rewrote it in TypeScript. The core no longer depends on React. A theme is plain JSON: a neutral ramp from darkest to lightest, plus anchor colors for red, yellow, green, blue and purple. Elements get their contrast from a class name, and Huet works out each color from the element's parent background.
+
+```html
+<section class="huet-bg-20">
+  <p class="huet-text-60">Manage your profile.</p>
+  <button class="huet-bg-blue-20">Save changes</button>
+  <img data-huet-recolor src="/photo.jpg" alt="" />
+</section>
+```
+
+```ts
+import { mountTheme, themes } from "huet";
+import { mountImages } from "huet/images";
+
+const colors = mountTheme(root, themes.Paperback);
+const images = mountImages(root, themes.Paperback);
+
+// Dark mode is the same theme with the background at the dark end of its ramp
+colors.update(themes.Paperback, { background: 0 });
+```
+
+What it does now:
+
+- **Contrast with APCA.** Text colors are solved for readability with APCA, instead of WCAG 2 contrast ratios.
+- **Image and SVG recoloring.** Each pixel is read as a position on the default ramps and moved to the same position on the theme's ramps. Each theme is baked into a 3D lookup table and applied on the GPU with WebGL2, with a CPU fallback.
+- **Framework support.** It works with React, Vue, Svelte and Astro, and has a Tailwind v4 bridge, a Shiki theme for code blocks, and styles for native form controls. Pages rendered at build time can get a theme as plain CSS variables, which is how this site uses it.
+- **A theme configurator.** `huet-react` has a panel for picking presets and editing a theme's colors, contrast, signal lightness and image settings. It floats in a corner or opens from a button, and this site's theme picker is that panel.
+- **A real-world test.** To see how far it goes, I themed the whole [shadcn/ui site](https://shadcn-huet.vercel.app) with Huet, including its charts, code blocks, logos and images.
+
 ## Learnings
 
 The biggest learning was I didn't have a set of people that wanted to use it. I figured I'd build it because I wanted something like this, but the complexity involved in building it was higher than the benefits I gained.
@@ -122,5 +157,11 @@ The biggest learning was I didn't have a set of people that wanted to use it. I 
     "chroma",
     "createReactApp",
     "npm",
+    "ts",
+    "astro",
+    "tailwindCss",
+    "pnpm",
+    "ghPages",
+    "vercel",
   ]}
 />
