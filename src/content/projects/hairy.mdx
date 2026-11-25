@@ -1,0 +1,65 @@
+---
+draft: false
+title: Hairy
+description: Fur for your buttons. An animated coat of hair, drawn on the GPU
+primaryLink: https://gethairy.vercel.app
+primaryLinkText: Playground
+# The repo is private for now.
+# source: https://github.com/markmiro/hairy
+date: Nov 3-Nov 10, 2026
+---
+
+import TechStack from "@/components/TechStack.astro";
+
+## Summary
+
+I wanted to see if it was possible, decided to try it out and quickly fell down the rabbit hole. With this library, you can make your buttons hairy.
+
+- [Playground](https://gethairy.vercel.app): tune the fur and copy the code
+- [Docs](https://gethairy.vercel.app/docs/)
+- [Recipes](https://gethairy.vercel.app/recipes/): toggles, loading states, disabled buttons and long lists, each beside its code
+- [@markmiro/hairy on npm](https://www.npmjs.com/package/@markmiro/hairy)
+
+## Usage
+
+Call `hairy()` on a DOM element already on the page.
+
+```js
+import { hairy } from "@markmiro/hairy";
+
+const fur = hairy(document.querySelector("#adopt"), {
+  preset: "plush",
+  color: "#ff4d70",
+  label: "auto",
+});
+```
+
+In React, `useHairy` returns a ref, and the fur follows the options as they change:
+
+```tsx
+import { useHairy } from "@markmiro/hairy/react";
+
+function AdoptButton() {
+  const ref = useHairy<HTMLButtonElement>({ preset: "plush", label: "auto" });
+  return <button ref={ref}>Click me</button>;
+}
+```
+
+---
+
+## Stack
+
+<TechStack
+  stack={[
+    "html",
+    "css",
+    "ts",
+    "jsx",
+    "react",
+    "astro",
+    "tailwindCss",
+    "npm",
+    "pnpm",
+    "vercel",
+  ]}
+/>
